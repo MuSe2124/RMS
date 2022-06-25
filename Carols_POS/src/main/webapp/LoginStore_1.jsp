@@ -94,13 +94,31 @@ top:10px;
             <h2><u>Login Store</u></h2>
             <br>
             <label>Store ID number:</label><br>
-            <input type="text" class="bars" id="fname" name="name" placeholder ="253"><br><br>
+            <input type="text" class="bars" id="fname" name="Id" placeholder ="253"><br><br>
             <label>Password:</label><br>
             <input type="text" class ="bars" id="fpassword" name="fname" placeholder ="password"><br><br>
             <br>
             <input type= "button" class="button"  id ="login" name = "button" value ="Login"><br>
             <br>
             <label>Failed to login store</label>
+            <script>
+                var document.getElementById('login').addEvenListener('click',loadUser);
+                function loadUser(){
+                    var xhr = new XMLHttpRequest(),id= document.getElementById('fname').value,fpassword=document.getElementById('fpassword').value;
+                    xhr.open('POST','http://223.223.223.223:8080/Carols_Boutique_API/pos/store/loginStore',true);
+                    xhr.setRequestHeader('Content-type','application/json;charset=UTF-8');
+                    store= "{id:"+id+"password:"+fpassword+"}"}"
+                    xhr.onload = function(){
+                        console.log(this.responseText);
+                        
+                    }
+                    xhr.send(store);
+                    
+                }
+                
+                
+                
+            </script>
         </div>
 
     </form>

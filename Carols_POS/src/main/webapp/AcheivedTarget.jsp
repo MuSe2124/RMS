@@ -231,7 +231,7 @@
             >Request IBT</a>
     </div>
     <div id="acheivedtargetpage" class="mid">
-        <h1>View top employee</h1><br>
+        <h1>Achieved Target</h1><br>
         <label>Enter Date</label><br>
         <input type ="month" class="bars" name ="toppageempdate"><br><br>
         <label>Store ID(optional)</label><br>

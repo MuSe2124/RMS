@@ -41,13 +41,13 @@ public class EmployeeServlet extends HttpServlet {
         switch (request.getParameter("submit")) {
             case "login":
                 Employee emp = new Employee(request.getParameter("employeeID"), request.getParameter("password"), request.getParameter("storeID"));
-                String loginResponseMessage = re.login(request.getParameter("employeeID"), request.getParameter("password"), request.getParameter("storeID"));
+                Employee signedInEmployee = re.login(emp);
                 if (emp != null) {
                     HttpSession session = request.getSession();//blank=returns session, doesnt exist itll create one for you//true=if session exists, still creates new session//false= not new session, gets existing session
-                    session.setAttribute("employee", emp);
+                    session.setAttribute("employee", signedInEmployee);
                     request.getRequestDispatcher("Index.jsp").forward(request, response);
                 } else {
-                    request.setAttribute("loginResponseMessage", loginResponseMessage);
+                    request.setAttribute("loginResponseMessage", "Could not log in");
                     
                     request.getRequestDispatcher("LoginEmployee.jsp").forward(request, response);
                 }

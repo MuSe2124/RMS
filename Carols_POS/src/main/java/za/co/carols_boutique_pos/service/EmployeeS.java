@@ -12,7 +12,7 @@ import za.co.carols_boutique_pos.models.Employee;
  */
 public interface EmployeeS {
     
-    String login(String employeeID, String password, String storeID);
+    Employee login(Employee employee);
     
     String register(Employee employee);
     

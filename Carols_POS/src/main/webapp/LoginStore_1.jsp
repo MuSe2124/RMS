@@ -102,22 +102,28 @@ top:10px;
             <br>
             <label>Failed to login store</label>
             <script>
-                var document.getElementById('login').addEvenListener('click',loadUser);
+                document.getElementById('login').addEvenListener('click',loadUser);
+                
                 function loadUser(){
-                    var xhr = new XMLHttpRequest(),id= document.getElementById('fname').value,fpassword=document.getElementById('fpassword').value;
-                    xhr.open('POST','http://223.223.223.223:8080/Carols_Boutique_API/pos/store/loginStore',true);
-                    xhr.setRequestHeader('Content-type','application/json;charset=UTF-8');
-                    store= "{id:"+id+"password:"+fpassword+"}"}"
-                    xhr.onload = function(){
-                        console.log(this.responseText);
-                        
-                    }
-                    xhr.send(store);
+                    var xhr = new XMLHttpRequest()
+                    var id = document.getElementById('fname').value
+                    var fpassword = document.getElementById('fpassword').value;
                     
+                    xhr.open('get','http://localhost:8080/Carols_Boutique_API/pos/report/viewTopSellingEmployees/str6/june',true);
+//                    xhr.setRequestHeader('Content-type','application/json');
+                    
+                    xhr.onload = function(){
+                        console.log(xhr.responseText);
+//                        const store= {
+//                                    id:"id",
+//                                    password:"fpassword"
+//                                    };
+//                        const jsonString = JSON.stringify(store);
+//                        document.getElementById('fname').innerHTML = JSON.parse(this.responseText);
+//                    }
+                    xhr.send(jsonString);
                 }
-                
-                
-                
+            
             </script>
         </div>
 

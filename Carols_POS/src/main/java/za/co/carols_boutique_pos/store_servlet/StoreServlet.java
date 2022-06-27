@@ -40,13 +40,13 @@ public class StoreServlet extends HttpServlet {
         switch (request.getParameter("submit")) {
             case "login":
                 Store store = new Store(request.getParameter("storeID"), request.getParameter("password"));
-                String loginResponseMessage = rs.loginStore(request.getParameter("storeID"), request.getParameter("password"));
+                Store loggedInStore = rs.loginStore(store);
                 if (store != null) {
                     HttpSession session = request.getSession();//blank=returns session, doesnt exist itll create one for you//true=if session exists, still creates new session//false= not new session, gets existing session
-                    session.setAttribute("store", store);
+                    session.setAttribute("store", loggedInStore);
                     request.getRequestDispatcher("Index.jsp").forward(request, response);
                 } else {
-                    request.setAttribute("loginResponseMessage", loginResponseMessage);
+                    request.setAttribute("loginResponseMessage", "Could not log in");
                     request.getRequestDispatcher("LoginStore.jsp").forward(request, response);
                 }
                 break;

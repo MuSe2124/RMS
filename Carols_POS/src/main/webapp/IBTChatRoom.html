@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>IBT ChatRoom</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="text/javascript">
+            var websocket = new Websocket("ws://localhost:8080/Carols_POS/IBTchatroomEndpoint");
+            websocket.onopen = function (message){processOpen(message);}; {
+                var jsonData = JSON.parse(message.data);
+                if (jsonData.message !== null)messageTextArea.value += jsonData.message + "\n";
+                    
+            }
+            function sendMessage() {
+                websocket.send(messageText.value);
+                messageText.value = "";
+            }
+        </script>
+    </head>
+    <body>
+        <textarea id="messageTextArea" readonly="readonly" rows="10" cols="45"></textarea></br>
+        <input type="text" id="messageText" size="50"/><input type="button" value="Send" onclick="sendMessage();"/>
+    </body>
+</html>

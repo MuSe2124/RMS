@@ -20,7 +20,9 @@
                 </div>
                 <div class="col-md-6">
                     <label>SCAN QR CODE</label>
-                    <input type="text" name="text" id="text" readonly="" placeholder="scan qrcode" class="form-control">
+                    <form>
+                        <label>QR CODE: <input type="text" id="text"></label>
+                    </form>
                 </div>
             </div>
         </div>
@@ -35,7 +37,7 @@
                 if(cameras.length > 0) {
                     scanner.start(cameras[0]);
                 }else{
-                    alret('no cameras found');
+                    alert('no cameras found');
                 }               
             }).catch(function(e){
                 console.error(e);

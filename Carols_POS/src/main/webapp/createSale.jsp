@@ -180,7 +180,7 @@
             >Exchanged</a><br>
         <a href="Return.jsp" id="Returnb" class="b" name="button" value="Return page"
             >Return</a><br>
-        <a href="createSale"id="LineItemsb" class="b" name="button" value="LineItems page"
+        <a href="createSale.jsp"id="LineItemsb" class="b" name="button" value="LineItems page"
             >Create Sale</a>
     </div>
     <div id="storebar" class="sideside">
@@ -194,13 +194,13 @@
             >Update Employee</a>
     </div>
     <div id="Keepasidebar" class="sideside">
-        <a href="CreateKeepAside.jsp" id="createkeepasideb" class="b" name="button" value="create keep aside page"
+        <a href="CreateKeepAside.jsp" id="createkeepasideb" class="b" name="button" value="createkeepasidepage"
             >create keep aside</a>
     </div>
     <div id="Stockbar" class="sideside">
         <a href ="CreateProduct.jsp" id="createproductb" class="b" name="button" value="createproduct page"
             >create product</a><br>
-        <a href="DeleteProduct" id="deleteproductb" class="b" name="button" value="delete product page"
+        <a href="DeleteProduct.jsp" id="deleteproductb" class="b" name="button" value="delete product page"
             >delete product</a><br>
         <a href="AddToStock.jsp" id="addtostockb" class="b" name="button" value="add to stock page"
             >add to stock</a><br>
@@ -208,7 +208,7 @@
             >remove from stock</a>
     </div>
     <div id="Reportbar" class="sideside">
-        <a href="ViewTopEmployees.jsp" id="viewtopempb" class="b" name="button" value="view top employees page"
+        <a href="ViewTopEmployee.jsp" id="viewtopempb" class="b" name="button" value="view top employees page"
             >view top employees page</a><br>
         <a href="MonthlySales.jsp" id="monthlysalesb" class="b" name="button" value="view monthly sales page"
             >view monthly sales</a><br>
@@ -227,7 +227,7 @@
     </div>
     <div id="IBTbar" class="sideside">
 
-        <a href ="Request IBT" id="ibtrequestb" class="b" name="button" value="IBT Requests page"
+        <a href ="RequestIBT.jsp" id="ibtrequestb" class="b" name="button" value="IBT Requests page"
             >Request IBT</a>
     </div>
 
@@ -260,7 +260,7 @@
                 <td></td>
             </tr>
         </table>
-        <button style="position:absolute;left:500px;" name="button" value="Scan">Scan</button>
+        <button style="position:absolute;left:500px;" name="button" value="Scan" onclick="function()">Scan</button>
         <button style="position:absolute;left:0px;" name="button"
             value="InputintoLineItems">Input</button><br><br><br><br>
         <label style="position:absolute;left:0px;">ProductID</label><br><br>

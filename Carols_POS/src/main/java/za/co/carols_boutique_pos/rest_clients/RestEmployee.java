@@ -25,7 +25,7 @@ public class RestEmployee implements EmployeeS{
 
 	public RestEmployee(){
 		client = ClientBuilder.newClient();
-		url = "http://localhost:8080/Carols_Boutique_API/pos/report/";
+		url = "http://localhost:8080/Carols_Boutique_API/pos/employee/";
 	}
 	@Override
 	public Employee login(Employee employee) {
@@ -94,7 +94,7 @@ public class RestEmployee implements EmployeeS{
 
 	@Override
 	public String deleteEmployee(String employeeID) {
-		String url = "url"+"register";
+		String url = "url"+"deleteEmployee";
 
         WebTarget webTarget = client.target(url);
         Response response = null;

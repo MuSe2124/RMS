@@ -13,7 +13,7 @@ import za.co.carols_boutique_pos.models.Store;
  */
 public interface StoreS {
     
-    String loginStore(String storeID, String password);
+    Store loginStore(Store store);
     
     String registerStore(Store store);
     

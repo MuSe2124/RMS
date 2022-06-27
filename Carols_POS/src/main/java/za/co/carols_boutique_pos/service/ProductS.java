@@ -6,6 +6,7 @@ package za.co.carols_boutique_pos.service;
 
 import java.util.ArrayList;
 import za.co.carols_boutique_pos.models.Exchange;
+import za.co.carols_boutique_pos.models.ProdCat;
 import za.co.carols_boutique_pos.models.Product;
 import za.co.carols_boutique_pos.models.Refund;
 import za.co.carols_boutique_pos.models.Stock;
@@ -18,16 +19,11 @@ public interface ProductS {
     
     Product getProduct(String productID,String size);
 
-    String addProductToInventory(String storeID, String productID, String employeeID, Integer amount, String sizeID);
-    String addNewProduct(Product product, String catID);
+    String addProductToInventory(Stock stock);
+    String addNewProduct(ProdCat prodCat);
 
-    String removeProductFromInventory(String storeID, String productID, String employeeID, Integer amount, String sizeID);
-    String deleteProduct(String productID, String categoryID);
+    String removeProductFromInventory(Stock stock);
+    String deleteProduct(String productID, String catID);
 
     String refund(Refund refund);
-    String exchange(Exchange exchange);
-    
-    void checkLowStock(String storeID);
-
-
 }

@@ -954,9 +954,9 @@
     <div id="viewtopemppage" class="mid">
         <h1>View top employee</h1><br>
         <label>Enter Date</label><br>
-        <input type ="month" class="bars" name ="toppageempdate"><br><br>
+        <input type ="month" class="bars" name ="toppageempdate" id="topemployeedate"><br><br>
         <label>Store ID(optional)</label><br>
-        <input type ="text" name ="StoreID" class="bars"><br><br>
+        <input type ="text" name ="StoreID" class="bars" id="topemployeestoreid"><br><br>
         <button name="button" value="topempresults">Get Results</button><br><br>
         <h2>View top employee for ??Month??</h2><br>
         <table style="width:100%">
@@ -1336,6 +1336,7 @@
         <button name="button" values="updateemployee">update employee</button>
     </div>
     <script>
+        
         var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
         var yValues = [55, 49, 44, 24, 15];
         var barColors = ["red", "green", "blue", "orange", "brown"];
@@ -1412,6 +1413,19 @@
             }
             document.getElementById(pagename).style.display = "block";
             evt.currentTarget.className += " active";
+        }
+        function resultfortopemp(){
+            var xhr = new XMLHttpRequest(),date= document.getElementById('topemployeedate').value,storeid=document.getElementById('topemployeestoreid').value;
+                    xhr.open('GET','http://localhost:8080/Carols_Boutique-1.0-SNAPSHOT/pos/store/loginStore',true);
+                    xhr.setRequestHeader('Content-type','application/json;charset=UTF-8');
+                    report= "{date:"+date+"storeid:"+storeid+"}";
+                    xhr.send(report);
+        }
+        function clearEverything(){
+            
+        }
+        function filltable(){
+            
         }
 
 

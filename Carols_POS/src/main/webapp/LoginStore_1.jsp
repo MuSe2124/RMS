@@ -101,26 +101,23 @@ top:10px;
             <input type= "button" class="button"  id ="login" name = "button" value ="Login"><br>
             <br>
             <label>Failed to login store</label>
-            <script>
-                var document.getElementById('login').addEvenListener('click',loadUser);
-                function loadUser(){
-                    var xhr = new XMLHttpRequest(),id= document.getElementById('fname').value,fpassword=document.getElementById('fpassword').value;
-                    xhr.open('POST','http://223.223.223.223:8080/Carols_Boutique_API/pos/store/loginStore',true);
-                    xhr.setRequestHeader('Content-type','application/json;charset=UTF-8');
-                    store= "{id:"+id+"password:"+fpassword+"}"}"
-                    xhr.onload = function(){
-                        console.log(this.responseText);
-                        
-                    }
-                    xhr.send(store);
-                    
-                }
-                
-                
-                
-            </script>
+            
         </div>
 
     </form>
+    
+    <script>
+                document.getElementById('login').addEventListener('click',loadUser);
+                function loadUser(){
+                    var xhr = new XMLHttpRequest(),id= document.getElementById('fname').value,fpassword=document.getElementById('fpassword').value;
+                    xhr.open('POST','http://localhost:8080/Carols_Boutique-1.0-SNAPSHOT/pos/store/loginStore',true);
+                    xhr.setRequestHeader('Content-type','application/json;charset=UTF-8');
+                    store= "{id:"+id+"password:"+fpassword+"}";
+                    xhr.onload = function(){
+                        console.log(this.responseText);
+                    }
+                    xhr.send(store);
+                }
+    </script>
 </body>
 </html>

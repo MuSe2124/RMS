@@ -128,5 +128,19 @@ top:10px;
         </div>
 
     </form>
+    
+    <script>
+                document.getElementById('login').addEventListener('click',loadUser);
+                function loadUser(){
+                    var xhr = new XMLHttpRequest(),id= document.getElementById('fname').value,fpassword=document.getElementById('fpassword').value;
+                    xhr.open('POST','http://localhost:8080/Carols_Boutique-1.0-SNAPSHOT/pos/store/loginStore',true);
+                    xhr.setRequestHeader('Content-type','application/json;charset=UTF-8');
+                    store= "{id:"+id+"password:"+fpassword+"}";
+                    xhr.onload = function(){
+                        console.log(this.responseText);
+                    }
+                    xhr.send(store);
+                }
+    </script>
 </body>
 </html>

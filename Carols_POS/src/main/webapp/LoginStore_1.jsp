@@ -107,7 +107,7 @@ top:10px;
     </form>
     
     <script>
-                document.getElementById('login').addEventListener('click',loadUser);
+                document.getElementById('login').addEventListener('click',loadUser,laodhtml);
                 function loadUser(){
                     var xhr = new XMLHttpRequest(),id= document.getElementById('fname').value,fpassword=document.getElementById('fpassword').value;
                     xhr.open('POST','http://localhost:8080/Carols_Boutique-1.0-SNAPSHOT/pos/store/loginStore',true);

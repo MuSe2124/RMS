@@ -1295,7 +1295,7 @@
         <button name="button" value="addtostock">add to stock</button>
     </div>
     <div id="createproductpage" class="mid">
-        <div id="mid">
+        
             <h2>Create Product</h2><br>
             <label>Name</label><br>
             <input type="text" name="name" class="bars"><br><br>
@@ -1306,7 +1306,7 @@
             <label>size</label><br>
             <input type="text" name="size" class="bars"><br><br><label>??success??</label><br><br>
             <button name="button" value="createproduct">Create product</button>
-        </div>
+       
     </div>
     <div id="deleteproductpage" class="mid">
         <h1>Delete Product</h1><br>

@@ -6,6 +6,7 @@ package za.co.carols_boutique_pos.service;
 
 
 import java.util.ArrayList;
+import java.util.List;
 import za.co.carols_boutique_pos.models.Category;
 import za.co.carols_boutique_pos.models.Exchange;
 import za.co.carols_boutique_pos.models.ProdCat;
@@ -26,6 +27,6 @@ public interface ProductS {
 
     String removeProductFromInventory(Stock stock);
     String deleteProduct(String productID, String catID);
-    ArrayList<Category> getCategories();
+    List<Category> getCategories();
     String refund(Refund refund);
 }

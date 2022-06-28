@@ -84,11 +84,13 @@ top:10px;
         </style>
     </head>
     <body style ="background-color:rgb(204, 224, 255)">
+        <% String loginResponseMessage = (String)request.getAttribute("loginResponseMessage"); %>
         <h1 id="H">Carols Boutique</h1>
         <br>
         <br>
         <br>
         <div id ="midbody" style="background-image:url('https://lh3.googleusercontent.com/pw/AM-JKLXMO5yDb4rwt4sEQrgiQOMODT_pJfb1SL2dd8vpb9xK6qq-v0-sLTcA7ci2YTgbCEc9EH-VWq56ksYL1wsRQOFNAtSXfc6cmCOwCtpfS-Hbcj4rYphCA-b4AYxOAjboLEyfbJ4HxwYWuwhl5jRgETc=w1095-h657-no?authuser=0'); background-size:cover;">
+            <form action="StoreServlet" method="post">
             <br>
             <br>
             <h2><u>Login Store</u></h2>
@@ -98,9 +100,13 @@ top:10px;
             <label>Password:</label><br>
             <input type="text" class ="bars" id="fpassword" name="fname" placeholder ="password"><br><br>
             <br>
-            <input type= "button" class="button"  id ="login" name = "button" value ="Login"><br>
+            <input type= "submit" class="button"  id ="login" name = "submit" value ="login"><br>
             <br>
-            <label>Failed to login store</label>
+            <%if(loginResponseMessage != null){%>
+            <label><%=loginResponseMessage%></label>
+            <%}%>
+            </form>
+        </div>
             <script>
                 document.getElementById('login').addEvenListener('click',loadUser);
                 

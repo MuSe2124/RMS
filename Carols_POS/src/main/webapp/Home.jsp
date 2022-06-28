@@ -1,44 +1,17 @@
 <%-- 
-    Document   : CreateProduct
-    Created on : 27 Jun 2022, 09:14:52
+    Document   : createSale
+    Created on : 27 Jun 2022, 08:58:16
     Author     : HP
 --%>
-<%@page import="java.util.List"%>
-<%@page import="za.co.carols_boutique_pos.models.Category"%>
-<%%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Create Product</title>
+        <title>Create Sale</title>
         <style>
-        #createproductpage label {
-            font-size: 30px;
-        }
-
-        #createproductpage .bars {
-            font-size: 25px;
-            height: 60px;
-            width: 400px;
-        }
-
-        #createproductpage button {
-            background-color: rgb(0, 128, 117);
-            color: white;
-            text-align: center;
-            text-decoration: none;
-            transition-duration: all 0.1s;
-            cursor: pointer;
-            font-size: 30px;
-            width: 300px;
-            height: 100px;
-            border-style: solid;
-            border-color: white;
-            border-width: 3px;
-            border-radius: 8px;
-        }    
-        .mid {
+            .mid {
             text-align: center;
             background-color: white;
             width: 950px;
@@ -69,6 +42,46 @@
             h1,
         h2 {
             font-size: 35px;
+        }
+            #lineitemspage label {
+            font-size: 25px;
+        }
+
+        #lineitemspage .bars {
+            font-size: 30px;
+        }
+
+        #lineitemspage button {
+            background-color: rgb(0, 128, 117);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            transition-duration: all 0.1s;
+            cursor: pointer;
+            font-size: 20px;
+            width: 250px;
+            height: 50px;
+            border-style: solid;
+            border-color: white;
+            border-width: 3px;
+            border-radius: 8px;
+        }
+
+        #lineitemspage table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #lineitemspage td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        #lineitemspage tr:nth-child(even) {
+            background-color: #dddddd;
         }
         .b:hover {
             background-color: rgb(0, 0, 80);
@@ -148,10 +161,9 @@
             overflow-x: hidden;
             padding-top: 10px;
         }
-        </style>  
+        </style>
     </head>
     <body style="background-image:url('https://lh3.googleusercontent.com/pw/AM-JKLXMO5yDb4rwt4sEQrgiQOMODT_pJfb1SL2dd8vpb9xK6qq-v0-sLTcA7ci2YTgbCEc9EH-VWq56ksYL1wsRQOFNAtSXfc6cmCOwCtpfS-Hbcj4rYphCA-b4AYxOAjboLEyfbJ4HxwYWuwhl5jRgETc=w1095-h657-no?authuser=0'); background-size:cover;">
-        <%List<Category>categories = (List<Category>)session.getAttribute("categories");%>
         <label id="heading">Carol's Boutique</label>
     <div id="side">
         <button class="c" id="keepaside" name="button" onclick="openCity(event, 'Keepasidebar')">keep aside</button>
@@ -220,26 +232,7 @@
     </div>
 
     <label id="copyright">Carols Boutique pty.Ltd.<br>Reg.131 482 9132</label>
-    <div id="createproductpage" class="mid">
-        <form action="ProductServlet" method="post">
-            <h2>Create Product</h2><br>
-            <label>Name</label><br>
-            <input type="text" name="pName" class="bars"><br><br>
-            <label>Description</label><br>
-            <input type="text" name="pDescription" class="bars"><br><br>
-            <label>Price</label><br>
-            <input type="number" min="0" name="pPrice" class="bars"><br><br>
-            <label>size</label><br>
-            
-            <%for(Category c : categories){%>
-            <input type="checkbox" id="<%= c.getId() %>" name="category" value="<%= c.getId() %>">
-            <label for="<%= c.getId() %>"> <%= c.getName() %></label><br>
-            <%}%>
-            
-            <input type="text" name="size" class="bars"><br><br><label>??success??</label><br><br>
-            <input type='submit' name="submit" value="createProduct">
-        </form>
-    </div>    
+
     <script>
         function openCity(evt, cityName) {
             var i, tabcontent, tablinks;
@@ -254,6 +247,6 @@
             document.getElementById(cityName).style.display = "block";
             evt.currentTarget.className += " active";
         }
-    </script>    
+    </script>
     </body>
 </html>

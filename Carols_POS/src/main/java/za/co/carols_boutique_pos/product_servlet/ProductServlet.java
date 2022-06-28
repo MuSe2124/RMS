@@ -14,7 +14,6 @@ import za.co.carols_boutique_pos.models.Product;
 import za.co.carols_boutique_pos.rest_clients.RestProduct;
 import za.co.carols_boutique_pos.service.ProductS;
 
-
 /**
  *
  * @author muaad
@@ -22,37 +21,43 @@ import za.co.carols_boutique_pos.service.ProductS;
 @WebServlet(name = "ProductServlet", urlPatterns = {"/ProductServlet"})
 public class ProductServlet extends HttpServlet {
 
-	private RestProduct pr;
-	
-	public ProductServlet(){
-		pr = new RestProduct();
-	}
-	
+    private ProductS pr;
+
+    public ProductServlet() {
+        pr = new RestProduct();
+    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        switch(request.getParameter("submit")){
+        switch (request.getParameter("submit")) {
             //edit
             case "getProduct":
-                Product product = pr.getProduct(request.getParameter("prodID"), request.getParameter("size"));
+                Product product = null;
+                String[] size = request.getParameter("proID").split("");
+                for (int i = 0; i < size.length; i++) {
+                    product = pr.getProduct(request.getParameter("prodID"), size[2]);
+                }
                 request.setAttribute("product", product);
                 request.getRequestDispatcher("createSale.jsp").forward(request, response);
                 break;
+            case "":
                 
+                break;
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-		
-		switch(request.getParameter("submit")){
-			
-			case "createProduct":
-				Product p = new Product(request.getParameter("pName"),request.getParameter("pDescription"),Float.parseFloat(request.getParameter("pPrice")));
-				
-				break;
-		}
+
+        switch (request.getParameter("submit")) {
+
+            case "createProduct":
+                Product p = new Product(request.getParameter("pName"), request.getParameter("pDescription"), Float.parseFloat(request.getParameter("pPrice")));
+
+                break;
+        }
     }
 
 }

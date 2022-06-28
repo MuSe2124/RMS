@@ -128,7 +128,13 @@ public class RestProduct implements ProductS{
 	
 	@Override
 	public ArrayList<Category> getCategories(){
-		return null;
+		String url = "url"+"refund";
+
+        WebTarget webTarget = client.target(url);
+        Response response = null;
+		response = webTarget.request(MediaType.APPLICATION_JSON).get(Response.class);
+
+        return response.readEntity(ArrayList.class);   
 	}
 
 

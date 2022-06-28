@@ -22,10 +22,10 @@ import za.co.carols_boutique_pos.service.ProductS;
 @WebServlet(name = "ProductServlet", urlPatterns = {"/ProductServlet"})
 public class ProductServlet extends HttpServlet {
 
-	private RestProduct product;
+	private RestProduct pr;
 	
 	public ProductServlet(){
-		product = new RestProduct();
+		pr = new RestProduct();
 	}
 	
     @Override
@@ -34,7 +34,7 @@ public class ProductServlet extends HttpServlet {
         switch(request.getParameter("submit")){
             //edit
             case "getProduct":
-                Product product = rp.getProduct(request.getParameter("prodID"), request.getParameter("size"));
+                Product product = pr.getProduct(request.getParameter("prodID"), request.getParameter("size"));
                 request.setAttribute("product", product);
                 request.getRequestDispatcher("createSale.jsp").forward(request, response);
                 break;

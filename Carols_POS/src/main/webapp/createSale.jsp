@@ -318,7 +318,7 @@
     <div class="container">
             <div class="col-md-6">
                 <div class="row">
-                    <video id="preview" width="100%" ></video>
+                    <video id="preview" width="100%" style="display:none"></video>
                 </div>
                 <div class="col-md-6">
                     <label>SCAN QR CODE</label>

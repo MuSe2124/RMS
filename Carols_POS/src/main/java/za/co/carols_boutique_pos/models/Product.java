@@ -23,7 +23,8 @@ public class Product {
         this.price = price;
         this.size = size;
     }
-    
+
+
 
     public Product(String name, String description, Float price) {
         this.name = name;
@@ -43,7 +44,14 @@ public class Product {
     
     public Product() {
     }
+    public String getSize() {
+        return size;
+    }
 
+    public void setSize(String size) {
+        this.size = size;
+    }
+    
     public String getId() {
         return id;
     }
@@ -80,6 +88,5 @@ public class Product {
     public String toString() {
         return "Product{" + "id=" + id + ", name=" + name + ", description=" + description + ", price=" + price + '}';
     }
-    
-    
+
 }

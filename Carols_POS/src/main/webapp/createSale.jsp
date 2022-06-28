@@ -4,6 +4,8 @@
     Author     : HP
 --%>
 
+<%@page import="za.co.carols_boutique_pos.models.Sale"%>
+<%@page import="za.co.carols_boutique_pos.models.Product"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -164,6 +166,9 @@
         </style>
     </head>
     <body style="background-image:url('https://lh3.googleusercontent.com/pw/AM-JKLXMO5yDb4rwt4sEQrgiQOMODT_pJfb1SL2dd8vpb9xK6qq-v0-sLTcA7ci2YTgbCEc9EH-VWq56ksYL1wsRQOFNAtSXfc6cmCOwCtpfS-Hbcj4rYphCA-b4AYxOAjboLEyfbJ4HxwYWuwhl5jRgETc=w1095-h657-no?authuser=0'); background-size:cover;">
+        <script type="text/javascript" src="instascan.js.min"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
         <label id="heading">Carol's Boutique</label>
     <div id="side">
         <button class="c" id="keepaside" name="button" onclick="openCity(event, 'Keepasidebar')">keep aside</button>
@@ -233,6 +238,9 @@
 
     <label id="copyright">Carols Boutique pty.Ltd.<br>Reg.131 482 9132</label>
     <div id="lineitemspage" class="mid">
+        <%Product product =(Product) request.getAttribute("product");
+        
+        %>
         <h1>Line Items</h1>
         <table>
             <tr>
@@ -247,20 +255,41 @@
                 </th>
             </tr>
             <tr>
-                <td>?id??</td>
-                <td>??item??</td>
-                <td>??size??</td>
-                <td>??QTY??</td>
-                <td>??Price??</td>
+                <td><%product.getId().toString();%></td>
+                <td><%product.getName().toString();%></td>
+                <td><%product.getSize().toString();%></td>
+                <td><%product.getDescription().toString();%></td>
+                <td><%product.getPrice();%></td>
             </tr>
             <tr>
                 <td>Total:</td>
                 <td></td>
                 <td></td>
-                <td></td>
+                <%Sale sale = new Sale();%>
+                <td><%sale.calculateTotal();%></td>
             </tr>
         </table>
-        <button style="position:absolute;left:500px;" name="button" value="Scan">Scan</button>
+
+        <button style="position:absolute;left:500px;" name="button" value="Scan" id="scan" onclick="scanner()">Scan</button>
+        <script>
+            function scanner(){
+                let scanner = new Instascan.Scanner({video: document.getElementById('preview')});
+            scanner.addListener('scan', function(c){
+                document.getElementById('prodID').value=c;
+            
+            });            
+            Instascan.Camera.getCameras().then(function(cameras){
+                if(cameras.length > 0) {
+                    scanner.start(cameras[0]);
+                }else{
+                    alert('no cameras found');
+                }               
+            }).catch(function(e){
+                console.error(e);
+            }); 
+            }
+        </script>
+
         <button style="position:absolute;left:0px;" name="button"
             value="InputintoLineItems">Input</button><br><br><br><br>
         <label style="position:absolute;left:0px;">ProductID</label><br><br>
@@ -285,5 +314,20 @@
             evt.currentTarget.className += " active";
         }
     </script>
+    
+    <div class="container">
+            <div class="col-md-6">
+                <div class="row">
+                    <video id="preview" width="100%" ></video>
+                </div>
+                <div class="col-md-6">
+                    <label>SCAN QR CODE</label>
+                    <form>
+                        <label>QR CODE: <input type="text" id="prodID"></label>
+                    </form>
+                </div>
+            </div>
+        </div>
+
     </body>
 </html>

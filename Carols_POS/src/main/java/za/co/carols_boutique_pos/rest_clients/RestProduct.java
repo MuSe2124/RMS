@@ -4,6 +4,7 @@
  */
 package za.co.carols_boutique_pos.rest_clients;
 
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.ws.rs.client.Client;
@@ -12,8 +13,10 @@ import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import za.co.carols_boutique_pos.models.Category;
 import za.co.carols_boutique_pos.models.Exchange;
 import za.co.carols_boutique_pos.models.ProdCat;
 import za.co.carols_boutique_pos.models.Product;
@@ -121,6 +124,11 @@ public class RestProduct implements ProductS{
 		}
             
         return response.readEntity(String.class);     
+	}
+	
+	@Override
+	public ArrayList<Category> getCategories(){
+		return null;
 	}
 
 

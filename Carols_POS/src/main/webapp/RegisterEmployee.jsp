@@ -224,17 +224,19 @@
     <div id="registeremployeepage" class="mid">
         <h1>Register employee</h1>
         <br>
+        <form action ="EmployeeServlet" method ="post">
         <label>Name:</label><br>
         <input type="text" class="bars" id="reName" name="reName" placeholder="name"><br><br>
         <label>Surname:</label><br>
         <input type="text" class="bars" id="reSurname" name="reSurname" placeholder="surname"><br><br>
         <label>Password:</label><br>
-        <input type="text" class="bars" id="rePassword" name="reName" placeholder="password"><br><br>
+        <input type="text" class="bars" id="rePassword" name="rePassword" placeholder="password"><br><br>
         <label>??is success??</label>
         <label>Your Employee Id, do not forget.</label><br><br>
         <label class="a" id="id">??id??</label><br>
         <br>
-        <button class="button" id="reSignup" name="reButton" value="Register">Register storeS</button>
+        <button class="button" id="reSignup" name="submit" value="Register">Register</button>
+        </form>
         <br>
     </div>    
     <script>

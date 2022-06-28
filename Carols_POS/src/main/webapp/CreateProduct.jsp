@@ -218,18 +218,18 @@
 
     <label id="copyright">Carols Boutique pty.Ltd.<br>Reg.131 482 9132</label>
     <div id="createproductpage" class="mid">
-        
+        <form action="ProductServlet" method="post">
             <h2>Create Product</h2><br>
             <label>Name</label><br>
-            <input type="text" name="name" class="bars"><br><br>
+            <input type="text" name="pName" class="bars"><br><br>
             <label>Description</label><br>
-            <input type="text" name="description" class="bars"><br><br>
+            <input type="text" name="pDescription" class="bars"><br><br>
             <label>Price</label><br>
-            <input type="number" min="0" name="price" class="bars"><br><br>
+            <input type="number" min="0" name="pPrice" class="bars"><br><br>
             <label>size</label><br>
             <input type="text" name="size" class="bars"><br><br><label>??success??</label><br><br>
-            <button name="button" value="createproduct">Create product</button>
-       
+            <button name="submit" value="createProduct">Create product</button>
+        </form>
     </div>    
     <script>
         function openCity(evt, cityName) {

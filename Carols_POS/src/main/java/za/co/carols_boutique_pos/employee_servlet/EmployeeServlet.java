@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import za.co.carols_boutique_pos.models.Employee;
+import za.co.carols_boutique_pos.models.Store;
 import za.co.carols_boutique_pos.rest_clients.RestEmployee;
 
 
@@ -53,13 +54,15 @@ public class EmployeeServlet extends HttpServlet {
                 }
                 break;
             case "register":
-                Employee e = new Employee(request.getParameter("name"), request.getParameter("password"), request.getParameter("storeID"));
+				HttpSession session = request.getSession();
+				Store store =(Store)session.getAttribute("store");
+                Employee e = new Employee(request.getParameter("reName"), request.getParameter("reSurname"), request.getParameter("rePassword"),store.getId(),false);
                 String registerResponseMessage = re.register(e);  
-                if (e != null) {
-                    request.setAttribute("employee", e);
-                    request.getRequestDispatcher("LoginEmployee.jsp").forward(request, response);
-                } else {
+                if (registerResponseMessage != null) {
                     request.setAttribute("registerResponseMessage", registerResponseMessage);
+                    request.getRequestDispatcher("RegisterEmployee.jsp").forward(request, response);
+                } else {
+                    request.setAttribute("registerResponseMessage", "Something went wrong");
                     request.getRequestDispatcher("RegisterEmployee.jsp").forward(request, response);
                 }
                 break;

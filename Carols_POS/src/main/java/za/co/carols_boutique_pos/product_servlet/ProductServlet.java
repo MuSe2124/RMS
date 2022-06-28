@@ -10,6 +10,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import za.co.carols_boutique_pos.models.Product;
+import za.co.carols_boutique_pos.rest_clients.RestProduct;
 
 
 
@@ -19,7 +21,13 @@ import java.io.IOException;
  */
 @WebServlet(name = "ProductServlet", urlPatterns = {"/ProductServlet"})
 public class ProductServlet extends HttpServlet {
-
+	
+	private RestProduct product;
+	
+	public ProductServlet(){
+		product = new RestProduct();
+	}
+	
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -29,6 +37,14 @@ public class ProductServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+		
+		switch(request.getParameter("submit")){
+			
+			case "createProduct":
+				Product p = new Product(request.getParameter("pName"),request.getParameter("pDescription"),Float.parseFloat(request.getParameter("pPrice")));
+				
+				break;
+		}
     }
 
 }

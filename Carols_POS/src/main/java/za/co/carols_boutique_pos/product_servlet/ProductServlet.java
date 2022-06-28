@@ -15,7 +15,6 @@ import za.co.carols_boutique_pos.rest_clients.RestProduct;
 import za.co.carols_boutique_pos.service.ProductS;
 
 
-
 /**
  *
  * @author muaad
@@ -23,12 +22,12 @@ import za.co.carols_boutique_pos.service.ProductS;
 @WebServlet(name = "ProductServlet", urlPatterns = {"/ProductServlet"})
 public class ProductServlet extends HttpServlet {
 
-    private ProductS rp; 
-
-    public ProductServlet() {
-        rp = new RestProduct();
-    }    
-            
+	private RestProduct product;
+	
+	public ProductServlet(){
+		product = new RestProduct();
+	}
+	
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -46,6 +45,14 @@ public class ProductServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+		
+		switch(request.getParameter("submit")){
+			
+			case "createProduct":
+				Product p = new Product(request.getParameter("pName"),request.getParameter("pDescription"),Float.parseFloat(request.getParameter("pPrice")));
+				
+				break;
+		}
     }
 
 }

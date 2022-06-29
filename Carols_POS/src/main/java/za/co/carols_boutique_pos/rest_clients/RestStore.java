@@ -25,16 +25,16 @@ import za.co.carols_boutique_pos.service.StoreS;
 public class RestStore implements StoreS{
 
 	private Client client;
-	private String url;
+	private String uri;
 
 	public RestStore(){
 		client = ClientBuilder.newClient();
-		url = "http://localhost:8080/Carols_Boutique_API/pos/store/";
+		uri = "http://localhost:8080/Carols_Boutique_API/pos/store/";
 	}
 	
     @Override
     public Store loginStore(Store store) {
-		String url = "url"+"login";
+		String url = uri+"loginStore";
 
         WebTarget webTarget = client.target(url);
         Response response = null;
@@ -50,7 +50,7 @@ public class RestStore implements StoreS{
 
     @Override
     public String registerStore(Store store) {
-		String url = "url"+"register";
+		String url = uri+"registerStore";
 
         WebTarget webTarget = client.target(url);
         Response response = null;
@@ -66,7 +66,7 @@ public class RestStore implements StoreS{
 
     @Override
     public String addSale(Sale sale) {
-		String url = "url"+"register";
+		String url = uri+"register";
 
         WebTarget webTarget = client.target(url);
         Response response = null;
@@ -82,7 +82,7 @@ public class RestStore implements StoreS{
 
     @Override
     public String deleteStore(String storeID) {
-		String url = "url"+"deleteEmployee";
+		String url = uri+"deleteEmployee";
 
         WebTarget webTarget = client.target(url);
         Response response = null;

@@ -21,18 +21,18 @@ import za.co.carols_boutique_pos.service.EmployeeS;
 public class RestEmployee implements EmployeeS{
 
 	private Client client;
-	private String url;
+	private String uri;
 
 	public RestEmployee(){
 		client = ClientBuilder.newClient();
-		url = "http://localhost:8080/Carols_Boutique_API/pos/employee/";
+		uri = "http://localhost:8080/Carols_Boutique_API/pos/employee/";
 	}
         
         
         
 	@Override
 	public Employee login(Employee employee) {
-		String url = "url"+"login";
+		String url = uri+"login";
 
         WebTarget webTarget = client.target(url);
         Response response = null;
@@ -49,7 +49,7 @@ public class RestEmployee implements EmployeeS{
 	@Override
 	public String register(Employee employee) {
 	
-		String url = "url"+"register";
+		String url = uri+"register";
 
         WebTarget webTarget = client.target(url);
         Response response = null;
@@ -65,7 +65,7 @@ public class RestEmployee implements EmployeeS{
 
 	@Override
 	public String promoteToManager(String employeeID) {
-		String url = "url"+"promoteToManager";
+		String url = uri+"promoteToManager";
 
         WebTarget webTarget = client.target(url);
         Response response = null;
@@ -81,7 +81,7 @@ public class RestEmployee implements EmployeeS{
 
 	@Override
 	public String updateEmployee(Employee employee) {
-		String url = "url"+"updateEmployee";
+		String url = uri+"updateEmployee";
 
         WebTarget webTarget = client.target(url);
         Response response = null;
@@ -97,7 +97,7 @@ public class RestEmployee implements EmployeeS{
 
 	@Override
 	public String deleteEmployee(String employeeID) {
-		String url = "url"+"deleteEmployee";
+		String url = uri+"deleteEmployee";
 
         WebTarget webTarget = client.target(url);
         Response response = null;

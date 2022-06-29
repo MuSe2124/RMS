@@ -14,6 +14,8 @@ import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import za.co.carols_boutique.models.ProdCat;
@@ -30,16 +32,16 @@ import za.co.carols_boutique_pos.service.ProductS;
 public class RestProduct implements ProductS{
 
 	private Client client;
-	private String url;
+	private String uri;
 
 	public RestProduct(){
 		client = ClientBuilder.newClient();
-		url = "http://localhost:8080/Carols_Boutique_API/pos/product/";
+		uri = "http://localhost:8080/Carols_Boutique_API/pos/product/";
 	}
 	
     @Override
     public Product getProduct(String productID,String size) {
-       String url = "url"+"getProduct/"+productID+"/"+size;
+       String url = uri+"getProduct/"+productID+"/"+size;
 
         WebTarget webTarget = client.target(url);
         Response response = null;
@@ -51,7 +53,7 @@ public class RestProduct implements ProductS{
 
     @Override
     public String addProductToInventory(Stock stock) {
-        String url = "url"+"addProductToInventory";
+        String url = uri+"addProductToInventory";
 
         WebTarget webTarget = client.target(url);
         Response response = null;
@@ -67,7 +69,7 @@ public class RestProduct implements ProductS{
 
     @Override
     public String addNewProduct(ProdCat prodCat) {
-        String url = "url"+"addNewProduct";
+        String url = uri+"addNewProduct";
 
         WebTarget webTarget = client.target(url);
         Response response = null;
@@ -83,7 +85,7 @@ public class RestProduct implements ProductS{
 
     @Override
     public String removeProductFromInventory(Stock stock) {
-        String url = "url"+"removeProductFromInventory";
+        String url = uri+"removeProductFromInventory";
 
         WebTarget webTarget = client.target(url);
         Response response = null;
@@ -99,7 +101,7 @@ public class RestProduct implements ProductS{
 
     @Override
     public String deleteProduct(String productID, String catID) {
-     String url = "url"+"deleteProduct/"+productID+"/"+catID;
+     String url = uri+"deleteProduct/"+productID+"/"+catID;
 
         WebTarget webTarget = client.target(url);
         Response response = null;
@@ -111,7 +113,7 @@ public class RestProduct implements ProductS{
 
     @Override
     public String refund(Refund refund) {
-    String url = "url"+"refund";
+    String url = uri+"refund";
 
         WebTarget webTarget = client.target(url);
         Response response = null;
@@ -126,14 +128,19 @@ public class RestProduct implements ProductS{
 	}
 	
 	@Override
-	public ArrayList<Category> getCategories(){
-		String url = "url"+"refund";
+	public List<Category> getCategories(){
+		String url = uri+"getCategories";
 
         WebTarget webTarget = client.target(url);
         Response response = null;
 		response = webTarget.request(MediaType.APPLICATION_JSON).get(Response.class);
-
-        return response.readEntity(ArrayList.class);   
+		List<Category> cats = new ArrayList<Category>();
+		try {
+			cats = Arrays.asList(new ObjectMapper().readValue(response.readEntity(String.class) , Category[].class));
+		} catch (JsonProcessingException ex) {
+			Logger.getLogger(RestProduct.class.getName()).log(Level.SEVERE, null, ex);
+		}
+        return cats;   
 	}
 
 

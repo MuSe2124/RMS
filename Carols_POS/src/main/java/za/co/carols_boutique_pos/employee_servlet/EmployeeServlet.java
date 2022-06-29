@@ -38,15 +38,19 @@ public class EmployeeServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        HttpSession session = request.getSession();
+		Store store = (Store)session.getAttribute("store");
         switch (request.getParameter("submit")) {
             case "login":
-                Employee emp = new Employee(request.getParameter("employeeID"), request.getParameter("password"), request.getParameter("storeID"));
+				System.out.println(request.getParameter("empID"));
+				System.out.println(request.getParameter("empPass"));
+				System.out.println(store.getId());
+                Employee emp = new Employee(request.getParameter("empID"), request.getParameter("empPass"), store.getId());
                 Employee signedInEmployee = re.login(emp);
                 if (emp != null) {
-                    HttpSession session = request.getSession();//blank=returns session, doesnt exist itll create one for you//true=if session exists, still creates new session//false= not new session, gets existing session
+                   
                     session.setAttribute("employee", signedInEmployee);
-                    request.getRequestDispatcher("Index.jsp").forward(request, response);
+                    request.getRequestDispatcher("Home.jsp").forward(request, response);
                 } else {
                     request.setAttribute("loginResponseMessage", "Could not log in");
                     
@@ -54,8 +58,7 @@ public class EmployeeServlet extends HttpServlet {
                 }
                 break;
             case "register":
-				HttpSession session = request.getSession();
-				Store store =(Store)session.getAttribute("store");
+				
                 Employee e = new Employee(request.getParameter("reName"), request.getParameter("reSurname"), request.getParameter("rePassword"),store.getId(),false);
                 String registerResponseMessage = re.register(e);  
                 if (registerResponseMessage != null) {

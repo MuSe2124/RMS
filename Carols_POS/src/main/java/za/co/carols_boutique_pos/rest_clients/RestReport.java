@@ -26,16 +26,16 @@ import za.co.carols_boutique_pos.service.ReportS;
 public class RestReport implements ReportS{
 
 	private Client client;
-	private String url;
+	private String uri;
 
 	public RestReport(){
 		client = ClientBuilder.newClient();
-		url = "http://localhost:8080/Carols_Boutique_API/pos/report/";
+		uri = "http://localhost:8080/Carols_Boutique_API/pos/report/";
 	}
 	
     @Override
     public Report viewTopAchievingStores(String month) {
-		String url = "url"+"viewTopAchievingStores/"+month;
+		String url = uri+"viewTopAchievingStores/"+month;
 
         WebTarget webTarget = client.target(url);
         Response response = null;
@@ -47,7 +47,7 @@ public class RestReport implements ReportS{
 
     @Override
     public Report getCustomerReviews(String month, Integer amount) {
-		String url = "url"+"getCustomerReviews/"+month+"/"+amount;
+		String url = uri+"getCustomerReviews/"+month+"/"+amount;
 
         WebTarget webTarget = client.target(url);
         Response response = null;
@@ -59,7 +59,7 @@ public class RestReport implements ReportS{
 
     @Override
     public Report viewMonthlySales(String storeID, String month) {
-		String url = "url"+"viewMonthlySales/"+storeID+"/"+month;
+		String url = uri+"viewMonthlySales/"+storeID+"/"+month;
 
         WebTarget webTarget = client.target(url);
         Response response = null;
@@ -71,7 +71,7 @@ public class RestReport implements ReportS{
 
     @Override
     public Report viewTopSellingEmployees(String storeID, String month) {
-		String url = "url"+"viewTopSellingEmployees/"+storeID+"/"+month;
+		String url = uri+"viewTopSellingEmployees/"+storeID+"/"+month;
 
         WebTarget webTarget = client.target(url);
         Response response = null;
@@ -83,7 +83,7 @@ public class RestReport implements ReportS{
 
     @Override
     public Report viewStoresThatAchievedTarget(String month) {
-		String url = "url"+"viewStoresThatAchievedTarget/"+month;
+		String url = uri+"viewStoresThatAchievedTarget/"+month;
 
         WebTarget webTarget = client.target(url);
         Response response = null;
@@ -95,7 +95,7 @@ public class RestReport implements ReportS{
 
     @Override
     public Report viewTopSellingProducts(String month) {
-		String url = "url"+"viewTopSellingProducts/"+month;
+		String url = uri+"viewTopSellingProducts/"+month;
 
         WebTarget webTarget = client.target(url);
         Response response = null;
@@ -107,7 +107,7 @@ public class RestReport implements ReportS{
 
     @Override
     public Report viewLeastPerformingStores(String month) {
-		String url = "url"+"viewLeastPerformingStores/"+month;
+		String url = uri+"viewLeastPerformingStores/"+month;
 
         WebTarget webTarget = client.target(url);
         Response response = null;
@@ -119,7 +119,7 @@ public class RestReport implements ReportS{
 
     @Override
     public Report viewProductReport(String productID, String month) {
-		String url = "url"+"viewProductReport/"+productID+"/"+month;
+		String url = uri+"viewProductReport/"+productID+"/"+month;
 
         WebTarget webTarget = client.target(url);
         Response response = null;
@@ -131,7 +131,7 @@ public class RestReport implements ReportS{
 
     @Override
     public Report viewDailySalesReport(String storeID) {
-		String url = "url"+"viewDailySalesReport/"+storeID;
+		String url = uri+"viewDailySalesReport/"+storeID;
 
         WebTarget webTarget = client.target(url);
         Response response = null;
@@ -143,7 +143,7 @@ public class RestReport implements ReportS{
 
     @Override
     public String addReview(Review review) {
-		String url = "url"+"addReview";
+		String url = uri+"addReview";
 
         WebTarget webTarget = client.target(url);
         Response response = null;
@@ -159,7 +159,7 @@ public class RestReport implements ReportS{
 
     @Override
     public String addCustomer(Customer customer) {
-		String url = "url"+"addCustomer";
+		String url = uri+"addCustomer";
 
         WebTarget webTarget = client.target(url);
         Response response = null;

@@ -58,31 +58,17 @@ private RestReport rr;
                 request.setAttribute("ProductReportReport",rep);
                 request.getRequestDispatcher("ProductReport.jsp").forward(request,response);
                 break;    
-            case"":
-                rep=rr;
-                request.setAttribute("",rep);
-                request.getRequestDispatcher("").forward(request,response);
+            case"TopSellingProductsbutton":
+                rep=rr.viewTopSellingProducts(request.getParameter("TopSellingProductsMonth"));
+                request.setAttribute("TopSellingProductsReport",rep);
+                request.getRequestDispatcher("TopSellingProducts.jsp").forward(request,response);
                 break;
-            case"":
-                rep=rr;
-                request.setAttribute("",rep);
-                request.getRequestDispatcher("").forward(request,response);
+            case"CustomerReviewbutton":
+                rep=rr.getCustomerReviews(request.getParameter("CustomerReviewMonth"),Integer.valueOf(request.getParameter("CustomerReviewAmount")));
+                request.setAttribute("CustomerReviewReport",rep);
+                request.getRequestDispatcher("CustomerReviewReport.jsp").forward(request,response);
                 break;
-            case"":
-                rep=rr;
-                request.setAttribute("",rep);
-                request.getRequestDispatcher("").forward(request,response);
-                break;
-            case"":
-                rep=rr;
-                request.setAttribute("",rep);
-                request.getRequestDispatcher("").forward(request,response);
-                break;
-            case"":
-                rep=rr;
-                request.setAttribute("",rep);
-                request.getRequestDispatcher("").forward(request,response);
-                break;    
+                
                 
         }
     }

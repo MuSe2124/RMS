@@ -4,6 +4,7 @@
     Author     : HP
 --%>
 
+<%@page import="za.co.carols_boutique_pos.models.ProdStore"%>
 <%@page import="za.co.carols_boutique_pos.models.ProductReport"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
@@ -237,27 +238,26 @@
         <a href ="RequestIBT.jsp" id="ibtrequestb" class="b" name="button" value="IBT Requests page"
             >Request IBT</a>
     </div>
-    <%Report report = (Report)request.getAttribute("ProductReportReport");
+    <%Report report = (Report)request.getAttribute("TopSellingProductsReport");
     List<String> x=new ArrayList<>(); List<Integer> y = new ArrayList<>();%>
         <form action="ReportServlet" method =get>
     <div id="acheivedtargetpage" class="mid">
         <h1>Product Report</h1><br>
         <label>Enter Date</label><br>
         <input type ="month" class="bars" name ="TopSellingProductsMonth"><br><br>
-        <label>Store ID</label>
-        <input type="text" name="TopSellingProductsStoreID" class="bars"><br><br>
-        <button type="submit" name="TopSellingProductsbutton" value="button">Get Results</button><br><br>
+        <button type="submit" name="button" value="TopSellingProductsbutton">Get Results</button><br><br>
         <h2>Top Selling Products for ??Month??</h2><br>
         <table style="width:100%">
             <tr>
                 <th>Product ID</th>
-                <th>Amount Sold</th>
-                
+                <th>Store ID</th>
+                <th>Amount</th>
             </tr>
-            <%for(ProductReport ss :report.getProductReport()){%>
-            <tr><%x.add(ss.getProductID());y.add(Integer.getInteger(ss.getAmountsSold()));%>
+            <%for(ProdStore ss:report.getProdStores()){%>
+            <tr><%x.add(ss.getProductID());y.add(ss.getAmount());%>
                 <td> <%= ss.getProductID() %> </td>
-                <td> <%= ss.getAmountsSold() %> </td>    
+                <td> <%= ss.getStoreID() %> </td>
+                <td><%=ss.getAmount()%></td>
             </tr>
             <%}%>
         </table>

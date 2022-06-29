@@ -51,7 +51,7 @@ public class StoreServlet extends HttpServlet {
                 Store loggedInStore = rs.loginStore(store);
                 if (loggedInStore != null) {
 					List <Category> categories = product.getCategories();
-                    HttpSession session = request.getSession();//blank=returns session, doesnt exist itll create one for you//true=if session exists, still creates new session//false= not new session, gets existing session
+                    HttpSession session = request.getSession();
                     session.setAttribute("store", loggedInStore);
 					session.setAttribute("categories", categories);
                     request.getRequestDispatcher("LoginEmployee_1.jsp").forward(request, response);
@@ -61,7 +61,7 @@ public class StoreServlet extends HttpServlet {
                 }
                 break;
             case "register":
-				
+
                 Store s = new Store("id",request.getParameter("name"), request.getParameter("location"),request.getParameter("password"), Float.parseFloat(request.getParameter("ftarget")));
                 String registerResponseMessage = rs.registerStore(s);
                 if (registerResponseMessage != null) {

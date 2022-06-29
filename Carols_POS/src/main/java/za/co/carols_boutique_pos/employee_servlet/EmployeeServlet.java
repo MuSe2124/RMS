@@ -40,33 +40,26 @@ public class EmployeeServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
 		Store store = (Store)session.getAttribute("store");
-		System.out.println("\n\n\n\n\n\n\n\n\n\n\n");
-		System.out.println(store.getId());
-		System.out.println("\n\n\n\n\n\n\n\n\n\n\n");
+
         switch (request.getParameter("submit")) {
             case "login":
-				System.out.println(request.getParameter("empID"));
-				System.out.println(request.getParameter("empPass"));
-				System.out.println(store.getId());
                 Employee emp = new Employee(request.getParameter("empID"), request.getParameter("empPass"), store.getId());
                 Employee signedInEmployee = re.login(emp);
                 if (emp != null) {
-                   
                     session.setAttribute("employee", signedInEmployee);
                     request.getRequestDispatcher("Home.jsp").forward(request, response);
                 } else {
                     request.setAttribute("loginResponseMessage", "Could not log in");
-                    
                     request.getRequestDispatcher("LoginEmployee.jsp").forward(request, response);
                 }
                 break;
             case "register":
-				
+
                 Employee e = new Employee(request.getParameter("reName"), request.getParameter("reSurname"), request.getParameter("rePassword"),store.getId(),false);
                 String registerResponseMessage = re.register(e);  
                 if (registerResponseMessage != null && registerResponseMessage.equals("Could not register")) {
                     
-					request.setAttribute("registerResponseMessage", "Something went wrong");
+					request.setAttribute("registerEmpResponseMessage", "Something went wrong");
                     request.getRequestDispatcher("RegisterEmployee.jsp").forward(request, response);
 					
                 } else {

@@ -163,7 +163,9 @@
         }
         </style>
     </head>
-    <body style="background-image:url('https://lh3.googleusercontent.com/pw/AM-JKLXMO5yDb4rwt4sEQrgiQOMODT_pJfb1SL2dd8vpb9xK6qq-v0-sLTcA7ci2YTgbCEc9EH-VWq56ksYL1wsRQOFNAtSXfc6cmCOwCtpfS-Hbcj4rYphCA-b4AYxOAjboLEyfbJ4HxwYWuwhl5jRgETc=w1095-h657-no?authuser=0'); background-size:cover;">
+    <body 
+        <%String responseMessage = request.getParameter("responseMessage");%>
+        style="background-image:url('https://lh3.googleusercontent.com/pw/AM-JKLXMO5yDb4rwt4sEQrgiQOMODT_pJfb1SL2dd8vpb9xK6qq-v0-sLTcA7ci2YTgbCEc9EH-VWq56ksYL1wsRQOFNAtSXfc6cmCOwCtpfS-Hbcj4rYphCA-b4AYxOAjboLEyfbJ4HxwYWuwhl5jRgETc=w1095-h657-no?authuser=0'); background-size:cover;">
         <label id="heading">Carol's Boutique</label>
     <div id="side">
         <button class="c" id="keepaside" name="button" onclick="openCity(event, 'Keepasidebar')">keep aside</button>
@@ -230,7 +232,11 @@
         <a href ="RequestIBT.jsp" id="ibtrequestb" class="b" name="button" value="IBT Requests page"
             >Request IBT</a>
     </div>
-
+        
+        <%if(responseMessage != null){%>
+        <h1><%=responseMessage%></h1>
+        <%}%>
+        
     <label id="copyright">Carols Boutique pty.Ltd.<br>Reg.131 482 9132</label>
 
     <script>

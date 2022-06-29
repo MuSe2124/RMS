@@ -88,8 +88,7 @@ public class RestStore implements StoreS {
 		String url = uri+"deleteEmployee";
 
         WebTarget webTarget = client.target(url);
-        Response response = null;
-        response = webTarget.request(MediaType.APPLICATION_JSON).get(Response.class);
+        Response response = webTarget.request(MediaType.APPLICATION_JSON).get(Response.class);
 
         return response.readEntity(String.class);
     }
@@ -100,12 +99,11 @@ public class RestStore implements StoreS {
 
     @Override
     public Sale getSale(String saleID) {
-        String url = "uri" + "getSale";
+        String url = uri + "getSale";
 
         WebTarget webTarget = client.target(url);
-        Response response = null;
 
-            response = webTarget.request(MediaType.APPLICATION_JSON).get(Response.class);
+           Response response = webTarget.request(MediaType.APPLICATION_JSON).get(Response.class);
 
         return response.readEntity(Sale.class);
     }

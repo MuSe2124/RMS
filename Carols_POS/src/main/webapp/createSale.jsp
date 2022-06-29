@@ -4,6 +4,8 @@
     Author     : HP
 --%>
 
+<%@page import="za.co.carols_boutique_pos.models.Payment"%>
+<%@page import="za.co.carols_boutique_pos.models.Product"%>
 <%@page import="za.co.carols_boutique_pos.models.CardPayment"%>
 <%@page import="za.co.carols_boutique_pos.models.LineItem"%>
 <%@page import="za.co.carols_boutique_pos.models.Sale"%>
@@ -13,7 +15,6 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.time.LocalDateTime"%>
 <%@page import="java.sql.Date"%>
-<%@page import="za.co.carols_boutique.models.Product"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -189,34 +190,10 @@
             evt.currentTarget.className += " active";
         }
     </script>
-    
-           <%
-                CardPayment cardPayment = (CardPayment)request.getAttribute("cdp");
-                %>    
+ 
+              
                     
-        <script>
-            function scanner(){
-                let scanner = new Instascan.Scanner({video: document.getElementById('preview')});
-            scanner.addListener('prodID', function(c){
-                document.getElementById('prodID').value=c;
-            
-            });            
-            Instascan.Camera.getCameras().then(function(cameras){
-                if(cameras.length > 0) {
-                    scanner.start(cameras[0]);
-                }else{
-                    alert('no cameras found');
-                }               
-            }).catch(function(e){
-                console.error(e);
-            }); 
-            }
-         </script>
-         
-                 <%
-                    CashPayment cashPayment = (CashPayment)request.getAttribute("cp");
-                    Float change = (Float)request.getAttribute("change");
-                 %>
+        
                                
     </head>
     <body style="background-image:url('https://lh3.googleusercontent.com/pw/AM-JKLXMO5yDb4rwt4sEQrgiQOMODT_pJfb1SL2dd8vpb9xK6qq-v0-sLTcA7ci2YTgbCEc9EH-VWq56ksYL1wsRQOFNAtSXfc6cmCOwCtpfS-Hbcj4rYphCA-b4AYxOAjboLEyfbJ4HxwYWuwhl5jRgETc=w1095-h657-no?authuser=0'); background-size:cover;">
@@ -292,15 +269,32 @@
 
     <label id="copyright">Carols Boutique pty.Ltd.<br>Reg.131 482 9132</label>
     <div id="lineitemspage" class="mid">
-        <%
-            List<LineItem> lineItems = (List<LineItem>) request.getAttribute("lineItems");
-            Product product = (Product) request.getAttribute("product");
-            for (int i = 0; i < lineItems.size(); i++) {
-                product = lineItems.get(i).getProduct();
-                
-            }
+        <form>
             
-        %>
+            <%
+                Sale sale = (Sale)session.getAttribute("sale");
+                if (sale != null) {
+            %>
+            <button type="submit" name="submit" value="newSale">New Sale</button>
+            <%}else{%>
+        <script>
+            function scanner(){
+                let scanner = new Instascan.Scanner({video: document.getElementById('preview')});
+            scanner.addListener('prodID', function(c){
+                document.getElementById('prodID').value=c;
+            
+            });            
+            Instascan.Camera.getCameras().then(function(cameras){
+                if(cameras.length > 0) {
+                    scanner.start(cameras[0]);
+                }else{
+                    alert('no cameras found');
+                }               
+            }).catch(function(e){
+                console.error(e);
+            }); 
+            }
+                    </script>
         <h1>Line Items</h1>
         <table>
             <tr>
@@ -314,20 +308,18 @@
                 <th>Price
                 </th>
             </tr>
-            <%for(LineItem li : lineItems){%>
+            <%for (int i = 0; i < sale.getLineItems().size(); i++) {
+                Product prod = sale.getLineItems().get(i).getProduct();
+            %>
             <tr>
-                <td><%product.getId().toString();%></td>
-                <td><%product.getName().toString();%></td>
-                <td><%product.getSize().toString();%></td>
-                <% Integer amount = li.getAmount();
-                    if(li.getProduct().equals(product)){
-                        amount += li.getAmount();
-                        } 
-                    %>
-                <td>                   
-                    <label><%=li.getAmount()%></label>
-                </td>
-                <td><%=li.getProduct().getPrice()%></td>
+                <td><%=prod.getId().toString()%></td>
+                <td><%=prod.getName().toString()%></td>
+                <td><%=prod.getSize().toString()%></td>
+                <td><%=sale.getLineItems().get(i).getAmount()%></td>
+                <%Float price = prod.getPrice() * sale.getLineItems().get(i).getAmount();
+                prod.setPrice(price);
+                %>
+                <td><%=prod.getPrice()%></td>
                 <%}%>
         
             </tr>
@@ -335,60 +327,13 @@
                 <td>Total:</td>
                 <td></td>
                 <td></td>
-                <% 
-                     Date date = new Date(System.currentTimeMillis());
-                     if (cashPayment != null) {
-                             
-                         
-                    Sale sale = new Sale(lineItems, date, cashPayment);
-                    request.setAttribute("sale", sale);
-                %>
-                <td value="total"><%=sale.calculateTotal()%></td>
-                <%}%>
-                <% 
-                     if (cardPayment != null) {
-                             
-                         
-                    Sale sale = new Sale(lineItems, date, cardPayment);
-                    request.setAttribute("sale", sale);
-                %>
-                <td value="total"><%=sale.calculateTotal()%></td>
-                <%}%>
-                <%%>
+                <td><%=sale.calculateTotal()%></td>
+
             </tr>
         </table>
 
         <button type="submit" style="position:absolute;left:500px;" name="submit" value="Scan" id="prodID" onclick="scanner()">Scan</button>
-        
-        <br><br><br><br>
-        
-            
-            
-        <button style="position:absolute;left:0px;" name="submit" value="Cash" >Cash</button>
-        <%if(cashPayment != null){%>
-        <label>Cash: <input type="text" name="cash" id="cashPayment" ></label>
-        <label>Change: <input type="text" name="change" id="change" value="<%%>"></label>
-        <label>Total Change: <%=change%></label>
-        <%}%>
-        
-         
-        <button style="position:absolute;left:500px;" name="submit" value="Card">Card</button>
-        <%if (cardPayment != null) {%>
-        <label>Card Number: <input type="text" name="cardNumber" id="cardNumber" ></label>
-        <label>Card Type: <input type="radio" name="Debit" id="cardType" ></label>
-        <input type="radio" name="Credit" id="cardType">
-        <input type="radio" name="Credit" id="cardType">
-        <%}%>
-        <button style="position:absolute;left:0px;" name="submit" value="Checkout">Proceed to
-            checkout</button><br><br><br><br>
-            <%String responseMessage = (String) request.getAttribute("responseMessage");%>
-            <input type="text" value="<%=responseMessage%>">
-    </div>
-    
-    
-    
-         
-    <div class="container">
+        <div class="container">
             <div class="col-md-6">
                 <div class="row">
                     <video id="preview" width="100%" style="display:none"></video>
@@ -397,10 +342,41 @@
                     <label>SCAN QR CODE</label>
                     <form>
                         <label>Product ID: <input type="text" id="prodID" name="prodID" class="bars"></label>
+
                     </form>
                 </div>
             </div>
         </div>
-
+        <br><br><br><br>
+        
+            
+            <%
+                Float change = Float.parseFloat(request.getParameter("change"));
+                Float difference = change - Float.parseFloat(request.getParameter("Cash"));
+            %>
+        <button style="position:absolute;left:0px;" name="submit" value="Cash" >Cash</button>
+        <%if(sale.getPayment() == null){%>
+        <label>Cash: <input type="text" name="cash" id="cashPayment" ></label>
+        <label>Change: <input type="text" name="change" id="change" value="change"></label>
+        <label>Difference: <%=difference%></label>
+        <%}%>
+        
+         
+        <button style="position:absolute;left:500px;" name="submit" value="Card">Card</button>
+        <%if (sale.getPayment() != null) {%>
+        <label>Card Number: <input type="text" name="cardNumber" id="cardNumber" ></label>
+        <label>Card Type: <input type="radio" name="Debit" id="cardType" value="Debit"></label>
+        <input type="radio" name="Credit" id="cardType" value="Credit">
+        <input type="radio" name="Cheque" id="cardType"value="Cheque">
+        <%}%>
+        <button style="position:absolute;left:0px;" name="submit" value="Checkout">Proceed to
+            checkout</button><br><br><br><br>
+            <%String responseMessage = (String)request.getAttribute("responseMessage");%>
+            <a href="../java/za/co/carols_boutique_pos/employee_servlet/EmployeeServlet.java"></a>
+            <label><%=responseMessage%></label>>
+    </div>
+     <%}%>
+    </form>
+   
     </body>
 </html>

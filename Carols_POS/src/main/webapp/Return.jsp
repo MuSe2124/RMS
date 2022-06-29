@@ -4,6 +4,7 @@
     Author     : HP
 --%>
 
+<%@page import="za.co.carols_boutique_pos.models.Sale"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -236,8 +237,13 @@
         <label>Receipt ID<label><br>
                 <input type="text" name="ReceiptID" class="bars"><br>
                 <button name="submit" value="searchSale">search</button><br>
+                <%
+                Sale sale = (Sale) request.getAttribute("sale1");
+                String saleResponse = (String) request.getAttribute("noSale");
+                
+                %>
                 <br><br>
-                <label>??result??</label><br><br>
+                <label><%=saleResponse%></label><br><br>
                 <table>
                     <tr>
                         <th>ProductID</th>
@@ -263,7 +269,6 @@
                 <input type="text" name="Email" class="bars"><br><br>
                 <button name="submit" value="removeitem">remove item</button><br>
                 <button name="submit" value="ConfirmReturn">Confirm</button>
-
 
     </div>   
     <script>

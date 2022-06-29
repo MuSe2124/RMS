@@ -10,8 +10,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import za.co.carols_boutique_pos.models.CardPayment;
 import za.co.carols_boutique_pos.models.CashPayment;
@@ -43,100 +45,41 @@ public class ProductServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         switch (request.getParameter("submit")) {
-            //edit
-            case "Scan":
-                Product product = new Product();
-                String[] size = request.getParameter("prodID").split("");
-                for (int i = 0; i < size.length; i++) {
-                    product = pr.getProduct(size[0] + " " + size[1], size[2]);
-                }
-                if (product != null) {
-                    request.setAttribute("product", product);
-                    request.getRequestDispatcher("createSale.jsp").forward(request, response);
-                    List<LineItem> lineItems = new ArrayList<>();
-
-                    for (LineItem lineItem : lineItems) {
-                        lineItem = new LineItem(product, Integer.parseInt(request.getParameter("amount")), product.getSize());
-                        lineItems.add(lineItem);
-                        request.setAttribute("lineItems", lineItems);
-                        request.getRequestDispatcher("createSale.jsp").forward(request, response);
-                    }
-                }
-                break;
-            case "Cash":
-                CashPayment cp = new CashPayment(Float.parseFloat(request.getParameter("cashPayment")));
-                Boolean b = cp.verify(Float.parseFloat(request.getParameter("total")));
-                request.setAttribute("cp", cp);
-                request.getRequestDispatcher("createSale.jsp").forward(request, response);
-                Float total = Float.parseFloat(request.getParameter("total"));
-                Float change = cp.getPayment() - total;
-                request.setAttribute("change", change);
-                request.getRequestDispatcher("createSale.jsp").forward(request, response);
-                break;
-            case "Card":
-                CardPayment cdp = new CardPayment(request.getParameter("cardNumber"), request.getParameter("cardType"));
-                request.setAttribute("cdp", cdp);
-                request.getRequestDispatcher("createSale.jsp").forward(request, response);
-                break;
-            case "Checkout":
-                Sale sale = (Sale) request.getAttribute("sale");
-                if (sale != null) {
-                    String responseMessage = ss.addSale(sale);
-                    request.setAttribute("responseMessage", responseMessage);
-                    request.getRequestDispatcher("createSale.jsp").forward(request, response);
-                }
-                break;
-            case "receiptID":
-                Sale s = ss.getSale(request.getParameter("ReceiptID"));
-
-                if (s != null) {
-                    request.setAttribute("s", s);
-                    request.getRequestDispatcher("Exchange.jsp").forward(request, response);
-                } else {
-                    String noSale = "Sale not found";
-                    request.setAttribute("noSale", noSale);
-                    request.getRequestDispatcher("Exchange.jsp").forward(request, response);
-                }
-                break;
-            case "addwithproductID":
-                Product product1 = new Product();
-                String[] prodArr = request.getParameter("prodID").split("");
-                for (int i = 0; i < prodArr.length; i++) {
-                    product1 = pr.getProduct(prodArr[0] + " " + prodArr[1], prodArr[2]);
-                    if (product1 != null) {
-                        request.setAttribute("product1", product1);
-                        request.getRequestDispatcher("Exchange.jsp").forward(request, response);
-                    } else {
-                        String noProduct = "Product not found";
-                        request.setAttribute("noProduct", noProduct);
-                        request.getRequestDispatcher("Exchange.jsp").forward(request, response);
-                    }
-                }
-                break;
-            case "exchangedItem":
-                Product product2 = new Product();
-                String[] prodArr2 = request.getParameter("prodID").split("");
-                for (int i = 0; i < prodArr2.length; i++) {
-                    product2 = pr.getProduct(prodArr2[0] + " " + prodArr2[1], prodArr2[2]);
-                    if (product2 != null) {
-                        request.setAttribute("product2", product2);
-                        request.getRequestDispatcher("Exchange.jsp").forward(request, response);
-                    } else {
-                        String noProduct = "Product not found";
-                        request.setAttribute("noProduct", noProduct);
-                        request.getRequestDispatcher("Exchange.jsp").forward(request, response);
-                    }
-                }
-            case "ConfirmExchange":
-                //fix this
-                //"pr.deleteProduct(responseMessage, responseMessage)
-                break;
-            case "searchSale":
-                Sale sale1 = ss.getSale(request.getParameter("ReceiptID"));
-                if (sale1 != null) {
+            case "newSale":
+                HttpSession session = request.getSession();
+                Sale sale = new Sale();
+                String productID = request.getParameter("prodID");
+                
+                String[]arr = productID.split(" ");
+                Product prod = pr.getProduct(arr[0], arr[1]);
+                if (prod != null) {
                     
+                        Integer amount = 1;
+                        LineItem li = new LineItem(prod, amount, arr[1]);
+                        sale.getLineItems().add(li);
+                        for (int i = 0; i < sale.getLineItems().size(); i++) {
+                        if (sale.getLineItems().get(i).getProduct().getId().equals(sale.getLineItems().get(i + 1).getId())) {
+                            li.setAmount(amount++);
+                        }else{
+                            sale.getLineItems().add(new LineItem(prod, amount, arr[1]));
+                        }
+                    } 
                 }
+                Date date = new Date(System.currentTimeMillis());
+                sale.setDate(date);
+                
+                CashPayment cp = new CashPayment(Float.parseFloat(request.getParameter("Cash")));
+                CardPayment crdP = new CardPayment(request.getParameter("cardNumber"), request.getParameter("cardType"));
+                if (cp != null) {
+                    sale.setPayment(cp);
+                }else if(crdP != null){
+                    sale.setPayment(crdP);
+                }
+                session.setAttribute("sale", sale);
+                
+                
                 break;
+          
         }
     }
 
@@ -148,9 +91,14 @@ public class ProductServlet extends HttpServlet {
 
             case "createProduct":
                 Product p = new Product(request.getParameter("pName"), request.getParameter("pDescription"), Float.parseFloat(request.getParameter("pPrice")));
-
                 break;
-
+            case "Checkout":
+                HttpSession session = request.getSession();
+                Sale sale = (Sale)session.getAttribute("sale");
+                String responseMessage = ss.addSale(sale);
+                request.setAttribute(responseMessage, responseMessage);
+                request.getRequestDispatcher("create.jsp").forward(request, response);
+                break;
         }
     }
 

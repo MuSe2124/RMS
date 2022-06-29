@@ -27,6 +27,7 @@ public class RestUtilities {
 
 		WebTarget webTarget = client.target(url);
 		Response response = null;
+
 		try {
 			response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(Stringify(keepAside)));
 		} catch (JsonProcessingException ex) {

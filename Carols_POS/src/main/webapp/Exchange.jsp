@@ -4,7 +4,7 @@
     Author     : HP
 --%>
 
-<%@page import="za.co.carols_boutique.models.Product"%>
+<%@page import="za.co.carols_boutique_pos.models.Product"%>
 <%@page import="za.co.carols_boutique_pos.models.Sale"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -242,30 +242,38 @@
 
         <label id="copyright">Carols Boutique pty.Ltd.<br>Reg.131 482 9132</label>
         <div id="exchangepage" class="mid">
-            <h1>Exchange</h1><br>
-            <label>Receipt ID<label><br>
-                    <%
-                        Sale sale = (Sale) request.getAttribute("s");
-                        String saleResponse = (String) request.getAttribute("noSale");
-                        Product prod = (Product) request.getAttribute("product1");
-                        String prodResponse = (String) request.getAttribute("noProduct");
-                        Product prod1 = (Product) request.getAttribute("product2");
-                    %>
-                    <input type="text" name="ReceiptID" class="bars"><br>
-                    <button name="submit" value="receiptID">search</button><br>
-                    <br><br>
-                    <%if (saleResponse != null) {%>
-                    <label><%=saleResponse%></label><br><br>
-                    <%}%>
-                    <table>
-                        <tr>
-                            <th>ProductID</th>
-                            <th>Item</th>
-                            <th>Size</th>
-                            <th>Qty</th>
-                            <th>Price</th>
-                        </tr>
-                               <td>?ProductID?
+            <form>
+                <h1>Exchange</h1><br>
+                <label>Receipt ID<label><br>
+                        <%
+                            Sale sale = (Sale) request.getAttribute("s");
+                            String saleResponse = (String) request.getAttribute("noSale");
+                            Product prod = (Product) request.getAttribute("product1");
+                            String prodResponse = (String) request.getAttribute("noProduct");
+                            Product prod1 = (Product) request.getAttribute("product2");
+                        %>
+                        <input type="text" name="ReceiptID" class="bars"><br>
+                        <button name="submit" value="receiptID">search</button><br>
+                        <br><br>
+                        <label></label><br><br>
+                        
+                        <label style>Return ProductID</label><br>
+                        <input type="text" name="returnProductID" class="bars"><br>
+                        <input type="text" name="returnAmount" class="bars"><br>
+                        <label>Exchange ProductID</label><br>
+                        <input type="text" name="exchangeProductID" class="bars">
+                        <input type="text" name="exchangeAmount" class="bars">
+                        <br><br>
+                        
+                        <table>
+                            <tr>
+                                <th>ProductID</th>
+                                <th>Item</th>
+                                <th>Size</th>
+                                <th>Qty</th>
+                                <th>Price</th>
+                            </tr>
+                            <td>?ProductID?
                             </td>
                             <td>??-item??
                             </td>
@@ -274,65 +282,63 @@
                             <td>??Qty??</td>
                             <td>??Price??
                             </td> 
-                        <tr>
-                            
-                        </tr>
-                        <tr style="background-color:red">
-                            
-                            <td><%=prod.getId()%>
-                            </td>
-                            <td><%=prod.getName()%>
-                            </td>
-                            <td><%=prod.getSize()%>
-                            </td>
-                            <td>??Qty??</td>
-                            <td><%=prod.getPrice()%>
-                            </td>
-                        </tr>
-                        <tr style="background-color:green">
-                            <td><%=prod1.getId()%>
-                            </td>
-                            <td><%=prod1.getName()%>
-                            </td>
-                            <td><%=prod1.getSize()%>
-                            </td>
-                            <td>??Qty??</td>
-                            <td><%=prod1.getPrice()%>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Total: </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <%Float total = prod1.getPrice() - prod.getPrice();%>
-                            <td><%= total%></td>                            
-                        </tr>
-                    </table><br>
-                    <label style>ProductID</label><br>
-                    <input type="text" name="ProductID" class="bars">
-                    <br><br>
-                    <button name="submit" value="addwithproductID">add with productID</button><br><br>
-                    <label><%=prodResponse%></label>
-                    <button name="submit" value="exchangedItem">Select item that is being exchanged</button><br><br>
-                    <button name="submit" value="ConfirmExchange">Confirm Exchange</button>
+                            <tr>
+
+                            </tr>
+                            <tr style="background-color:red">
+
+                                <td><%=prod.getId()%>
+                                </td>
+                                <td><%=prod.getName()%>
+                                </td>
+                                <td><%=prod.getSize()%>
+                                </td>
+                                <td>??Qty??</td>
+                                <td><%=prod.getPrice()%>
+                                </td>
+                            </tr>
+                            <tr style="background-color:green">
+                                <td><%=prod1.getId()%>
+                                </td>
+                                <td><%=prod1.getName()%>
+                                </td>
+                                <td><%=prod1.getSize()%>
+                                </td>
+                                <td>??Qty??</td>
+                                <td><%=prod1.getPrice()%>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Total: </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <%Float total = prod1.getPrice() - prod.getPrice();%>
+                                <td><%= total%></td>                            
+                            </tr>
+                        </table><br>
+                        
+                        <button name="submit" value="ConfirmExchange">Confirm Exchange</button>
 
 
-                    </div>    
-                    <script>
-                        function openCity(evt, cityName) {
-                            var i, tabcontent, tablinks;
-                            tabcontent = document.getElementsByClassName("sideside");
-                            for (i = 0; i < tabcontent.length; i++) {
-                                tabcontent[i].style.display = "none";
+                        </div> 
+                                </form>   
+                        <script>
+                            function openCity(evt, cityName) {
+                                var i, tabcontent, tablinks;
+                                tabcontent = document.getElementsByClassName("sideside");
+                                for (i = 0; i < tabcontent.length; i++) {
+                                    tabcontent[i].style.display = "none";
+                                }
+                                tablinks = document.getElementsByClassName("c");
+                                for (i = 0; i < tablinks.length; i++) {
+                                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                                }
+                                document.getElementById(cityName).style.display = "block";
+                                evt.currentTarget.className += " active";
                             }
-                            tablinks = document.getElementsByClassName("c");
-                            for (i = 0; i < tablinks.length; i++) {
-                                tablinks[i].className = tablinks[i].className.replace(" active", "");
-                            }
-                            document.getElementById(cityName).style.display = "block";
-                            evt.currentTarget.className += " active";
-                        }
-                    </script>    
-                    </body>
-                    </html>
+                        </script>    
+                        
+                        </body>
+
+                        </html>

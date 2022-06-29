@@ -78,9 +78,17 @@ public class ProductServlet extends HttpServlet {
                 }
                 session.setAttribute("sale", sale);
                 
-                
                 break;
-          
+            case "receiptID":
+                Sale sale1 = ss.getSale(request.getParameter("ReceiptID"));
+                if (sale1 != null) {
+                    String[] arr1 = request.getParameter("returnProductID").split(" ");
+                    
+                    Product returnProd = sale1.getLineItems().get(0);
+                    LineItem preLineItem = new LineItem(prod, Integer.SIZE, productID);
+                    Exchange exchange = new Exchange(sale, preLineItem, postLineItem);
+                }
+                break;
         }
     }
 
@@ -103,6 +111,8 @@ public class ProductServlet extends HttpServlet {
                 HttpSession session = request.getSession();
                 Sale sale = (Sale)session.getAttribute("sale");
                 String responseMessage = ss.addSale(sale);
+                sale = null;
+                session.setAttribute("sale", null);
                 request.setAttribute(responseMessage, responseMessage);
                 request.getRequestDispatcher("create.jsp").forward(request, response);
                 break;

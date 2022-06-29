@@ -5,12 +5,11 @@
 package za.co.carols_boutique_pos.service;
 
 
-import java.util.ArrayList;
-import za.co.carols_boutique.models.ProdCat;
-import za.co.carols_boutique.models.Product;
 import za.co.carols_boutique.models.Stock;
 import java.util.List;
 import za.co.carols_boutique_pos.models.Category;
+import za.co.carols_boutique_pos.models.ProdCat;
+import za.co.carols_boutique_pos.models.Product;
 import za.co.carols_boutique_pos.models.Refund;
 
 /**

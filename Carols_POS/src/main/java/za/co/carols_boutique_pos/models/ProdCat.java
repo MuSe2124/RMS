@@ -1,4 +1,5 @@
-package za.co.carols_boutique.models;
+package za.co.carols_boutique_pos.models;
+
 
 import java.io.Serializable;
 

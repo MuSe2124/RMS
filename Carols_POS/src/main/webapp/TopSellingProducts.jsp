@@ -1,4 +1,10 @@
-<%@page import="za.co.carols_boutique_pos.models.Sale"%>
+<%-- 
+    Document   : TopSellingProducts
+    Created on : 29 Jun 2022, 05:36:55
+    Author     : HP
+--%>
+
+<%@page import="za.co.carols_boutique_pos.models.ProductReport"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="za.co.carols_boutique_pos.models.StoreSales"%>
@@ -9,8 +15,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>View Top Daily Sales</title>
         
+        <title>Top Selling Products</title>
         <style>
             .mid {
             text-align: center;
@@ -231,26 +237,27 @@
         <a href ="RequestIBT.jsp" id="ibtrequestb" class="b" name="button" value="IBT Requests page"
             >Request IBT</a>
     </div>
-    <%Report report = (Report)request.getAttribute("ViewDailySalesReport");
-    List<String> x=new ArrayList<>(); List<Float> y = new ArrayList<>();%>
+    <%Report report = (Report)request.getAttribute("ProductReportReport");
+    List<String> x=new ArrayList<>(); List<Integer> y = new ArrayList<>();%>
         <form action="ReportServlet" method =get>
     <div id="acheivedtargetpage" class="mid">
-        <h1>Daily Sales</h1><br>
-        <label>Enter Store ID</label><br>
-        <input type ="text" class="bars" name ="ViewDailySalesStoreButton"><br><br>
-        <button name="button" value="ViewDailySalesbutton">Get Results</button><br><br>
-        <h2>View Daily Sales for ??Month??</h2><br>
+        <h1>Product Report</h1><br>
+        <label>Enter Date</label><br>
+        <input type ="month" class="bars" name ="TopSellingProductsMonth"><br><br>
+        <label>Store ID</label>
+        <input type="text" name="TopSellingProductsStoreID" class="bars"><br><br>
+        <button type="submit" name="TopSellingProductsbutton" value="button">Get Results</button><br><br>
+        <h2>Top Selling Products for ??Month??</h2><br>
         <table style="width:100%">
             <tr>
-                <th>Sale ID</th>
-                <th>Total</th>
-                <th></th>
+                <th>Product ID</th>
+                <th>Amount Sold</th>
+                
             </tr>
-            <%for(Sale ss :report){%>
-            <tr><%x.add(ss.getId());y.add(ss);%>
-                <%for()%>
-                <td> <%= ss.getId() %> </td>
-                <td> <%= ; %> </td>    
+            <%for(ProductReport ss :report.getProductReport()){%>
+            <tr><%x.add(ss.getProductID());y.add(Integer.getInteger(ss.getAmountsSold()));%>
+                <td> <%= ss.getProductID() %> </td>
+                <td> <%= ss.getAmountsSold() %> </td>    
             </tr>
             <%}%>
         </table>
@@ -292,7 +299,7 @@
             options: {
                 title: {
                     display: true,
-                    text: "World Wide Wine Production 2018"
+                    text: "Top Selling Products"
                 }
             }
         });
@@ -310,7 +317,7 @@
                 legend: { display: false },
                 title: {
                     display: true,
-                    text: "LeastTopEmployees"
+                    text: "Top Selling Products"
                 }
             }
         });
@@ -326,5 +333,4 @@
         document.getElementById("barchart").style.display = "none";
         
     </script>
-</html>
 </html>

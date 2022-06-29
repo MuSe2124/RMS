@@ -22,76 +22,88 @@ import za.co.carols_boutique_pos.service.StoreS;
  *
  * @author muaad
  */
-public class RestStore implements StoreS{
+public class RestStore implements StoreS {
 
-	private Client client;
-	private String url;
+    private Client client;
+    private String url;
 
-	public RestStore(){
-		client = ClientBuilder.newClient();
-		url = "http://localhost:8080/Carols_Boutique_API/pos/store/";
-	}
-	
+    public RestStore() {
+        client = ClientBuilder.newClient();
+        url = "http://localhost:8080/Carols_Boutique_API/pos/store/";
+    }
+
     @Override
     public Store loginStore(Store store) {
-		String url = "url"+"login";
+        String url = "url" + "login";
 
         WebTarget webTarget = client.target(url);
         Response response = null;
-       
-		try {
-			response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(Stringify(store)));
-		} catch (JsonProcessingException ex) { 
-			Logger.getLogger(RestStore.class.getName()).log(Level.SEVERE, null, ex);
-		}
-            
+
+        try {
+            response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(Stringify(store)));
+        } catch (JsonProcessingException ex) {
+            Logger.getLogger(RestStore.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         return response.readEntity(Store.class);
-	}
+    }
 
     @Override
     public String registerStore(Store store) {
-		String url = "url"+"register";
+        String url = "url" + "register";
 
         WebTarget webTarget = client.target(url);
         Response response = null;
-       
-		try {
-			response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(Stringify(store)));
-		} catch (JsonProcessingException ex) {
-			Logger.getLogger(RestEmployee.class.getName()).log(Level.SEVERE, null, ex);
-		}
-            
+
+        try {
+            response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(Stringify(store)));
+        } catch (JsonProcessingException ex) {
+            Logger.getLogger(RestEmployee.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         return response.readEntity(String.class);
-	}
+    }
 
     @Override
     public String addSale(Sale sale) {
-		String url = "url"+"register";
+        String url = "url" + "register";
 
         WebTarget webTarget = client.target(url);
         Response response = null;
-       
-		try {
-			response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(Stringify(sale)));
-		} catch (JsonProcessingException ex) {
-			Logger.getLogger(RestEmployee.class.getName()).log(Level.SEVERE, null, ex);
-		}
-            
+
+        try {
+            response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(Stringify(sale)));
+        } catch (JsonProcessingException ex) {
+            Logger.getLogger(RestEmployee.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         return response.readEntity(String.class);
-	}
+    }
 
     @Override
     public String deleteStore(String storeID) {
-		String url = "url"+"deleteEmployee";
+        String url = "url" + "deleteEmployee";
 
         WebTarget webTarget = client.target(url);
         Response response = null;
-		response = webTarget.request(MediaType.APPLICATION_JSON).get(Response.class);
-            
+        response = webTarget.request(MediaType.APPLICATION_JSON).get(Response.class);
+
         return response.readEntity(String.class);
-	}
-    
-	private String Stringify(Object o) throws JsonProcessingException{   
+    }
+
+    private String Stringify(Object o) throws JsonProcessingException {
         return new ObjectMapper().writeValueAsString(o);
+    }
+
+    @Override
+    public Sale getSale(String saleID) {
+        String url = "url" + "getSale";
+
+        WebTarget webTarget = client.target(url);
+        Response response = null;
+
+            response = webTarget.request(MediaType.APPLICATION_JSON).get(Response.class);
+
+        return response.readEntity(Sale.class);
     }
 }

@@ -30,11 +30,11 @@ private RestReport rr;
         switch(request.getParameter("button")){
             case"acheivedtargetbutton":
                 rep=rr.viewStoresThatAchievedTarget(request.getParameter("acheivedtargetmonth"));
-                request.setAttribute("acheivedtargetreport",rep);
+                request.setAttribute("LeastTopStoreReport",rep);
                 request.getRequestDispatcher("AcheivedTarget.jsp").forward(request,response);
                 break;
-            case"LeastTopEmployeesbutton":
-                rep=rr.viewLeastPerformingStores(request.getParameter("LeastTopEmployeesmonth"));
+            case"LeastTopStorebutton":
+                rep=rr.viewLeastPerformingStores(request.getParameter("LeastTopStoresmonth"));
                 request.setAttribute("LeastTopEmployeesReport",rep);
                 request.getRequestDispatcher("LeastTopEmployees.jsp").forward(request,response);
                 break;
@@ -65,6 +65,7 @@ private RestReport rr;
                 break;
             case"CustomerReviewbutton":
                 rep=rr.getCustomerReviews(request.getParameter("CustomerReviewMonth"),Integer.valueOf(request.getParameter("CustomerReviewAmount")));
+                System.out.println("?????????????????????"+rep.getReviews().size()+"?????????????????????????????????");
                 request.setAttribute("CustomerReviewReport",rep);
                 request.getRequestDispatcher("CustomerReviewReport.jsp").forward(request,response);
                 break;

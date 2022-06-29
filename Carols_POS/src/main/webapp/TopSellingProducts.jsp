@@ -256,8 +256,8 @@
             </tr>
             <%for(ProdStore ss:report.getProdStores()){%>
             <tr><%x.add(ss.getProductID());y.add(ss.getAmount());colors.add("rgb("+(int)Math.random()*256+","+(int)Math.random()*256+","+(int)Math.random()*256+")");%>
-                <td> <%= ss.getProductID() %> </td>
-                <td> <%= ss.getStoreID() %> </td>
+                <td> <%= ss.getProductID()%> </td>
+                <td> <%= ss.getStoreID()%> </td>
                 <td><%=ss.getAmount()%></td>
             </tr>
             <%}%>

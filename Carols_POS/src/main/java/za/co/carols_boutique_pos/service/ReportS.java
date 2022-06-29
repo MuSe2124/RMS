@@ -4,7 +4,7 @@
  */
 package za.co.carols_boutique_pos.service;
 
-import za.co.carols_boutique.models.Review;
+import za.co.carols_boutique_pos.models.Review;
 import za.co.carols_boutique_pos.models.Customer;
 import za.co.carols_boutique_pos.models.Report;
 

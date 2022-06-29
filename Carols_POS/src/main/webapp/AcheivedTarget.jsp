@@ -238,14 +238,15 @@
     </div>
     
         <form action="ReportServlet" method =get>
-        <%Report report = (Report)request.getAttribute("acheivedtargetbutton");%>    
+        <%Report report = (Report)request.getAttribute("acheivedtargetReport");%>    
     <div id="acheivedtargetpage" class="mid">
         <h1>Achieved Target</h1><br>
         <label>Enter Date</label><br>
         <input type ="month" class="bars" name ="acheivedtargetmonth"><br><br>
         <button type="submit" name="button" value="acheivedtargetbutton">Get Results</button><br><br>
+        
         <%if(report!=null){%>
-        <h2>Table of achieved target</h2><br>
+        <h2>Table of achieved target <%=report.getStoreSales()%></h2><br>
         <table style="width:100%">
             <tr>
                 <th>Store ID</th>
@@ -281,4 +282,5 @@
             evt.currentTarget.className += " active";
         }
     </script>
+    </body>
 </html>

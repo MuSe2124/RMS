@@ -241,11 +241,11 @@
     <%Report report = (Report)request.getAttribute("MonthlySalesReport");
     List<String> x=new ArrayList<>(); List<Float> y = new ArrayList<>(); List<String> colors=new ArrayList<>();%>
         <form action="ReportServlet" method =get>
-    <div id="acheivedtargetpage" class="mid">
+    <div id="reportpage" class="mid">
         <h1>Monthly Sales</h1><br>
         <label>Enter Date</label><br>
         <input type ="month" class="bars" name ="MonthlySalesMonth"><br><br>
-        <label>Enter Store</label>
+        <label>Enter Store</label><br>
         <input type ="text" class="bars" name ="MonthlySalesStoreID"><br><br>
         <button type="submit" name="button" value="MonthlySalesbutton">Get Results</button><br><br>
         <%if(report!=null){%>
@@ -327,20 +327,20 @@
                 legend: { display: false },
                 title: {
                     display: true,
-                    text: "LeastTopEmployees"
+                    text: "Monthly Sales"
                 }
             }
         });
         function displaybarchart(){
-            document.getElementById("barchart").style.display = "block";
-            document.getElementById("piegraph").style.display = "none";
+            document.getElementById("barChart").style.display = "block";
+            document.getElementById("pieChart").style.display = "none";
         }
         function displaypiechart(){
-            document.getElementById("barchart").style.display = "none";
-            document.getElementById("piegraph").style.display = "block";
+            document.getElementById("barChart").style.display = "none";
+            document.getElementById("pieChart").style.display = "block";
         }
-        document.getElementById("piechart").style.display = "none";
-        document.getElementById("barchart").style.display = "none";
+        document.getElementById("pieChart").style.display = "none";
+        document.getElementById("barChart").style.display = "none";
         
     </script>
 </html>

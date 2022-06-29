@@ -21,4 +21,6 @@ public interface StoreS {
     String addSale(Sale sale);  
     
     String deleteStore(String storeID);
+    
+    Sale getSale(String saleID);
 }

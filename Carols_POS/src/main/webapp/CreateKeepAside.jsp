@@ -217,11 +217,12 @@
 			<a href ="RequestIBT.jsp" id="ibtrequestb" class="b" name="button" value="IBT Requests page"
 			   >Request IBT</a>
 		</div>
-		<form action="UtilitiesServlet" method="post">
+		
 			<label id="copyright">Carols Boutique pty.Ltd.<br>Reg.131 482 9132</label>
 			<div class="mid" id="ckapage">
-				<h2 style="font-size:30px;">Create keep aside</h2>
-
+				
+                         <form action="StoreServlet" method="post">
+                            <h2 style="font-size:30px;">Create keep aside</h2>
 				<label>ProductID:</label>
 				<br>
 				<br>
@@ -260,9 +261,9 @@
 				<br>
 				<% }%>
 
-				<button type="submit" id="createkeepaside" class="ckab" name="submit" value="createKeepAside">Create keep aside</button>
-		</form>
-	</div>
+				<button type="submit" id="createkeepaside" class="ckab" name="submit" value="keepAside">Create keep aside</button>
+                            </form>
+                        </div>
 	<script>
 		function openCity(evt, cityName) {
 			var i, tabcontent, tablinks;

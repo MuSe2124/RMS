@@ -12,11 +12,14 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import za.co.carols_boutique_pos.models.Category;
+import za.co.carols_boutique_pos.models.KeepAside;
 import za.co.carols_boutique_pos.models.Store;
 import za.co.carols_boutique_pos.rest_clients.RestProduct;
 import za.co.carols_boutique_pos.rest_clients.RestStore;
+import za.co.carols_boutique_pos.rest_clients.RestUtilities;
 
 
 
@@ -30,10 +33,12 @@ public class StoreServlet extends HttpServlet {
 
     private RestStore rs;
 	private RestProduct product;
+	private RestUtilities ru;
 
     public StoreServlet() {
         rs = new RestStore();
 		product = new RestProduct();
+		ru = new RestUtilities();
 	
     }
 
@@ -72,6 +77,37 @@ public class StoreServlet extends HttpServlet {
                     request.getRequestDispatcher("RegisterStore.jsp").forward(request, response);
                 }
                 break;
+				
+			case "keepAside":
+				System.out.println("In switch");
+				String productID = request.getParameter("productID");
+				String storeID = request.getParameter("StoreID");
+				Integer amount = Integer.parseInt(request.getParameter("amount"));
+				String customerEmail = request.getParameter("CustomerEmail");
+				Date date = new Date(System.currentTimeMillis());
+
+				
+				System.out.println(productID);
+				System.out.println("After 1");
+				System.out.println(storeID);
+				System.out.println("After 2");
+				System.out.println(amount);
+				System.out.println("After 3");
+				System.out.println(customerEmail);
+				System.out.println("After 4");
+				
+				KeepAside keepAside = new KeepAside(storeID, date, customerEmail, productID, amount);
+				String message = ru.createKeepAside(keepAside);
+				System.out.println(message);
+				System.out.println("Printing the damn message");
+				if (ru == null) { 
+					request.setAttribute("responseMessage", "Could not add keep aside");
+					request.getRequestDispatcher("CreateKeepAside.jsp").forward(request, response);
+				} else {
+					request.setAttribute("responseMessage", message);
+					request.getRequestDispatcher("Home.jsp").forward(request, response);
+				}
+				break;
         }
     }
 }

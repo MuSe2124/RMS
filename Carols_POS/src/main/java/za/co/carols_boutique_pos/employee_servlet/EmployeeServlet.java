@@ -45,7 +45,7 @@ public class EmployeeServlet extends HttpServlet {
             case "login":
                 Employee emp = new Employee(request.getParameter("empID"), request.getParameter("empPass"), store.getId());
                 Employee signedInEmployee = re.login(emp);
-                if (emp != null) {
+                if (signedInEmployee != null) {
                     session.setAttribute("employee", signedInEmployee);
                     request.getRequestDispatcher("Home.jsp").forward(request, response);
                 } else {

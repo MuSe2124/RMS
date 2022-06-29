@@ -1,89 +1,80 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package za.co.carols_boutique_pos.models;
+package za.co.carols_boutique.models;
 
-/**
- *
- * @author Jomar
- */
-public class Stock {
-    
-    private String storeID;
-    private String productID;
-    private String productName;
-    private String employeeID;
-    private Integer amount;
-    
-    private String sizeID;
+import java.io.Serializable;
 
-    public Stock() {
-    }
+public class Stock implements Serializable {
 
-    public String getProductName() {
-        return productName;
-    }
+	private String storeID;
+	private String productID;
+	private String productName;
+	private String employeeID;
+	private Integer amount;
 
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-    
-    public Stock(String storeID, String productID, String employeeID, Integer amount, String sizeID) {
-        this.storeID = storeID;
-        this.productID = productID;
-        this.employeeID = employeeID;
-        this.amount = amount;
-        this.sizeID = sizeID;
-    }
+	private String sizeID;
 
-    public Stock(String productID, String productName, Integer amount) {
-        this.productID = productID;
-        this.productName = productName;
-        this.amount = amount;
-    }
-    
-    
+	public Stock() {
+	}
 
-    public String getStoreID() {
-        return storeID;
-    }
+	public String getProductName() {
+		return productName;
+	}
 
-    public void setStoreID(String storeID) {
-        this.storeID = storeID;
-    }
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
 
-    public String getProductID() {
-        return productID;
-    }
+	public Stock(String storeID, String productID, String employeeID, Integer amount, String sizeID) {
+		this.storeID = storeID;
+		this.productID = productID;
+		this.employeeID = employeeID;
+		this.amount = amount;
+		this.sizeID = sizeID;
+	}
 
-    public void setProductID(String productID) {
-        this.productID = productID;
-    }
+	public Stock(String productID, String productName, Integer amount) {
+		this.productID = productID;
+		this.productName = productName;
+		this.amount = amount;
+	}
 
-    public String getEmployeeID() {
-        return employeeID;
-    }
+	public String getStoreID() {
+		return storeID;
+	}
 
-    public void setEmployeeID(String employeeID) {
-        this.employeeID = employeeID;
-    }
+	public void setStoreID(String storeID) {
+		this.storeID = storeID;
+	}
 
-    public Integer getAmount() {
-        return amount;
-    }
+	public String getProductID() {
+		return productID;
+	}
 
-    public void setAmount(Integer amount) {
-        this.amount = amount;
-    }
+	public void setProductID(String productID) {
+		this.productID = productID;
+	}
 
-    public String getSizeID() {
-        return sizeID;
-    }
+	public String getEmployeeID() {
+		return employeeID;
+	}
 
-    public void setSizeID(String sizeID) {
-        this.sizeID = sizeID;
-    }
-    
-    
+	public void setEmployeeID(String employeeID) {
+		this.employeeID = employeeID;
+	}
+
+	public Integer getAmount() {
+		return amount;
+	}
+
+	public void setAmount(Integer amount) {
+		this.amount = amount;
+	}
+
+	public String getSizeID() {
+		return sizeID;
+	}
+
+	public void setSizeID(String sizeID) {
+		this.sizeID = sizeID;
+	}
+
 }

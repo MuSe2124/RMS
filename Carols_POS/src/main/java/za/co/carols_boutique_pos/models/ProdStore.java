@@ -1,65 +1,56 @@
-package za.co.carols_boutique_pos.models;
+package za.co.carols_boutique.models;
 
-public class ProdStore {
-   
-    private String id;
-    private String storeID;
-    private String productID;
-    private Integer amount;
-    private Integer size;
+import java.io.Serializable;
 
-    public ProdStore(String id, String storeID, String productID, Integer amount,Integer size) {
-        this.id = id;
-        this.storeID = storeID;
-        this.productID = productID;
-        this.amount = amount;
-    }
+public class ProdStore implements Serializable {
 
-    public ProdStore(String storeID, String productID, Integer amount) {
-        this.storeID = storeID;
-        this.productID = productID;
-        this.amount = amount;
-    }
+	private String storeID;
+	private String productID;
+	private String productName;
+	private Integer amount;
 
-    public ProdStore() {
-    }
-    
+	public ProdStore(String storeID, String productID, String productName, Integer amount) {
+		this.storeID = storeID;
+		this.productID = productID;
+		this.productName = productName;
+		this.amount = amount;
+	}
 
-    public String getId() {
-        return id;
-    }
+	public String getStoreID() {
+		return storeID;
+	}
 
-    public void setId(String id) {
-        this.id = id;
-    }
+	public void setStoreID(String storeID) {
+		this.storeID = storeID;
+	}
 
-    public String getStoreID() {
-        return storeID;
-    }
+	public String getProductID() {
+		return productID;
+	}
 
-    public void setStoreID(String storeID) {
-        this.storeID = storeID;
-    }
+	public void setProductID(String productID) {
+		this.productID = productID;
+	}
 
-    public String getProductID() {
-        return productID;
-    }
+	public String getProductName() {
+		return productName;
+	}
 
-    public void setProductID(String productID) {
-        this.productID = productID;
-    }
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
 
-    public Integer getAmount() {
-        return amount;
-    }
+	public Integer getAmount() {
+		return amount;
+	}
 
-    public void setAmount(Integer amount) {
-        this.amount = amount;
-    }
+	public void setAmount(Integer amount) {
+		this.amount = amount;
+	}
 
-    @Override
-    public String toString() {
-        return "ProdStore{" + "id=" + id + ", storeID=" + storeID + ", productID=" + productID + ", amount=" + amount + '}';
-    }
+	@Override
+	public String toString() {
+		return "ProdStore{" + "storeID=" + storeID + ", productID=" + productID + ", productName=" + productName + ", amount=" + amount + '}';
+	}
 
 }

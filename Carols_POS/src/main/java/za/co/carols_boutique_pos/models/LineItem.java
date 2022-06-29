@@ -1,26 +1,22 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package za.co.carols_boutique_pos.models;
 
-/**
- *
- * @author muaad
- */
-public class LineItem {
+import java.io.Serializable;
+import za.co.carols_boutique.models.Product;
+
+public class LineItem implements Serializable {
 
 	private String id;
 	private String saleID;
 	private Product product;
 	private Integer amount;
-        private String size;
+	private String size;
 
-	public LineItem(String id, String saleID, Product product, Integer amounnt) {
+	public LineItem(String id, String saleID, Product product, Integer amounnt, String size) {
 		this.id = id;
 		this.saleID = saleID;
 		this.product = product;
 		this.amount = amounnt;
+		this.size = size;
 	}
 
 	public LineItem(String saleID, Product product, Integer amounnt) {
@@ -29,14 +25,22 @@ public class LineItem {
 		this.amount = amounnt;
 	}
 
+    public LineItem(Product product, Integer amount, String size) {
+        this.product = product;
+        this.amount = amount;
+        this.size = size;
+    }
+        
+        
+
 	public LineItem() {
 	}
 
-	public String getID() {
+	public String getId() {
 		return id;
 	}
 
-	public void setID(String id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -52,27 +56,33 @@ public class LineItem {
 		return product;
 	}
 
-	public void setProductID(Product product) {
+	public void setProduct(Product product) {
 		this.product = product;
 	}
 
-	public Integer getAmounnt() {
+	public Integer getAmount() {
 		return amount;
 	}
 
-	public void setAmounnt(Integer amounnt) {
-		this.amount = amounnt;
+	public void setAmount(Integer amount) {
+		this.amount = amount;
+	}
+
+	public String getSize() {
+		return size;
+	}
+
+	public void setSize(String size) {
+		this.size = size;
 	}
 
 	public Float getTotal() {
 		return product.getPrice() * amount;
 	}
-       
-
+	
 	@Override
 	public String toString() {
 		return "LineItem{" + "id=" + id + ", saleID=" + saleID + ", product=" + product.getName() + ", amounnt=" + amount + '}';
 	}
-    
-    
+
 }

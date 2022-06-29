@@ -10,7 +10,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import za.co.carols_boutique_pos.models.Employee;
+import za.co.carols_boutique.models.Employee;
 import za.co.carols_boutique_pos.service.EmployeeS;
 
 
@@ -27,6 +27,9 @@ public class RestEmployee implements EmployeeS{
 		client = ClientBuilder.newClient();
 		url = "http://localhost:8080/Carols_Boutique_API/pos/employee/";
 	}
+        
+        
+        
 	@Override
 	public Employee login(Employee employee) {
 		String url = "url"+"login";

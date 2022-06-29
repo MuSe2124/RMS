@@ -4,8 +4,18 @@
     Author     : HP
 --%>
 
+<%@page import="za.co.carols_boutique_pos.models.CardPayment"%>
+<%@page import="za.co.carols_boutique_pos.models.LineItem"%>
 <%@page import="za.co.carols_boutique_pos.models.Sale"%>
-<%@page import="za.co.carols_boutique_pos.models.Product"%>
+<%@page import="za.co.carols_boutique_pos.models.CashPayment"%>
+<%@page import="java.time.LocalDate"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="za.co.carols_boutique.models.Payment"%>
+<%@page import="java.time.LocalDateTime"%>
+<%@page import="java.sql.Date"%>
+<%@page import="za.co.carols_boutique.models.Product"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -164,142 +174,8 @@
             padding-top: 10px;
         }
         </style>
-    </head>
-    <body style="background-image:url('https://lh3.googleusercontent.com/pw/AM-JKLXMO5yDb4rwt4sEQrgiQOMODT_pJfb1SL2dd8vpb9xK6qq-v0-sLTcA7ci2YTgbCEc9EH-VWq56ksYL1wsRQOFNAtSXfc6cmCOwCtpfS-Hbcj4rYphCA-b4AYxOAjboLEyfbJ4HxwYWuwhl5jRgETc=w1095-h657-no?authuser=0'); background-size:cover;">
-        <script type="text/javascript" src="instascan.js.min"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
-        <label id="heading">Carol's Boutique</label>
-    <div id="side">
-        <button class="c" id="keepaside" name="button" onclick="openCity(event, 'Keepasidebar')">keep aside</button>
-        <button class="c" id="viewreport" name="button" onclick="openCity(event, 'Reportbar')">view report </button>
-
-        <button class="c" id="registerstore" name="button" onclick="openCity(event, 'storebar')">Store</button>
-        <button class="c" id="updateemploye" name="button" onclick="openCity(event, 'employeebar')">Employee</button>
-        <button class="c" id="ibt" name="button" onclick="openCity(event, 'IBTbar')">IBT</button>
-        <button class="c" id="stock" name="button" onclick="openCity(event, 'Stockbar')">Stock</button>
-        <button class="c" id="sale" name="button" onclick="openCity(event, 'Salebar')">Sale</button>
-    </div>
-    <div id="Salebar" class="sideside">
-        <a href="Exchange.jsp" id="Exchangedb" class="b" name="button" value="Exchanged page"
-            >Exchanged</a><br>
-        <a href="Return.jsp" id="Returnb" class="b" name="button" value="Return page"
-            >Return</a><br>
-        <a href="createSale.jsp"id="LineItemsb" class="b" name="button" value="LineItems page"
-            >Create Sale</a>
-    </div>
-    <div id="storebar" class="sideside">
-        <a href="RegisterStore.jsp" id="registerstoreb" class="b" name="button" value="registerstorepage"
-            >register store</a>
-    </div>
-    <div id="employeebar" class="sideside">
-        <a href="RegisterEmployee.jsp" id="registeremployeeb" class="b" name="button" value="registerstorepage"
-            >Register Employee</a><br>
-        <a href="UpdateEmployee.jsp" id="registeremployeeb" class="b" name="button" value="registerstorepage"
-            >Update Employee</a>
-    </div>
-    <div id="Keepasidebar" class="sideside">
-        <a href="CreateKeepAside.jsp" id="createkeepasideb" class="b" name="button" value="createkeepasidepage"
-            >create keep aside</a>
-    </div>
-    <div id="Stockbar" class="sideside">
-        <a href ="CreateProduct.jsp" id="createproductb" class="b" name="button" value="createproduct page"
-            >create product</a><br>
-        <a href="DeleteProduct.jsp" id="deleteproductb" class="b" name="button" value="delete product page"
-            >delete product</a><br>
-        <a href="AddToStock.jsp" id="addtostockb" class="b" name="button" value="add to stock page"
-            >add to stock</a><br>
-        <a href ="RemoveFromStock.jsp" id="removefromstockb" class="b" name="button" value="remove from stock page"
-            >remove from stock</a>
-    </div>
-    <div id="Reportbar" class="sideside">
-        <a href="ViewTopEmployee.jsp" id="viewtopempb" class="b" name="button" value="view top employees page"
-            >view top employees page</a><br>
-        <a href="MonthlySales.jsp" id="monthlysalesb" class="b" name="button" value="view monthly sales page"
-            >view monthly sales</a><br>
-        <a href ="ViewTopSellingEmployees.jsp" id="topsellingempsb" class="b" name="button" value="view top selling employees page"
-            >view top selling employees</a><br>
-        <a href ="AcheivedTarget.jsp"id="achievedtargetb" class="b" name="button" value="view stores that achieved target page"
-            >View stores that achieved target page</a><br>
-        <a href ="ViewTopSellingEmployees.jsp" id="topsellingproductsb" class="b" name="button" value="view top selling products page"
-            >View top selling products</a><br>
-        <a href="LeastTopEmployees.jsp" id="leastperformingstoresb" class="b" name="button" value="view least performing stores page"
-            >View least performing stores</a><br>
-        <a href="ProductReport.jsp" id="productsreportb" class="b" name="button" value="view product report page"
-            >View product report</a><br>
-        <a href="ViewDailySales.jsp" id="dailysalesb" class="b" name="button" value="view daily sales page"
-            >View daily sales page</a>
-    </div>
-    <div id="IBTbar" class="sideside">
-
-        <a href ="RequestIBT.jsp" id="ibtrequestb" class="b" name="button" value="IBT Requests page"
-            >Request IBT</a>
-    </div>
-
-    <label id="copyright">Carols Boutique pty.Ltd.<br>Reg.131 482 9132</label>
-    <div id="lineitemspage" class="mid">
-        <%Product product =(Product) request.getAttribute("product");
         
-        %>
-        <h1>Line Items</h1>
-        <table>
-            <tr>
-                <th>ProductID
-                </th>
-                <th>Item
-                </th>
-                <th>Size
-                </th>
-                <th>Qty</th>
-                <th>Price
-                </th>
-            </tr>
-            <tr>
-                <td><%product.getId().toString();%></td>
-                <td><%product.getName().toString();%></td>
-                <td><%product.getSize().toString();%></td>
-                <td><%product.getDescription().toString();%></td>
-                <td><%product.getPrice();%></td>
-            </tr>
-            <tr>
-                <td>Total:</td>
-                <td></td>
-                <td></td>
-                <%Sale sale = new Sale();%>
-                <td><%sale.calculateTotal();%></td>
-            </tr>
-        </table>
-
-        <button style="position:absolute;left:500px;" name="button" value="Scan" id="scan" onclick="scanner()">Scan</button>
         <script>
-            function scanner(){
-                let scanner = new Instascan.Scanner({video: document.getElementById('preview')});
-            scanner.addListener('scan', function(c){
-                document.getElementById('prodID').value=c;
-            
-            });            
-            Instascan.Camera.getCameras().then(function(cameras){
-                if(cameras.length > 0) {
-                    scanner.start(cameras[0]);
-                }else{
-                    alert('no cameras found');
-                }               
-            }).catch(function(e){
-                console.error(e);
-            }); 
-            }
-         </script>
-
-        <button style="position:absolute;left:0px;" name="button"
-            value="InputintoLineItems">Input</button><br><br><br><br>
-        <label style="position:absolute;left:0px;">ProductID</label><br><br>
-        <Input style="position:absolute;left:0px;" type="text" name="ProductID" class="bars"> <br><br><br><br>
-        <button style="position:absolute;left:0px;" name="button" value="ProceedtoCheckout">Proceed to
-            checkout</button><br><br><br><br>
-        <button style="position:absolute;left:0px;" name="button" value="Cash">Cash</button>
-        <button style="position:absolute;left:500px;" name="button" value="Card">Card</button>
-    </div>
-    <script>
         function openCity(evt, cityName) {
             var i, tabcontent, tablinks;
             tabcontent = document.getElementsByClassName("sideside");
@@ -315,6 +191,204 @@
         }
     </script>
     
+           <%
+                CardPayment cardPayment = (CardPayment)request.getAttribute("cdp");
+                %>    
+                    
+        <script>
+            function scanner(){
+                let scanner = new Instascan.Scanner({video: document.getElementById('preview')});
+            scanner.addListener('prodID', function(c){
+                document.getElementById('prodID').value=c;
+            
+            });            
+            Instascan.Camera.getCameras().then(function(cameras){
+                if(cameras.length > 0) {
+                    scanner.start(cameras[0]);
+                }else{
+                    alert('no cameras found');
+                }               
+            }).catch(function(e){
+                console.error(e);
+            }); 
+            }
+         </script>
+         
+                 <%
+                    CashPayment cashPayment = (CashPayment)request.getAttribute("cp");
+                    Float change = (Float)request.getAttribute("change");
+                 %>
+                               
+    </head>
+    <body style="background-image:url('https://lh3.googleusercontent.com/pw/AM-JKLXMO5yDb4rwt4sEQrgiQOMODT_pJfb1SL2dd8vpb9xK6qq-v0-sLTcA7ci2YTgbCEc9EH-VWq56ksYL1wsRQOFNAtSXfc6cmCOwCtpfS-Hbcj4rYphCA-b4AYxOAjboLEyfbJ4HxwYWuwhl5jRgETc=w1095-h657-no?authuser=0'); background-size:cover;">
+        <script type="text/javascript" src="instascan.js.min"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+        <label id="heading">Carol's Boutique</label>
+    <div id="side">
+        <button class="c" id="keepaside" name="submit" onclick="openCity(event, 'Keepasidebar')">keep aside</button>
+        <button class="c" id="viewreport" name="submit" onclick="openCity(event, 'Reportbar')">view report </button>
+
+        <button class="c" id="registerstore" name="submit" onclick="openCity(event, 'storebar')">Store</button>
+        <button class="c" id="updateemploye" name="submit" onclick="openCity(event, 'employeebar')">Employee</button>
+        <button class="c" id="ibt" name="submit" onclick="openCity(event, 'IBTbar')">IBT</button>
+        <button class="c" id="stock" name="submit" onclick="openCity(event, 'Stockbar')">Stock</button>
+        <button class="c" id="sale" name="submit" onclick="openCity(event, 'Salebar')">Sale</button>
+    </div>
+    <div id="Salebar" class="sideside">
+        <a href="Exchange.jsp" id="Exchangedb" class="b" name="submit" value="Exchanged page"
+            >Exchanged</a><br>
+        <a href="Return.jsp" id="Returnb" class="b" name="submit" value="Return page"
+            >Return</a><br>
+        <a href="createSale.jsp"id="LineItemsb" class="b" name="submit" value="LineItems page"
+            >Create Sale</a>
+    </div>
+    <div id="storebar" class="sideside">
+        <a href="RegisterStore.jsp" id="registerstoreb" class="b" name="submit" value="registerstorepage"
+            >register store</a>
+    </div>
+    <div id="employeebar" class="sideside">
+        <a href="RegisterEmployee.jsp" id="registeremployeeb" class="b" name="submit" value="registerstorepage"
+            >Register Employee</a><br>
+        <a href="UpdateEmployee.jsp" id="registeremployeeb" class="b" name="submit" value="registerstorepage"
+            >Update Employee</a>
+    </div>
+    <div id="Keepasidebar" class="sideside">
+        <a href="CreateKeepAside.jsp" id="createkeepasideb" class="b" name="submit" value="createkeepasidepage"
+            >create keep aside</a>
+    </div>
+    <div id="Stockbar" class="sideside">
+        <a href ="CreateProduct.jsp" id="createproductb" class="b" name="submit" value="createproduct page"
+            >create product</a><br>
+        <a href="DeleteProduct.jsp" id="deleteproductb" class="b" name="submit" value="delete product page"
+            >delete product</a><br>
+        <a href="AddToStock.jsp" id="addtostockb" class="b" name="submit" value="add to stock page"
+            >add to stock</a><br>
+        <a href ="RemoveFromStock.jsp" id="removefromstockb" class="b" name="submit" value="remove from stock page"
+            >remove from stock</a>
+    </div>
+    <div id="Reportbar" class="sideside">
+        <a href="ViewTopEmployee.jsp" id="viewtopempb" class="b" name="submit" value="view top employees page"
+            >view top employees page</a><br>
+        <a href="MonthlySales.jsp" id="monthlysalesb" class="b" name="submit" value="view monthly sales page"
+            >view monthly sales</a><br>
+        <a href ="ViewTopSellingEmployees.jsp" id="topsellingempsb" class="b" name="submit" value="view top selling employees page"
+            >view top selling employees</a><br>
+        <a href ="AcheivedTarget.jsp"id="achievedtargetb" class="b" name="submit" value="view stores that achieved target page"
+            >View stores that achieved target page</a><br>
+        <a href ="ViewTopSellingEmployees.jsp" id="topsellingproductsb" class="b" name="submit" value="view top selling products page"
+            >View top selling products</a><br>
+        <a href="LeastTopEmployees.jsp" id="leastperformingstoresb" class="b" name="submit" value="view least performing stores page"
+            >View least performing stores</a><br>
+        <a href="ProductReport.jsp" id="productsreportb" class="b" name="submit" value="view product report page"
+            >View product report</a><br>
+        <a href="ViewDailySales.jsp" id="dailysalesb" class="b" name="submit" value="view daily sales page"
+            >View daily sales page</a>
+    </div>
+    <div id="IBTbar" class="sideside">
+
+        <a href ="RequestIBT.jsp" id="ibtrequestb" class="b" name="submit" value="IBT Requests page"
+            >Request IBT</a>
+    </div>
+
+    <label id="copyright">Carols Boutique pty.Ltd.<br>Reg.131 482 9132</label>
+    <div id="lineitemspage" class="mid">
+        <%
+            List<LineItem> lineItems = (List<LineItem>) request.getAttribute("lineItems");
+            Product product = (Product) request.getAttribute("product");
+            for (int i = 0; i < lineItems.size(); i++) {
+                product = lineItems.get(i).getProduct();
+                
+            }
+            
+        %>
+        <h1>Line Items</h1>
+        <table>
+            <tr>
+                <th>ProductID
+                </th>
+                <th>Item
+                </th>
+                <th>Size
+                </th>
+                <th>Qty</th>
+                <th>Price
+                </th>
+            </tr>
+            <%for(LineItem li : lineItems){%>
+            <tr>
+                <td><%product.getId().toString();%></td>
+                <td><%product.getName().toString();%></td>
+                <td><%product.getSize().toString();%></td>
+                <% Integer amount = li.getAmount();
+                    if(li.getProduct().equals(product)){
+                        amount += li.getAmount();
+                        } 
+                    %>
+                <td>                   
+                    <label><%=li.getAmount()%></label>
+                </td>
+                <td><%=li.getProduct().getPrice()%></td>
+                <%}%>
+        
+            </tr>
+            <tr>
+                <td>Total:</td>
+                <td></td>
+                <td></td>
+                <% 
+                     Date date = new Date(System.currentTimeMillis());
+                     if (cashPayment != null) {
+                             
+                         
+                    Sale sale = new Sale(lineItems, date, cashPayment);
+                    request.setAttribute("sale", sale);
+                %>
+                <td value="total"><%=sale.calculateTotal()%></td>
+                <%}%>
+                <% 
+                     if (cardPayment != null) {
+                             
+                         
+                    Sale sale = new Sale(lineItems, date, cardPayment);
+                    request.setAttribute("sale", sale);
+                %>
+                <td value="total"><%=sale.calculateTotal()%></td>
+                <%}%>
+                <%%>
+            </tr>
+        </table>
+
+        <button type="submit" style="position:absolute;left:500px;" name="submit" value="Scan" id="prodID" onclick="scanner()">Scan</button>
+        
+        <br><br><br><br>
+        
+            
+            
+        <button style="position:absolute;left:0px;" name="submit" value="Cash" >Cash</button>
+        <%if(cashPayment != null){%>
+        <label>Cash: <input type="text" name="cash" id="cashPayment" ></label>
+        <label>Change: <input type="text" name="change" id="change" value="<%%>"></label>
+        <label>Total Change: <%=change%></label>
+        <%}%>
+        
+         
+        <button style="position:absolute;left:500px;" name="submit" value="Card">Card</button>
+        <%if (cardPayment != null) {%>
+        <label>Card Number: <input type="text" name="cardNumber" id="cardNumber" ></label>
+        <label>Card Type: <input type="radio" name="Debit" id="cardType" ></label>
+        <input type="radio" name="Credit" id="cardType">
+        <input type="radio" name="Credit" id="cardType">
+        <%}%>
+        <button style="position:absolute;left:0px;" name="submit" value="Checkout">Proceed to
+            checkout</button><br><br><br><br>
+            <%String responseMessage = (String) request.getAttribute("responseMessage");%>
+            <input type="text" value="<%=responseMessage%>">
+    </div>
+    
+    
+    
+         
     <div class="container">
             <div class="col-md-6">
                 <div class="row">
@@ -323,7 +397,7 @@
                 <div class="col-md-6">
                     <label>SCAN QR CODE</label>
                     <form>
-                        <label>QR CODE: <input type="text" id="prodID"></label>
+                        <label>Product ID: <input type="text" id="prodID" name="prodID" class="bars"></label>
                     </form>
                 </div>
             </div>

@@ -4,7 +4,7 @@
  */
 package za.co.carols_boutique_pos.service;
 
-import za.co.carols_boutique_pos.models.Employee;
+import za.co.carols_boutique.models.Employee;
 
 /**
  *

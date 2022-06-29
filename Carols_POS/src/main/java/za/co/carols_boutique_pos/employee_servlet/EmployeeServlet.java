@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
-import za.co.carols_boutique_pos.models.Employee;
+import za.co.carols_boutique.models.Employee;
 import za.co.carols_boutique_pos.models.Store;
 import za.co.carols_boutique_pos.rest_clients.RestEmployee;
 

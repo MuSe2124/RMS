@@ -1,75 +1,107 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package za.co.carols_boutique_pos.models;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import za.co.carols_boutique.models.EmpSale;
+import za.co.carols_boutique.models.ProdStore;
+import za.co.carols_boutique.models.ProductReport;
+import za.co.carols_boutique.models.Review;
+import za.co.carols_boutique.models.SaleReport;
+import za.co.carols_boutique.models.StoreSale;
+import za.co.carols_boutique_pos.rest_clients.RestReport;
+import za.co.carols_boutique_pos.service.ReportS;
 
-/**
- *
- * @author muaad
- */
-public class Report {
+public class Report implements Serializable {
 
-    private List<Review>reviews;
-    private List<StoreSale>storeSales;
-    private List<EmpSale>empSales;
-    private List<ProdStore>prodStores;
-    private List<Sale>sales;
-    private List<ProductReport>productReport;
+	private ReportS service;
+	private List<StoreSale> storeSales;
+	private List<EmpSale> empSales;
+	private List<ProdStore> prodStores;
+	private List<Sale> sales;
+	private ProductReport productReport;
+	private List<SaleReport> saleReports;
+	private List<Review> reviews;
 
-    public List<Sale> getSales() {
-        return sales;
-    }
+	public Report() {
+		service = new RestReport();
+		reviews = new ArrayList<Review>();
+		storeSales = new ArrayList<>();
+		empSales = new ArrayList<>();
+		prodStores = new ArrayList<>();
+		sales = new ArrayList<>();
+		saleReports = new ArrayList<>();
+	}
 
-    public List<ProductReport> getProductReport() {
-        return productReport;
-    }
 
-    public void setProductReport(List<ProductReport> productReport) {
-        this.productReport = productReport;
-    }
-    
-    
+	public void setSales(List<Sale> sales) {
+		this.sales = sales;
+	}
+	
 
-    public void setStoresSales(List<Sale> sales) {
-        this.sales = sales;
-    }
+	public List<Sale> getSales() {
+		return sales;
+	}
 
-    public List<Review> getReviews() {
-        return reviews;
-    }
+	public ProductReport getProductReport() {
+		return productReport;
+	}
 
-    public void setReviews(List<Review> reviews) {
-        this.reviews = reviews;
-    }
+	public void setProductReport(ProductReport productReport) {
+		this.productReport = productReport;
+	}
 
-    public List<StoreSale> getStoreSales() {
-        return storeSales;
-    }
+	public void setStoresSales(List<Sale> sales) {
+		this.sales = sales;
+	}
 
-    public void setStoreSales(List<StoreSale> storeSales) {
-        this.storeSales = storeSales;
-    }
+	public List<Review> getReviews() {
+		return reviews;
+	}
 
-    public List<EmpSale> getEmpSales() {
-        return empSales;
-    }
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
+	}
 
-    public void setEmpSales(List<EmpSale> empSales) {
-        this.empSales = empSales;
-    }
+	public List<StoreSale> getStoreSales() {
+		return storeSales;
+	}
 
-    public List<ProdStore> getProdStores() {
-        return prodStores;
-    }
+	public void setStoreSales(List<StoreSale> storeSales) {
+		this.storeSales = storeSales;
+	}
 
-    public void setProdStores(List<ProdStore> prodStores) {
-        this.prodStores = prodStores;
-    }
-    
-    
-    
+	public List<EmpSale> getEmpSales() {
+		return empSales;
+	}
+
+	public void setEmpSales(List<EmpSale> empSales) {
+		this.empSales = empSales;
+	}
+
+	public List<ProdStore> getProdStores() {
+		return prodStores;
+	}
+
+	public void setProdStores(List<ProdStore> prodStores) {
+		this.prodStores = prodStores;
+	}
+
+	public List<SaleReport> getSaleReports() {
+		return saleReports;
+	}
+
+	public void setSaleReports(List<SaleReport> saleReports) {
+		this.saleReports = saleReports;
+	}
+
+	@Override
+	public String toString() {
+		String s = "Report{" + "\nservice=" + service + "\nreviews=" + reviews.size() + "\nstoreSales=" + storeSales.size() + "\nempSales=" + empSales.size() + "\nprodStores=" + prodStores.size() + "\nsales=" + sales.size() + "\nsaleReports=" + saleReports.size() + "\n";
+		if (productReport != null) {
+			s += "\nproductReport= " + productReport.toString();
+		}
+		return s;
+	}
 
 }

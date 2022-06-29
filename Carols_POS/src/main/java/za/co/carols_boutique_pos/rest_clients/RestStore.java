@@ -14,7 +14,6 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import za.co.carols_boutique_pos.models.Employee;
 import za.co.carols_boutique_pos.models.Sale;
 import za.co.carols_boutique_pos.models.Store;
 import za.co.carols_boutique_pos.service.StoreS;

@@ -1,48 +1,44 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package za.co.carols_boutique_pos.models;
+package za.co.carols_boutique.models;
 
-/**
- *
- * @author muaad
- */
-public class ProductReport {
-    
-    private String productID;
-    private String employeeID;
-    private String amountsSold;
+import java.io.Serializable;
 
-    public ProductReport(String productID, String employeeID, String amountsSold) {
-        this.productID = productID;
-        this.employeeID = employeeID;
-        this.amountsSold = amountsSold;
-    }
+public class ProductReport implements Serializable {
 
-    public String getProductID() {
-        return productID;
-    }
+	private String productID;
+	private String employeeID;
+	private Integer amountsSold;
 
-    public void setProductID(String productID) {
-        this.productID = productID;
-    }
+	public ProductReport(String productID, String employeeID, Integer amountsSold) {
+		this.productID = productID;
+		this.employeeID = employeeID;
+		this.amountsSold = amountsSold;
+	}
 
-    public String getEmployeeID() {
-        return employeeID;
-    }
+	public ProductReport() {
+	}
 
-    public void setEmployeeID(String employeeID) {
-        this.employeeID = employeeID;
-    }
+	public String getProductID() {
+		return productID;
+	}
 
-    public String getAmountsSold() {
-        return amountsSold;
-    }
+	public void setProductID(String productID) {
+		this.productID = productID;
+	}
 
-    public void setAmountsSold(String amountsSold) {
-        this.amountsSold = amountsSold;
-    }
-    
-    
+	public String getEmployeeID() {
+		return employeeID;
+	}
+
+	public void setEmployeeID(String employeeID) {
+		this.employeeID = employeeID;
+	}
+
+	public Integer getAmountsSold() {
+		return amountsSold;
+	}
+
+	public void setAmountsSold(Integer amountsSold) {
+		this.amountsSold = amountsSold;
+	}
+
 }

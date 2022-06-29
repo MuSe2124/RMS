@@ -1,72 +1,65 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package za.co.carols_boutique_pos.models;
 
-/**
- *
- * @author muaad
- */
-public class Customer {
-    
-    private String id;
-    private String name;
-    private String phoneNumber;
-    private String email;
+import java.io.Serializable;
 
-    public Customer(String id, String name, String phoneNumber, String email) {
-        this.id = id;
-        this.name = name;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-    }
+public class Customer implements Serializable {
 
-    public Customer(String name, String phoneNumber, String email) {
-        this.name = name;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-    }
+	private String id;
+	private String name;
+	private String phoneNumber;
+	private String email;
 
-    public Customer() {
-    }
+	public Customer(String id, String name, String phoneNumber, String email) {
+		this.id = id;
+		this.name = name;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
+	}
 
-    public String getId() {
-        return id;
-    }
+	public Customer(String name, String phoneNumber, String email) {
+		this.name = name;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
+	}
 
-    public void setId(String id) {
-        this.id = id;
-    }
+	public Customer() {
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getId() {
+		return id;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setId(String id) {
+		this.id = id;
+	}
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
 
-    @Override
-    public String toString() {
-        return "Customer{" + "id=" + id + ", name=" + name + ", phoneNumber=" + phoneNumber + ", email=" + email + '}';
-    }
-    
-    
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	@Override
+	public String toString() {
+		return "Customer{" + "id=" + id + ", name=" + name + ", phoneNumber=" + phoneNumber + ", email=" + email + '}';
+	}
+
 }

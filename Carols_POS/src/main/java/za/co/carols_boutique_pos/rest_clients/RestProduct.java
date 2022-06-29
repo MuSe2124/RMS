@@ -16,12 +16,11 @@ import jakarta.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import za.co.carols_boutique.models.ProdCat;
+import za.co.carols_boutique.models.Product;
+import za.co.carols_boutique.models.Stock;
 import za.co.carols_boutique_pos.models.Category;
-import za.co.carols_boutique_pos.models.Exchange;
-import za.co.carols_boutique_pos.models.ProdCat;
-import za.co.carols_boutique_pos.models.Product;
 import za.co.carols_boutique_pos.models.Refund;
-import za.co.carols_boutique_pos.models.Stock;
 import za.co.carols_boutique_pos.service.ProductS;
 
 /**

@@ -1,51 +1,43 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package za.co.carols_boutique_pos.models;
+package za.co.carols_boutique.models;
 
-/**
- *
- * @author Jomar
- */
-public class ProdCat {
-    private Product product;
-    private String catID;
-    private String productID;
-    
-    
+import java.io.Serializable;
 
-    public ProdCat(Product product, String catID) {
-        this.product = product;
-        this.catID = catID;
-    }
+public class ProdCat implements Serializable {
 
-    public ProdCat() {
-    }
+	private Product product;
+	private String catID;
+	private String productID;
 
-    public Product getProduct() {
-        return product;
-    }
+	public ProdCat(Product product, String catID) {
+		this.product = product;
+		this.catID = catID;
+	}
 
-    public void setProduct(Product product) {
-        this.product = product;
-    }
+	public ProdCat() {
+	}
 
-    public String getCatID() {
-        return catID;
-    }
+	public Product getProduct() {
+		return product;
+	}
 
-    public void setCatID(String catID) {
-        this.catID = catID;
-    }
+	public void setProduct(Product product) {
+		this.product = product;
+	}
 
-    public String getProductID() {
-        return productID;
-    }
+	public String getCatID() {
+		return catID;
+	}
 
-    public void setProductID(String productID) {
-        this.productID = productID;
-    }
-    
-    
+	public void setCatID(String catID) {
+		this.catID = catID;
+	}
+
+	public String getProductID() {
+		return productID;
+	}
+
+	public void setProductID(String productID) {
+		this.productID = productID;
+	}
+
 }

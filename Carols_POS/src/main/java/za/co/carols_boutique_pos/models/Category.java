@@ -1,54 +1,54 @@
 package za.co.carols_boutique_pos.models;
 
-public class Category {
-    
-    private String id;
-    private String name;
-    private String description;
+import java.io.Serializable;
 
-    public Category(String id, String name, String description) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-    }
+public class Category implements Serializable {
 
-    public Category(String name, String description) {
-        this.name = name;
-        this.description = description;
-    }
+	private String id;
+	private String name;
+	private String description;
 
-    public Category() {
-    }
+	public Category(String id, String name, String description) {
+		this.id = id;
+		this.name = name;
+		this.description = description;
+	}
 
-    public String getId() {
-        return id;
-    }
+	public Category(String name, String description) {
+		this.name = name;
+		this.description = description;
+	}
 
-    public void setId(String id) {
-        this.id = id;
-    }
+	public Category() {
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getId() {
+		return id;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setId(String id) {
+		this.id = id;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    @Override
-    public String toString() {
-        return "Category{" + "id=" + id + ", name=" + name + ", description=" + description + '}';
-    }
-    
-    
-    
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	@Override
+	public String toString() {
+		return "Category{" + "id=" + id + ", name=" + name + ", description=" + description + '}';
+	}
+
 }

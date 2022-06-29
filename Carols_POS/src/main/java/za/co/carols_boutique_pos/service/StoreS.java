@@ -7,6 +7,7 @@ package za.co.carols_boutique_pos.service;
 import za.co.carols_boutique_pos.models.Sale;
 import za.co.carols_boutique_pos.models.Store;
 
+
 /**
  *
  * @author muaad

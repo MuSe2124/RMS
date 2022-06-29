@@ -4,6 +4,14 @@ import java.io.Serializable;
 
 public class Store implements Serializable {
 
+	
+	public Store(String name, String location, String password, Float target) {
+        this.name = name;
+        this.location = location;
+        this.password = password;
+        this.target = target;
+    }
+
 	private String id;
 	private String name;
 	private String location;

@@ -20,6 +20,7 @@ import za.co.carols_boutique_pos.rest_clients.RestStore;
 
 
 
+
 /**
  *
  * @author muaad
@@ -60,11 +61,12 @@ public class StoreServlet extends HttpServlet {
                 }
                 break;
             case "register":
-                Store u = new Store(request.getParameter("name"), request.getParameter("location"), request.getParameter("password"));
-                String registerResponseMessage = rs.registerStore(u);
-                if (u != null) {
-                    request.setAttribute("store", u);
-                    request.getRequestDispatcher("LoginStore.jsp").forward(request, response);
+				
+                Store s = new Store(request.getParameter("name"), request.getParameter("location"),request.getParameter("password"), Float.parseFloat(request.getParameter("ftarget")));
+                String registerResponseMessage = rs.registerStore(s);
+                if (registerResponseMessage != null) {
+                    request.setAttribute("responseMessage", registerResponseMessage);
+                    request.getRequestDispatcher("Main.jsp").forward(request, response);
                 } else {
                     request.setAttribute("registerResponseMessage", registerResponseMessage);
                     request.getRequestDispatcher("RegisterStore.jsp").forward(request, response);

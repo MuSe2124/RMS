@@ -51,16 +51,16 @@ public class ProductServlet extends HttpServlet {
                     product = pr.getProduct(size[0] + " " + size[1], size[2]);
                 }
                 if (product != null) {
-                request.setAttribute("product", product);
-                request.getRequestDispatcher("createSale.jsp").forward(request, response);
-                List<LineItem> lineItems = new ArrayList<>();
-
-                for (LineItem lineItem : lineItems) {
-                    lineItem = new LineItem(product, Integer.parseInt(request.getParameter("amount")), product.getSize());
-                    lineItems.add(lineItem);
-                    request.setAttribute("lineItems", lineItems);
+                    request.setAttribute("product", product);
                     request.getRequestDispatcher("createSale.jsp").forward(request, response);
-                }
+                    List<LineItem> lineItems = new ArrayList<>();
+
+                    for (LineItem lineItem : lineItems) {
+                        lineItem = new LineItem(product, Integer.parseInt(request.getParameter("amount")), product.getSize());
+                        lineItems.add(lineItem);
+                        request.setAttribute("lineItems", lineItems);
+                        request.getRequestDispatcher("createSale.jsp").forward(request, response);
+                    }
                 }
                 break;
             case "Cash":
@@ -79,21 +79,23 @@ public class ProductServlet extends HttpServlet {
                 request.getRequestDispatcher("createSale.jsp").forward(request, response);
                 break;
             case "Checkout":
-                Sale sale = (Sale)request.getAttribute("sale");
-                String responseMessage = ss.addSale(sale);
-                request.setAttribute("responseMessage", responseMessage);
-                request.getRequestDispatcher("createSale.jsp").forward(request, response);
+                Sale sale = (Sale) request.getAttribute("sale");
+                if (sale != null) {
+                    String responseMessage = ss.addSale(sale);
+                    request.setAttribute("responseMessage", responseMessage);
+                    request.getRequestDispatcher("createSale.jsp").forward(request, response);
+                }
                 break;
             case "receiptID":
                 Sale s = ss.getSale(request.getParameter("ReceiptID"));
-                
+
                 if (s != null) {
                     request.setAttribute("s", s);
-                    request.getRequestDispatcher("Exchange.jsp").forward(request, response);   
-                }else{
+                    request.getRequestDispatcher("Exchange.jsp").forward(request, response);
+                } else {
                     String noSale = "Sale not found";
                     request.setAttribute("noSale", noSale);
-                    request.getRequestDispatcher("Exchange.jsp").forward(request, response); 
+                    request.getRequestDispatcher("Exchange.jsp").forward(request, response);
                 }
                 break;
             case "addwithproductID":
@@ -104,11 +106,11 @@ public class ProductServlet extends HttpServlet {
                     if (product1 != null) {
                         request.setAttribute("product1", product1);
                         request.getRequestDispatcher("Exchange.jsp").forward(request, response);
-                    }else{
-                    String noProduct = "Product not found";
-                    request.setAttribute("noProduct", noProduct);
-                    request.getRequestDispatcher("Exchange.jsp").forward(request, response); 
-                }
+                    } else {
+                        String noProduct = "Product not found";
+                        request.setAttribute("noProduct", noProduct);
+                        request.getRequestDispatcher("Exchange.jsp").forward(request, response);
+                    }
                 }
                 break;
             case "exchangedItem":
@@ -119,15 +121,21 @@ public class ProductServlet extends HttpServlet {
                     if (product2 != null) {
                         request.setAttribute("product2", product2);
                         request.getRequestDispatcher("Exchange.jsp").forward(request, response);
-                    }else{
-                    String noProduct = "Product not found";
-                    request.setAttribute("noProduct", noProduct);
-                    request.getRequestDispatcher("Exchange.jsp").forward(request, response); 
+                    } else {
+                        String noProduct = "Product not found";
+                        request.setAttribute("noProduct", noProduct);
+                        request.getRequestDispatcher("Exchange.jsp").forward(request, response);
                     }
                 }
             case "ConfirmExchange":
                 //fix this
                 //"pr.deleteProduct(responseMessage, responseMessage)
+                break;
+            case "searchSale":
+                Sale sale1 = ss.getSale(request.getParameter("ReceiptID"));
+                if (sale1 != null) {
+                    
+                }
                 break;
         }
     }
@@ -140,7 +148,7 @@ public class ProductServlet extends HttpServlet {
 
             case "createProduct":
                 Product p = new Product(request.getParameter("pName"), request.getParameter("pDescription"), Float.parseFloat(request.getParameter("pPrice")));
-                
+
                 break;
 
         }

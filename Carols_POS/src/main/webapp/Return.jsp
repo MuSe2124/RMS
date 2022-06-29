@@ -235,8 +235,7 @@
         <h1>Return</h1><br>
         <label>Receipt ID<label><br>
                 <input type="text" name="ReceiptID" class="bars"><br>
-                <button>search</button><br>
-                <button>Scan</button>
+                <button name="submit" value="searchSale">search</button><br>
                 <br><br>
                 <label>??result??</label><br><br>
                 <table>

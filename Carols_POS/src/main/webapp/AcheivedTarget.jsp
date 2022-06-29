@@ -238,14 +238,14 @@
     </div>
     
         <form action="ReportServlet" method =get>
-        <%Report report = (Report)request.getAttribute("");
-    List<String> x=new ArrayList<>(); List<Float> y = new ArrayList<>();%>    
+        <%Report report = (Report)request.getAttribute("acheivedtargetbutton");%>    
     <div id="acheivedtargetpage" class="mid">
         <h1>Achieved Target</h1><br>
         <label>Enter Date</label><br>
         <input type ="month" class="bars" name ="acheivedtargetmonth"><br><br>
-        <button  name="button" value="acheivedtargetbutton">Get Results</button><br><br>
-        <h2>View achieved target for ??Month??</h2><br>
+        <button type="submit" name="button" value="acheivedtargetbutton">Get Results</button><br><br>
+        <%if(report!=null){%>
+        <h2>Table of achieved target</h2><br>
         <table style="width:100%">
             <tr>
                 <th>Store ID</th>
@@ -261,13 +261,12 @@
             <%}%>
         </table>
         <br>
-        
         <br>
+        <%}%>
     </div>    
     </form>
     <label id="copyright">Carols Boutique pty.Ltd.<br>Reg.131 482 9132</label>
     <script>
-        
         function openCity(evt, cityName) {
             var i, tabcontent, tablinks;
             tabcontent = document.getElementsByClassName("sideside");
@@ -281,8 +280,5 @@
             document.getElementById(cityName).style.display = "block";
             evt.currentTarget.className += " active";
         }
-        
-        
-        
     </script>
 </html>

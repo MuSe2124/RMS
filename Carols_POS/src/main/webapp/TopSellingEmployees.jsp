@@ -232,7 +232,7 @@
             >Request IBT</a>
     </div>
     <%Report report = (Report)request.getAttribute("TopSellingEmployeesReport");
-    List<String> x=new ArrayList<>(); List<Float> y = new ArrayList<>();%>
+    List<String> xval=new ArrayList<>(); List<Float> yval = new ArrayList<>();List<String> colors=new ArrayList<>();%>
         <form action="ReportServlet" method =get>
     <div id="acheivedtargetpage" class="mid">
         <h1>Top Selling Employees</h1><br>
@@ -241,7 +241,8 @@
         <label>Store ID</label>
         <input type ="text" class="bars" name="TopSellingEmployeesStore" ><br><br>
         <button name="button" value="TopSellingEmployeesbutton">Get Results</button><br><br>
-        <h2>View top selling employees for ??Month??</h2><br>
+        <%if(report!=null){%>
+        <h2>Table of top selling employees</h2><br>
         <table style="width:100%">
             <tr>
                 <th>Employee ID</th>
@@ -249,7 +250,8 @@
                 <th>Store ID</th>
             </tr>
             <%for(EmpSale ss :report.getEmpSales()){%>
-            <tr><%x.add(ss.getEmployee());y.add(ss.getSaleTotal());%>
+            <tr><%xval.add(ss.getEmployee());yval.add(ss.getSaleTotal());%>
+                <%colors.add("rgb("+(int)Math.random()*256+","+(int)Math.random()*256+","+(int)Math.random()*256+")");%>
                 <td> <%= ss.getStoreID() %> </td>
                 <td> <%= ss.getSaleTotal() %> </td>
                 <td><%=ss.getStoreID()%></td>
@@ -261,14 +263,17 @@
         <button class="bars" onclick="displaybarchart()">Show bar graph</button><button onclick="displaypiechart()" class="bars">show pie chart</button>
         <canvas id="pieChart" style="max-height:500px;max-width:500px;"></canvas><br>
         <canvas id="barChart" style="max-height:500px;max-width:500px;"></canvas>
+        <%}%>
     </div>    
-    </form
+        </form>
         
     <label id="copyright">Carols Boutique pty.Ltd.<br>Reg.131 482 9132</label>
+    
     <script>
-        var xValues =<%=x%>;
-        var yValues = <%=y%>;
-        var barColors = ["red", "green"];
+        
+        var xValues =<%=xval%>;
+        var yValues = <%=yval%>;
+        var barColors = <%=colors%>;
         function openCity(evt, cityName) {
             var i, tabcontent, tablinks;
             tabcontent = document.getElementsByClassName("sideside");
@@ -312,7 +317,7 @@
                 legend: { display: false },
                 title: {
                     display: true,
-                    text: "LeastTopEmployees"
+                    text: "Top Selling Employees"
                 }
             }
         });

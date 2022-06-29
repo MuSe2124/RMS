@@ -233,7 +233,7 @@
             >Request IBT</a>
     </div>
     <%Report report = (Report)request.getAttribute("ProductReportReport");
-    List<String> x=new ArrayList<>(); List<Integer> y = new ArrayList<>();%>
+    List<String> x=new ArrayList<>(); List<Integer> y = new ArrayList<>(); List<String> colors=new ArrayList<>();%>
         <form action="ReportServlet" method =get>
     <div id="acheivedtargetpage" class="mid">
         <h1>Product Report</h1><br>
@@ -242,17 +242,17 @@
         <label>Store ID</label>
         <input type="text" name="ProductReportStoreID" class="bars"><br><br>
         <button type="submit" name="button" value="ProductReportbutton">Get Results</button><br><br>
-        <h2>Product Report for ??Month??</h2><br>
+        <%if(report!=null){%>
+        <h2>Table of product report</h2><br>
         <table style="width:100%">
             <tr>
                 <th>Product ID</th>
                 <th>Amount Sold</th>
                 
             </tr>
-            <%for(ProductReport ss :report.getProductReport()){%>
-            <tr><%x.add(ss.getProductID());y.add(Integer.getInteger(ss.getAmountsSold()));%>
-                <td> <%= ss.getProductID() %> </td>
-                <td> <%= ss.getAmountsSold() %> </td>    
+            <tr>
+                <td> <%= report.getProductReport().getProductID() %> </td>
+                <td> <%= report.getProductReport().getAmountsSold() %> </td>    
             </tr>
             <%}%>
         </table>
@@ -261,14 +261,14 @@
         <button class="bars" onclick="displaybarchart()">Show bar graph</button><button onclick="displaypiechart()" class="bars">show pie chart</button>
         <canvas id="pieChart" style="max-height:500px;max-width:500px;"></canvas><br>
         <canvas id="barChart" style="max-height:500px;max-width:500px;"></canvas>
-    </div>    
-    </form
+        <%}%>
+    </div> 
+        
+        </form>
         
     <label id="copyright">Carols Boutique pty.Ltd.<br>Reg.131 482 9132</label>
     <script>
-        var xValues =<%=x%>;
-        var yValues = <%=y%>;
-        var barColors = ["red", "green"];
+        
         function openCity(evt, cityName) {
             var i, tabcontent, tablinks;
             tabcontent = document.getElementsByClassName("sideside");
@@ -282,50 +282,6 @@
             document.getElementById(cityName).style.display = "block";
             evt.currentTarget.className += " active";
         }
-        new Chart("pieChart", {
-            type: "pie",
-            data: {
-                labels: xValues,
-                datasets: [{
-                    backgroundColor: barColors,
-                    data: yValues
-                }]
-            },
-            options: {
-                title: {
-                    display: true,
-                    text: "Product Report"
-                }
-            }
-        });
-        new Chart("barChart", {
-            type: "bar",
-            data: {
-
-                labels: xValues,
-                datasets: [{
-                    backgroundColor: barColors,
-                    data: yValues
-                }]
-            },
-            options: {
-                legend: { display: false },
-                title: {
-                    display: true,
-                    text: "Product Report"
-                }
-            }
-        });
-        function displaybarchart(){
-            document.getElementById("barchart").style.display = "block";
-            document.getElementById("piegraph").style.display = "none";
-        }
-        function displaypiechart(){
-            document.getElementById("barchart").style.display = "none";
-            document.getElementById("piegraph").style.display = "block";
-        }
-        document.getElementById("piechart").style.display = "none";
-        document.getElementById("barchart").style.display = "none";
         
     </script>
 </html>

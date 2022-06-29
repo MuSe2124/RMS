@@ -4,7 +4,11 @@
     Author     : HP
 --%>
 
-<%@page import="za.co.carols_boutique_pos.models.StoreSale"%>
+
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+<%@page import="za.co.carols_boutique.models.StoreSale"%>
+
 <%@page import="za.co.carols_boutique_pos.models.Report"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -234,12 +238,13 @@
     </div>
     
         <form action="ReportServlet" method =get>
-            
+        <%Report report = (Report)request.getAttribute("");
+    List<String> x=new ArrayList<>(); List<Float> y = new ArrayList<>();%>    
     <div id="acheivedtargetpage" class="mid">
         <h1>Achieved Target</h1><br>
         <label>Enter Date</label><br>
         <input type ="month" class="bars" name ="acheivedtargetmonth"><br><br>
-        <button name="button" value="acheivedtargetbutton">Get Results</button><br><br>
+        <button  name="button" value="acheivedtargetbutton">Get Results</button><br><br>
         <h2>View achieved target for ??Month??</h2><br>
         <table style="width:100%">
             <tr>

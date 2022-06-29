@@ -1,4 +1,6 @@
-<%@page import="za.co.carols_boutique_pos.models.Sale"%>
+<%@page import="za.co.carols_boutique_pos.models.Review"%>
+<%@page import="za.co.carols_boutique_pos.models.ProdStore"%>
+<%@page import="za.co.carols_boutique_pos.models.ProductReport"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="za.co.carols_boutique_pos.models.StoreSales"%>
@@ -9,8 +11,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>View Top Daily Sales</title>
         
+        <title>Customer Reviews Report<title>
         <style>
             .mid {
             text-align: center;
@@ -231,42 +233,38 @@
         <a href ="RequestIBT.jsp" id="ibtrequestb" class="b" name="button" value="IBT Requests page"
             >Request IBT</a>
     </div>
-    <%Report report = (Report)request.getAttribute("ViewDailySalesReport");
-    List<String> x=new ArrayList<>(); List<Float> y = new ArrayList<>();%>
+    <%Report report = (Report)request.getAttribute("CustomerReviewReport");
+    %>
         <form action="ReportServlet" method =get>
     <div id="acheivedtargetpage" class="mid">
-        <h1>Daily Sales</h1><br>
-        <label>Enter Store ID</label><br>
-        <input type ="text" class="bars" name ="ViewDailySalesStoreButton"><br><br>
-        <button name="button" value="ViewDailySalesbutton">Get Results</button><br><br>
-        <h2>View Daily Sales for ??Month??</h2><br>
+        <h1>Product</h1><br>
+        <label>Enter Date</label><br>
+        <input type ="month" class="bars" name ="CustomerReviewMonth"><br><br>
+        <label>Enter amount reviews</label><br>
+        <input type ="number" min="0" class="bars" name ="CustomerReviewAmount"><br><br>
+        <button type="submit" name="button" value="CustomerReviewbutton">Get Results</button><br><br>
+        <h2>Customer Reviews for ??Month??</h2><br>
         <table style="width:100%">
             <tr>
-                <th>Sale ID</th>
-                <th>Total</th>
-                <th></th>
+                <th>Product ID</th>
+                <th>Store ID</th>
+                <th>Amount</th>
             </tr>
-            <%for(Sale ss :report){%>
-            <tr><%x.add(ss.getId());y.add(ss);%>
-                <%for()%>
+            <%for(Review ss:report.getReviews()){%>
+            <tr>
                 <td> <%= ss.getId() %> </td>
-                <td> <%= ; %> </td>    
+                <td> <%= ss.getComment() %> </td>
+                <td><%=ss.getDate()%></td>
             </tr>
             <%}%>
         </table>
-        <br>
-        <br>
-        <button class="bars" onclick="displaybarchart()">Show bar graph</button><button onclick="displaypiechart()" class="bars">show pie chart</button>
-        <canvas id="pieChart" style="max-height:500px;max-width:500px;"></canvas><br>
-        <canvas id="barChart" style="max-height:500px;max-width:500px;"></canvas>
+        
     </div>    
-    </form
+        </form>
         
     <label id="copyright">Carols Boutique pty.Ltd.<br>Reg.131 482 9132</label>
     <script>
-        var xValues =<%=x%>;
-        var yValues = <%=y%>;
-        var barColors = ["red", "green"];
+        
         function openCity(evt, cityName) {
             var i, tabcontent, tablinks;
             tabcontent = document.getElementsByClassName("sideside");
@@ -280,51 +278,7 @@
             document.getElementById(cityName).style.display = "block";
             evt.currentTarget.className += " active";
         }
-        new Chart("pieChart", {
-            type: "pie",
-            data: {
-                labels: xValues,
-                datasets: [{
-                    backgroundColor: barColors,
-                    data: yValues
-                }]
-            },
-            options: {
-                title: {
-                    display: true,
-                    text: "World Wide Wine Production 2018"
-                }
-            }
-        });
-        new Chart("barChart", {
-            type: "bar",
-            data: {
-
-                labels: xValues,
-                datasets: [{
-                    backgroundColor: barColors,
-                    data: yValues
-                }]
-            },
-            options: {
-                legend: { display: false },
-                title: {
-                    display: true,
-                    text: "LeastTopEmployees"
-                }
-            }
-        });
-        function displaybarchart(){
-            document.getElementById("barchart").style.display = "block";
-            document.getElementById("piegraph").style.display = "none";
-        }
-        function displaypiechart(){
-            document.getElementById("barchart").style.display = "none";
-            document.getElementById("piegraph").style.display = "block";
-        }
-        document.getElementById("piechart").style.display = "none";
-        document.getElementById("barchart").style.display = "none";
+        
         
     </script>
-</html>
 </html>

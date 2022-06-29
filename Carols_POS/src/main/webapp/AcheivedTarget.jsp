@@ -4,12 +4,14 @@
     Author     : HP
 --%>
 
+<%@page import="za.co.carols_boutique_pos.models.StoreSale"%>
+<%@page import="za.co.carols_boutique_pos.models.Report"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Create Sale</title>
+        <title>Achieved Target</title>
         <style>
             .mid {
             text-align: center;
@@ -230,46 +232,38 @@
         <a href ="RequestIBT.jsp" id="ibtrequestb" class="b" name="button" value="IBT Requests page"
             >Request IBT</a>
     </div>
+    
+        <form action="ReportServlet" method =get>
+            
     <div id="acheivedtargetpage" class="mid">
         <h1>Achieved Target</h1><br>
         <label>Enter Date</label><br>
-        <input type ="month" class="bars" name ="toppageempdate"><br><br>
-        <label>Store ID(optional)</label><br>
-        <input type ="text" name ="StoreID" class="bars"><br><br>
-        <button name="button" value="topempresults">Get Results</button><br><br>
-        <h2>View top employee for ??Month??</h2><br>
+        <input type ="month" class="bars" name ="acheivedtargetmonth"><br><br>
+        <button name="button" value="acheivedtargetbutton">Get Results</button><br><br>
+        <h2>View achieved target for ??Month??</h2><br>
         <table style="width:100%">
             <tr>
-                <th>StoreID</th>
-                <th>EmployeeID</th>
-                <th>Total</th>
+                <th>Store ID</th>
+                <th>Sale Total</th>
+                <th>Target</th>
             </tr>
+            <%for(StoreSale ss:report.getStoreSales()){%>
             <tr>
-                <td>StoreID</td>
-                <td>EmployeeID</td>
-                <td>Total</td>
-            </tr>    
+                <td><%=ss.getStoreID()%></td>
+                <td><%=ss.getSaleTotal()%></td>
+                <td><%=ss.getTarget()%></td>
+            </tr>
+            <%}%>
         </table>
         <br>
-        <canvas id="pieChart" style="max-height:500px;max-width:500px;"></canvas><br>
-        <canvas id="barChart" style="max-height:500px;max-width:500px;"></canvas>
+        
         <br>
     </div>    
-
+    </form>
     <label id="copyright">Carols Boutique pty.Ltd.<br>Reg.131 482 9132</label>
     <script>
+        
         function openCity(evt, cityName) {
-            var barColors = ["red", "green", "blue", "orange", "brown"];
-        var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
-        var yValues = [55, 49, 44, 24, 15];
-        var barColors = [
-            "#b91d47",
-            "#00aba9",
-            "#2b5797",
-            "#e8c3b9",
-            "#1e7145"
-        ];
-            
             var i, tabcontent, tablinks;
             tabcontent = document.getElementsByClassName("sideside");
             for (i = 0; i < tabcontent.length; i++) {
@@ -283,39 +277,7 @@
             evt.currentTarget.className += " active";
         }
         
-        new Chart("pieChart", {
-            type: "pie",
-            data: {
-                labels: xValues,
-                datasets: [{
-                    backgroundColor: barColors,
-                    data: yValues
-                }]
-            },
-            options: {
-                title: {
-                    display: true,
-                    text: "World Wide Wine Production 2018"
-                }
-            }
-        });
-        new Chart("barChart", {
-            type: "bar",
-            data: {
-
-                labels: xValues,
-                datasets: [{
-                    backgroundColor: barColors,
-                    data: yValues
-                }]
-            },
-            options: {
-                legend: { display: false },
-                title: {
-                    display: true,
-                    text: "World Wine Production 2018"
-                }
-            }
-        });
+        
+        
     </script>
 </html>

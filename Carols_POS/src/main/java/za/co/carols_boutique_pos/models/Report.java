@@ -103,5 +103,9 @@ public class Report implements Serializable {
 		}
 		return s;
 	}
-
+	
+    public void setProdStores(List<ProdStore> prodStores) {
+        this.prodStores = prodStores;
+    }
+    
 }

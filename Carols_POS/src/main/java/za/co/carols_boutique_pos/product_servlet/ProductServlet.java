@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import za.co.carols_boutique.models.ProdCat;
 import za.co.carols_boutique.models.Product;
 import za.co.carols_boutique_pos.models.CardPayment;
 import za.co.carols_boutique_pos.models.CashPayment;
@@ -140,7 +141,12 @@ public class ProductServlet extends HttpServlet {
 
             case "createProduct":
                 Product p = new Product(request.getParameter("pName"), request.getParameter("pDescription"), Float.parseFloat(request.getParameter("pPrice")));
-                
+                ProdCat prodCat = new ProdCat(p,request.getParameter("category"));
+				String added = pr.addNewProduct(prodCat);
+				if(added != null && added.equals("New product added successfully.")){
+					request.setAttribute("responseMessage", added);
+                    request.getRequestDispatcher("CreateProduct.jsp").forward(request, response); 
+				}
                 break;
 
         }

@@ -150,7 +150,10 @@
         }
         </style>  
     </head>
-    <body style="background-image:url('https://lh3.googleusercontent.com/pw/AM-JKLXMO5yDb4rwt4sEQrgiQOMODT_pJfb1SL2dd8vpb9xK6qq-v0-sLTcA7ci2YTgbCEc9EH-VWq56ksYL1wsRQOFNAtSXfc6cmCOwCtpfS-Hbcj4rYphCA-b4AYxOAjboLEyfbJ4HxwYWuwhl5jRgETc=w1095-h657-no?authuser=0'); background-size:cover;">
+    <body 
+        <% String prodID = (String)request.getParameter("prodID"); %>
+        <% String responseMessage = (String)request.getParameter("responseMessage");%>
+        style="background-image:url('https://lh3.googleusercontent.com/pw/AM-JKLXMO5yDb4rwt4sEQrgiQOMODT_pJfb1SL2dd8vpb9xK6qq-v0-sLTcA7ci2YTgbCEc9EH-VWq56ksYL1wsRQOFNAtSXfc6cmCOwCtpfS-Hbcj4rYphCA-b4AYxOAjboLEyfbJ4HxwYWuwhl5jRgETc=w1095-h657-no?authuser=0'); background-size:cover;">
         <%List<Category>categories = (List<Category>)session.getAttribute("categories");%>
         <label id="heading">Carol's Boutique</label>
     <div id="side">
@@ -235,8 +238,9 @@
             <input type="checkbox" id="<%= c.getId() %>" name="category" value="<%= c.getId() %>">
             <label for="<%= c.getId() %>"> <%= c.getName() %></label><br>
             <%}%>
-            
+            <%if (responseMessage != null){%>
             <input type="text" name="size" class="bars"><br><br><label>??success??</label><br><br>
+            <%}%>
             <input type='submit' name="submit" value="createProduct">
         </form>
     </div>    

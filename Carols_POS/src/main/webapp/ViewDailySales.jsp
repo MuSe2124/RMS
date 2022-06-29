@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>View Top Daily Sales</title>
+        <title>View Daily Sales</title>
         
         <style>
             .mid {
@@ -238,7 +238,8 @@
         <h1>Daily Sales</h1><br>
         <label>Enter Store ID</label><br>
         <input type ="text" class="bars" name ="ViewDailySalesStoreButton"><br><br>
-        <button name="button" value="ViewDailySalesbutton">Get Results</button><br><br>
+        <button type ="submit" name="button" value="ViewDailySalesbutton">Get Results</button><br><br>
+        <%if(report!=null){%>
         <h2>View Daily Sales for ??Month??</h2><br>
         <table style="width:100%">
             <tr>
@@ -248,6 +249,7 @@
             </tr>
             <%for(Sale ss :report){%>
             <tr><%x.add(ss.getId());y.add(ss);%>
+                <%colors.add("rgb("+(int)Math.random()*256+","+(int)Math.random()*256+","+(int)Math.random()*256+")");%>
                 <%for()%>
                 <td> <%= ss.getId() %> </td>
                 <td> <%= ; %> </td>    
@@ -259,6 +261,7 @@
         <button class="bars" onclick="displaybarchart()">Show bar graph</button><button onclick="displaypiechart()" class="bars">show pie chart</button>
         <canvas id="pieChart" style="max-height:500px;max-width:500px;"></canvas><br>
         <canvas id="barChart" style="max-height:500px;max-width:500px;"></canvas>
+        <%}%>
     </div>    
     </form
         
@@ -266,7 +269,7 @@
     <script>
         var xValues =<%=x%>;
         var yValues = <%=y%>;
-        var barColors = ["red", "green"];
+        var barColors = <%=colors%>;
         function openCity(evt, cityName) {
             var i, tabcontent, tablinks;
             tabcontent = document.getElementsByClassName("sideside");

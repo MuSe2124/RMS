@@ -1,10 +1,9 @@
-<%@page import="za.co.carols_boutique_pos.models.Review"%>
-<%@page import="za.co.carols_boutique_pos.models.ProdStore"%>
-<%@page import="za.co.carols_boutique_pos.models.ProductReport"%>
+
+<%@page import="za.co.carols_boutique.models.Review"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="za.co.carols_boutique_pos.models.StoreSales"%>
-<%@page import="za.co.carols_boutique_pos.models.StoreSale"%>
+
 <%@page import="za.co.carols_boutique_pos.models.Report"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -243,7 +242,8 @@
         <label>Enter amount reviews</label><br>
         <input type ="number" min="0" class="bars" name ="CustomerReviewAmount"><br><br>
         <button type="submit" name="button" value="CustomerReviewbutton">Get Results</button><br><br>
-        <h2>Customer Reviews for ??Month??</h2><br>
+        <%if(report!=null){%>
+        <h2>Table of customer reviews</h2><br>
         <table style="width:100%">
             <tr>
                 <th>Product ID</th>
@@ -258,7 +258,7 @@
             </tr>
             <%}%>
         </table>
-        
+        <%}%>
     </div>    
         </form>
         
@@ -278,7 +278,5 @@
             document.getElementById(cityName).style.display = "block";
             evt.currentTarget.className += " active";
         }
-        
-        
     </script>
 </html>

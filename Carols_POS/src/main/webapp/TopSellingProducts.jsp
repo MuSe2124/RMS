@@ -4,12 +4,12 @@
     Author     : HP
 --%>
 
-<%@page import="za.co.carols_boutique_pos.models.ProdStore"%>
-<%@page import="za.co.carols_boutique_pos.models.ProductReport"%>
+
+
+<%@page import="za.co.carols_boutique.models.ProdStore"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="za.co.carols_boutique_pos.models.StoreSales"%>
-<%@page import="za.co.carols_boutique_pos.models.StoreSale"%>
 <%@page import="za.co.carols_boutique_pos.models.Report"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -239,14 +239,15 @@
             >Request IBT</a>
     </div>
     <%Report report = (Report)request.getAttribute("TopSellingProductsReport");
-    List<String> x=new ArrayList<>(); List<Integer> y = new ArrayList<>();%>
+    List<String> x=new ArrayList<>(); List<Integer> y = new ArrayList<>();List<String> colors=new ArrayList<>();%>
         <form action="ReportServlet" method =get>
     <div id="acheivedtargetpage" class="mid">
         <h1>Product Report</h1><br>
         <label>Enter Date</label><br>
         <input type ="month" class="bars" name ="TopSellingProductsMonth"><br><br>
         <button type="submit" name="button" value="TopSellingProductsbutton">Get Results</button><br><br>
-        <h2>Top Selling Products for ??Month??</h2><br>
+        <%if(report!=null){%>
+        <h2>Table of Top Selling Products</h2><br>
         <table style="width:100%">
             <tr>
                 <th>Product ID</th>
@@ -254,7 +255,7 @@
                 <th>Amount</th>
             </tr>
             <%for(ProdStore ss:report.getProdStores()){%>
-            <tr><%x.add(ss.getProductID());y.add(ss.getAmount());%>
+            <tr><%x.add(ss.getProductID());y.add(ss.getAmount());colors.add("rgb("+(int)Math.random()*256+","+(int)Math.random()*256+","+(int)Math.random()*256+")");%>
                 <td> <%= ss.getProductID() %> </td>
                 <td> <%= ss.getStoreID() %> </td>
                 <td><%=ss.getAmount()%></td>
@@ -266,6 +267,7 @@
         <button class="bars" onclick="displaybarchart()">Show bar graph</button><button onclick="displaypiechart()" class="bars">show pie chart</button>
         <canvas id="pieChart" style="max-height:500px;max-width:500px;"></canvas><br>
         <canvas id="barChart" style="max-height:500px;max-width:500px;"></canvas>
+        <%}%>
     </div>    
     </form
         
@@ -273,7 +275,7 @@
     <script>
         var xValues =<%=x%>;
         var yValues = <%=y%>;
-        var barColors = ["red", "green"];
+        var barColors = <%=colors%>;
         function openCity(evt, cityName) {
             var i, tabcontent, tablinks;
             tabcontent = document.getElementsByClassName("sideside");

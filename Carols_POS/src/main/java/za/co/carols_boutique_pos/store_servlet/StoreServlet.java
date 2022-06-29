@@ -62,11 +62,11 @@ public class StoreServlet extends HttpServlet {
                 break;
             case "register":
 				
-                Store s = new Store(request.getParameter("name"), request.getParameter("location"),request.getParameter("password"), Float.parseFloat(request.getParameter("ftarget")));
+                Store s = new Store("id",request.getParameter("name"), request.getParameter("location"),request.getParameter("password"), Float.parseFloat(request.getParameter("ftarget")));
                 String registerResponseMessage = rs.registerStore(s);
                 if (registerResponseMessage != null) {
                     request.setAttribute("responseMessage", registerResponseMessage);
-                    request.getRequestDispatcher("Main.jsp").forward(request, response);
+                    request.getRequestDispatcher("Home.jsp").forward(request, response);
                 } else {
                     request.setAttribute("registerResponseMessage", registerResponseMessage);
                     request.getRequestDispatcher("RegisterStore.jsp").forward(request, response);

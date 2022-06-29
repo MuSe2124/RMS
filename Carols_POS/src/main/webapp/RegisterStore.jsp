@@ -238,6 +238,7 @@
         
         <label>Password:</label><br>
         <input type="text" class="bars" id="fpassword" name="password" placeholder="password"><br><br>
+        <button type="submit" id="signup" name="submit" value="register">register</button><br>
         </form>
         <%if(registerResponseMessage != null){%>
         <div id="aline"></div>
@@ -246,7 +247,7 @@
         <label class="a" id="id">??id??</label><br>
         <%}%>
         <br>
-        <button type="submit" id="signup" name="submit" value="register">register</button><br>
+        
         <br>
         
     </div>   

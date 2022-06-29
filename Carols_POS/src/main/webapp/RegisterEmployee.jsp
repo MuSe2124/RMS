@@ -153,6 +153,7 @@
         </style>  
     </head>
     <body style="background-image:url('https://lh3.googleusercontent.com/pw/AM-JKLXMO5yDb4rwt4sEQrgiQOMODT_pJfb1SL2dd8vpb9xK6qq-v0-sLTcA7ci2YTgbCEc9EH-VWq56ksYL1wsRQOFNAtSXfc6cmCOwCtpfS-Hbcj4rYphCA-b4AYxOAjboLEyfbJ4HxwYWuwhl5jRgETc=w1095-h657-no?authuser=0'); background-size:cover;">
+        <%String registerResponseMessage = request.getParameter("registerResponseMessage");%>
         <label id="heading">Carol's Boutique</label>
     <div id="side">
         <button class="c" id="keepaside" name="button" onclick="openCity(event, 'Keepasidebar')">keep aside</button>
@@ -164,6 +165,7 @@
         <button class="c" id="stock" name="button" onclick="openCity(event, 'Stockbar')">Stock</button>
         <button class="c" id="sale" name="button" onclick="openCity(event, 'Salebar')">Sale</button>
     </div>
+        
     <div id="Salebar" class="sideside">
         <a href="Exchange.jsp" id="Exchangedb" class="b" name="button" value="Exchanged page"
             >Exchanged</a><br>
@@ -232,10 +234,13 @@
         <label>Password:</label><br>
         <input type="text" class="bars" id="rePassword" name="rePassword" placeholder="password"><br><br>
         <label>??is success??</label>
+        
+        <button class="button" type="submit" id="reSignup" name="submit" value="register">Register</button>   
+        <%if(registerResponseMessage != null){%>
         <label>Your Employee Id, do not forget.</label><br><br>
         <label class="a" id="id">??id??</label><br>
+        <%}%>
         <br>
-        <button class="button" id="reSignup" name="submit" value="Register">Register</button>
         </form>
         <br>
     </div>    

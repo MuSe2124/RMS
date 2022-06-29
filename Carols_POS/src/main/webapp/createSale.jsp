@@ -11,7 +11,6 @@
 <%@page import="java.time.LocalDate"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="za.co.carols_boutique.models.Payment"%>
 <%@page import="java.time.LocalDateTime"%>
 <%@page import="java.sql.Date"%>
 <%@page import="za.co.carols_boutique.models.Product"%>

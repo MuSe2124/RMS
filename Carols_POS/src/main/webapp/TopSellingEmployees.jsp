@@ -1,8 +1,8 @@
-<%@page import="za.co.carols_boutique_pos.models.EmpSale"%>
+<%@page import="za.co.carols_boutique.models.EmpSale"%>
+
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="za.co.carols_boutique_pos.models.StoreSales"%>
-<%@page import="za.co.carols_boutique_pos.models.StoreSale"%>
 <%@page import="za.co.carols_boutique_pos.models.Report"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

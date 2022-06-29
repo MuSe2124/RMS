@@ -40,11 +40,9 @@ public class Review implements Serializable {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
-
 	public Integer getRating() {
 		return rating;
 	}
-
 	public void setRating(Integer rating) {
 		this.rating = rating;
 	}

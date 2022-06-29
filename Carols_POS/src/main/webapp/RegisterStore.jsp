@@ -153,6 +153,7 @@
         </style>  
     </head>
     <body style="background-image:url('https://lh3.googleusercontent.com/pw/AM-JKLXMO5yDb4rwt4sEQrgiQOMODT_pJfb1SL2dd8vpb9xK6qq-v0-sLTcA7ci2YTgbCEc9EH-VWq56ksYL1wsRQOFNAtSXfc6cmCOwCtpfS-Hbcj4rYphCA-b4AYxOAjboLEyfbJ4HxwYWuwhl5jRgETc=w1095-h657-no?authuser=0'); background-size:cover;">
+        <%String registerResponseMessage = request.getParameter("registerResponseMessage");%>
         <label id="heading">Carol's Boutique</label>
     <div id="side">
         <button class="c" id="keepaside" name="button" onclick="openCity(event, 'Keepasidebar')">keep aside</button>
@@ -222,24 +223,32 @@
 
     <label id="copyright">Carols Boutique pty.Ltd.<br>Reg.131 482 9132</label>
     <div id="registerstorepage" class="mid">
+        <form action="StoreServlet" method="post">
         <h1 id="H">Carols Boutique</h1>
         <br>
         <label>Store name:</label><br>
         <input type="text" class="bars" id="fname" name="name" placeholder="name"><br><br>
+        
         <label>Location:</label><br>
         <input type="text" class="bars" id="flocation" name="location"
+               
             placeholder="province/city/suburb/street"><br><br>
         <label>Target:</label><br>
-        <input type="text" class="bars" id="ftarget" name="ftarget" placeholder="R20000"><br><br>
+        <input type="text" class="bars" id="ftarget" name="ftarget" placeholder="20000"><br><br>
+        
         <label>Password:</label><br>
-        <input type="text" class="bars" id="fpassword" name="fname" placeholder="password"><br><br>
+        <input type="text" class="bars" id="fpassword" name="password" placeholder="password"><br><br>
+        </form>
+        <%if(registerResponseMessage != null){%>
         <div id="aline"></div>
         <label>Your Store Id, do not forget.</label><br><br>
         <label>??is succsess??</label>
         <label class="a" id="id">??id??</label><br>
+        <%}%>
         <br>
-        <button type="button" id="signup" name="button" value="Register">register</button><br>
+        <button type="submit" id="signup" name="submit" value="register">register</button><br>
         <br>
+        
     </div>   
     <script>
         function openCity(evt, cityName) {

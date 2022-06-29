@@ -218,66 +218,66 @@
 			   >Request IBT</a>
 		</div>
 		<form action="UtilitiesServlet" method="post">
-		<label id="copyright">Carols Boutique pty.Ltd.<br>Reg.131 482 9132</label>
-        <div class="mid" id="ckapage">
-			<h2 style="font-size:30px;">Create keep aside</h2>
+			<label id="copyright">Carols Boutique pty.Ltd.<br>Reg.131 482 9132</label>
+			<div class="mid" id="ckapage">
+				<h2 style="font-size:30px;">Create keep aside</h2>
 
-			<label>ProductID:</label>
-			<br>
-			<br>
-			<input style="font-size:30px" class="bars" type="text" name="productID">
+				<label>ProductID:</label>
+				<br>
+				<br>
+				<input style="font-size:30px" class="bars" type="text" name="productID">
 
-			<br>
-			<br>
+				<br>
+				<br>
 
-			<label>StoreID:</label>
-			<br>
-			<br>
-			<input style="font-size:30px" class="bars" type="text" name="StoreID">
+				<label>StoreID:</label>
+				<br>
+				<br>
+				<input style="font-size:30px" class="bars" type="text" name="StoreID">
 
-			<br>
-			<br>
+				<br>
+				<br>
 
-			<label>Amount:</label>
-			<br>
-			<br>
-			<input style="font-size:30px" class="bars" type="number" min="0" name="amount">
+				<label>Amount:</label>
+				<br>
+				<br>
+				<input style="font-size:30px" class="bars" type="number" min="0" name="amount">
 
-			<br>
-			<br>		
+				<br>
+				<br>		
 
-			<label>Customer Email:</label>
-			<br>
-			<br>
-			<input style="font-size:30px" class="bars" type="text" name="CustomerEmail">
+				<label>Customer Email:</label>
+				<br>
+				<br>
+				<input style="font-size:30px" class="bars" type="text" name="CustomerEmail">
 
-			<br>
-			<br>
-			<% String responseMessage = (String) request.getAttribute("responseMessage"); %>
+				<br>
+				<br>
+				<% String responseMessage = (String) request.getAttribute("responseMessage"); %>
 
-			<%if (responseMessage != null) {%> 
-			<label style="font-size:30px"><br> <%= responseMessage %><br></label>
-			<br>
-			<% }%>
+				<%if (responseMessage != null) {%> 
+				<label style="font-size:30px"><br> <%= responseMessage%><br></label>
+				<br>
+				<% }%>
 
-			<button type="submit" id="createkeepaside" class="ckab" name="submit" value="createKeepAside">Create keep aside</button>
+				<button type="submit" id="createkeepaside" class="ckab" name="submit" value="createKeepAside">Create keep aside</button>
 		</form>
-		</div>
-		<script>
-			function openCity(evt, cityName) {
-				var i, tabcontent, tablinks;
-				tabcontent = document.getElementsByClassName("sideside");
-				for (i = 0; i < tabcontent.length; i++) {
-					tabcontent[i].style.display = "none";
-				}
-				tablinks = document.getElementsByClassName("c");
-				for (i = 0; i < tablinks.length; i++) {
-					tablinks[i].className = tablinks[i].className.replace(" active", "");
-				}
-				document.getElementById(cityName).style.display = "block";
-				evt.currentTarget.className += " active";
+	</div>
+	<script>
+		function openCity(evt, cityName) {
+			var i, tabcontent, tablinks;
+			tabcontent = document.getElementsByClassName("sideside");
+			for (i = 0; i < tabcontent.length; i++) {
+				tabcontent[i].style.display = "none";
 			}
-		</script>    
-    </body>
+			tablinks = document.getElementsByClassName("c");
+			for (i = 0; i < tablinks.length; i++) {
+				tablinks[i].className = tablinks[i].className.replace(" active", "");
+			}
+			document.getElementById(cityName).style.display = "block";
+			evt.currentTarget.className += " active";
+		}
+	</script>    
+</body>
 
 </html>

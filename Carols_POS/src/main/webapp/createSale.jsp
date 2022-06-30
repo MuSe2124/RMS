@@ -197,10 +197,24 @@
 
     </head>
     <body style="background-image:url('https://lh3.googleusercontent.com/pw/AM-JKLXMO5yDb4rwt4sEQrgiQOMODT_pJfb1SL2dd8vpb9xK6qq-v0-sLTcA7ci2YTgbCEc9EH-VWq56ksYL1wsRQOFNAtSXfc6cmCOwCtpfS-Hbcj4rYphCA-b4AYxOAjboLEyfbJ4HxwYWuwhl5jRgETc=w1095-h657-no?authuser=0'); background-size:cover;">
-                <script type="text/javascript" src="instascan.js.min"></script>
+                <script type="text/javascript" src="instascan.js.min" onclick="scanner()"></script>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
                 <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
-
+<script type="text/javascript">
+      let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
+      scanner.addListener('scan', function (content) {
+          document.getElementById('prodID').value=content;
+      });
+      Instascan.Camera.getCameras().then(function (cameras) {
+        if (cameras.length > 0) {
+          scanner.start(cameras[0]);
+        } else {
+          console.error('No cameras found.');
+        }
+      }).catch(function (e) {
+        console.error(e);
+      });
+    </script>
         <label id="heading">Carol's Boutique</label>
         <div id="side">
             <button class="c" id="keepaside" name="submit" onclick="openCity(event, 'Keepasidebar')">keep aside</button>
@@ -269,8 +283,8 @@
         </div>
 
         <label id="copyright">Carols Boutique pty.Ltd.<br>Reg.131 482 9132</label>
-        <div id="lineitemspage" class="mid">
-            <button type="submit" style="position:absolute;left:500px;" name="submit" value="scan" id="prodID" onclick="scanner()">Scan</button>
+        <div id="lineitemspage" class="mid" source="instascan.min.js" onclick="scanner()"><form action="ProductServlet" method="get">
+<!--            <br><br><button type="submit" style="position:absolute;left:500px;" name="submit" value="scan" id="scan">Scan</button><br><br>-->
 
                 
                         <div class="container">
@@ -279,38 +293,23 @@
                 <video id="preview" width="100%" style="display:none"></video>
                 </div>
                 <div class="col-md-6">
-                <label>SCAN QR CODE</label>
+                <br><br><br><label>SCAN QR CODE</label><br>
                 <form>
-                <label>Product ID: <input type="text" id="prodID" name="prodID" class="bars"></label>
+                <br><label>Product ID: <input type="text" id="prodID" name="prodID" class="bars"></label><br>
                 
-                </form>
+                
                 </div>
             </div>
             </div>
-                <br><br><br><br>
-                <script>
-            function scanner() {
-                                let scanner = new Instascan.Scanner({video: document.getElementById('preview')});
-                        scanner.addListener('prodID', function (c) {
-                            document.getElementById('prodID').value = c;
-
-                        });
-                        Instascan.Camera.getCameras().then(function (cameras) {
-                            if (cameras.length > 0) {
-                                scanner.start(cameras[0]);
-                            } else {
-                                alert('no cameras found');
-                            }
-                        }).catch(function (e) {
-                            console.error(e);
-                        });
-                }
+                <br><br>
                 
-                </script>
-                <button type="submit" name="submit" value="newSale"></button><br>
+                <button type="submit" name="submit" value="Enter">Enter</button>
+                <br><br>
+                
+                <br><button type="submit" name="submit" value="newSale">New Sale</button><br>
+</form>
             <form action="ProductServlet" method="get">
                 <%          
-                    
                     Sale sale = (Sale) request.getSession(false).getAttribute("sale");
                 %>
 
@@ -358,22 +357,22 @@
                       Float difference = change - Float.parseFloat(request.getParameter("Cash"));
                     %>
                     <button style="position:absolute;left:0px;" name="submit" value="Cash" >Cash</button>
-                    <%if (sale.getPayment() == null) {%>
+
                     <label>Cash: <input type="text" name="cash" id="cashPayment" ></label>
                     <label>Change: <input type="text" name="change" id="change" value="change"></label>
                     <label>Difference: <%=difference%></label>
-                    <%}%>
+
 
 
                     <button style="position:absolute;left:500px;" name="submit" value="Card">Card</button>
-                    <%if (sale.getPayment() != null) {%>
+
                     <label>Card Number: <input type="text" name="cardNumber" id="cardNumber" ></label>
                     <label>Card Type: <input type="radio" name="Debit" id="cardType" value="Debit"></label>
                     <input type="radio" name="Credit" id="cardType" value="Credit">
                     <input type="radio" name="Cheque" id="cardType"value="Cheque">
+
                     <%}%>
-                    <%}%>
-                    <button style="position:absolute;left:0px;" name="submit" value="Checkout">Proceed to
+                    <br><br><br><br><br><br><br><button style="position:absolute;left:0px;" name="submit" value="Checkout">Proceed to
                         checkout</button><br><br><br><br>
                         <%String responseMessage = (String) request.getAttribute("responseMessage");%>
                     <a href="../java/za/co/carols_boutique_pos/employee_servlet/EmployeeServlet.java"></a>

@@ -269,19 +269,9 @@
                                 <th>Size</th>
                                 <th>Qty</th>
                                 <th>Price</th>
+                                
                             </tr>
-                            <td>?ProductID?
-                            </td>
-                            <td>??-item??
-                            </td>
-                            <td>??size??
-                            </td>
-                            <td>??Qty??</td>
-                            <td>??Price??
-                            </td> 
-                            <tr>
-
-                            </tr>
+                            <%if(exchange != null){%>
                             <tr style="background-color:red">
 
                                 <td><%=exchange.getPreLineItem().getProduct().getId()%>
@@ -316,7 +306,7 @@
                                 <td><%= total%></td>                            
                             </tr>
                         </table><br>
-                        
+                        <%}%>
                         <button name="submit" value="ConfirmExchange">Confirm Exchange</button>
 
 

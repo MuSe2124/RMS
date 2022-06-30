@@ -1,6 +1,9 @@
 package za.co.carols_boutique_pos.models;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import za.co.carols_boutique.models.Employee;
@@ -48,7 +51,14 @@ public class Sale implements Serializable {
 		this.promo = promo;
 
 	}
-
+        {
+        store = new Store();
+        employee = new Employee();
+        lineItems = new ArrayList<>();
+        customerEmail = "muaadhseedat3@gmail.com";
+        date = new Date(System.currentTimeMillis());
+        promo = "PROMOPROMO";
+        }
 	public Sale(Store store, String id) {
 		this.store = store;
 		this.id = id;

@@ -80,7 +80,7 @@ public class ProductServlet extends HttpServlet {
                     sale.setPayment(crdP);
                 }
                 session.setAttribute("sale", sale);
-                
+                request.getRequestDispatcher("createSale.jsp").forward(request, response);
                 break;
             case "receiptID":
                 Sale sale1 = ss.getSale(request.getParameter("ReceiptID"));

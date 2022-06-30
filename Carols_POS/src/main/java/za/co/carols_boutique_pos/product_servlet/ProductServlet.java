@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import za.co.carols_boutique.models.Stock;
 import za.co.carols_boutique_pos.models.ProdCat;
 import za.co.carols_boutique_pos.models.CardPayment;
 import za.co.carols_boutique_pos.models.CashPayment;
@@ -84,14 +85,19 @@ public class ProductServlet extends HttpServlet {
                 if (sale1 != null) {
                     String[] arr1 = request.getParameter("returnProductID").split(" ");
                     Product returnProd = null;
-                    for (int i = 0; i < 10; i++) {
+                    for (int i = 0; i < sale1.getLineItems().size(); i++) {
                         if (sale1.getLineItems().get(i).getProduct().getId().equals(arr1[1]+arr1[2])) {
                             returnProd = sale1.getLineItems().get(i).getProduct();
                         }
                     }
+                    String[] arr2 = request.getParameter("exchangeProductID").split(" ");
+                    Product exchangeProd = pr.getProduct(arr2[0], arr2[1]);
                     
                     LineItem preLineItem = new LineItem(returnProd, Integer.parseInt(request.getParameter("returnAmount")), arr1[1]);
+                    LineItem postLineItem = new LineItem(exchangeProd, Integer.parseInt(request.getParameter("exchangeAmount")), arr2[1]);
                     Exchange exchange = new Exchange(sale1, preLineItem, postLineItem);
+                    request.setAttribute("exchange", exchange);
+                    request.getRequestDispatcher("Exchange.jsp").forward(request, response);
                 }
                 break;
         }
@@ -119,7 +125,12 @@ public class ProductServlet extends HttpServlet {
                 sale = null;
                 session.setAttribute("sale", null);
                 request.setAttribute(responseMessage, responseMessage);
-                request.getRequestDispatcher("create.jsp").forward(request, response);
+                request.getRequestDispatcher("Home.jsp").forward(request, response);
+                break;
+            case "ConfirmExchange":
+                String[]arr = request.getParameter("exchangeProductID").split(" ");
+                Product product = pr.getProduct(arr[0], arr[1]);
+                pr.removeProductFromInventory(new Stock(product.getId(), product.getName(), Integer.parseInt(request.getParameter("exchangeAmount"))));
                 break;
         }
     }

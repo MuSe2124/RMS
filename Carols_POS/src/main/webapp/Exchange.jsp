@@ -4,6 +4,7 @@
     Author     : HP
 --%>
 
+<%@page import="za.co.carols_boutique_pos.models.Exchange"%>
 <%@page import="za.co.carols_boutique_pos.models.Product"%>
 <%@page import="za.co.carols_boutique_pos.models.Sale"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -264,7 +265,9 @@
                         <input type="text" name="exchangeProductID" class="bars">
                         <input type="text" name="exchangeAmount" class="bars">
                         <br><br>
-                        
+                        <%
+                        Exchange exchange = (Exchange)request.getAttribute("exchange");
+                        %>
                         <table>
                             <tr>
                                 <th>ProductID</th>
@@ -287,25 +290,27 @@
                             </tr>
                             <tr style="background-color:red">
 
-                                <td><%=prod.getId()%>
+                                <td><%=exchange.getPreLineItem().getProduct().getId()%>
                                 </td>
-                                <td><%=prod.getName()%>
+                                <td><%=exchange.getPreLineItem().getProduct().getName()%>
                                 </td>
-                                <td><%=prod.getSize()%>
+                                <td><%=exchange.getPreLineItem().getProduct().getSize()%>
                                 </td>
-                                <td>??Qty??</td>
-                                <td><%=prod.getPrice()%>
+                                <td><%=exchange.getPreLineItem().getAmount()%></td>
+                                <%Float totalPrePrice = exchange.getPreLineItem().getProduct().getPrice() * exchange.getPreLineItem().getAmount();%>
+                                <td><%=totalPrePrice%>
                                 </td>
                             </tr>
                             <tr style="background-color:green">
-                                <td><%=prod1.getId()%>
+                                <td><%=exchange.getPostLineItem().getProduct().getId()%>
                                 </td>
-                                <td><%=prod1.getName()%>
+                                <td><%=exchange.getPostLineItem().getProduct().getName()%>
                                 </td>
-                                <td><%=prod1.getSize()%>
+                                <td><%=exchange.getPostLineItem().getProduct().getSize()%>
                                 </td>
-                                <td>??Qty??</td>
-                                <td><%=prod1.getPrice()%>
+                                <td><%=exchange.getPostLineItem().getAmount()%></td>
+                                <%Float totalPostPrice = exchange.getPostLineItem().getProduct().getPrice() * exchange.getPostLineItem().getAmount();%>
+                                <td><%=totalPostPrice%>
                                 </td>
                             </tr>
                             <tr>
@@ -313,7 +318,7 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <%Float total = prod1.getPrice() - prod.getPrice();%>
+                                <%Float total = totalPostPrice - totalPrePrice;%>
                                 <td><%= total%></td>                            
                             </tr>
                         </table><br>

@@ -56,6 +56,7 @@ public class ProductServlet extends HttpServlet {
                 session.setAttribute("sale", sale2);
                 List<LineItem> lis1 = new ArrayList<>();
                 sale2.setLineItems(lis1);
+				System.out.println("\n\n\n\n\n\n\n!!!\n\n\n\n\n\n\n");
                 request.getRequestDispatcher("lineitemspage").forward(request, response);
                 break;
             case "scan":

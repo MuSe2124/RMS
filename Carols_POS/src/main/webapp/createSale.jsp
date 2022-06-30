@@ -329,6 +329,7 @@
                         <th>Price
                         </th>
                     </tr>
+                    <%if(sale != null){%>
                     <%for (int i = 0; i < sale.getLineItems().size(); i++) {
                         Product prod = sale.getLineItems().get(i).getProduct();
                     %>
@@ -370,6 +371,7 @@
                     <label>Card Type: <input type="radio" name="Debit" id="cardType" value="Debit"></label>
                     <input type="radio" name="Credit" id="cardType" value="Credit">
                     <input type="radio" name="Cheque" id="cardType"value="Cheque">
+                    <%}%>
                     <%}%>
                     <button style="position:absolute;left:0px;" name="submit" value="Checkout">Proceed to
                         checkout</button><br><br><br><br>

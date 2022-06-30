@@ -272,7 +272,7 @@
         <div id="lineitemspage" class="mid">
             <button type="submit" style="position:absolute;left:500px;" name="submit" value="scan" id="prodID" onclick="scanner()">Scan</button>
 
-                <script>
+                
                         <div class="container">
                 <div class="col-md-6">
                 <div class="row">
@@ -288,6 +288,7 @@
             </div>
             </div>
                 <br><br><br><br>
+                <script>
             function scanner() {
                                 let scanner = new Instascan.Scanner({video: document.getElementById('preview')});
                         scanner.addListener('prodID', function (c) {
@@ -308,9 +309,12 @@
                 </script>
             
             <form action="ProductServlet" method="get">
-                <%
-                Sale sale = (Sale) session.getAttribute("sale");
-                
+                <%          
+                    Sale sale = (Sale) session.getAttribute("sale");
+                    if(sale == null){
+                    sale = new Sale();
+                    session.setAttribute("sale", sale);
+                    }
                 %>
 
                 <!--                <button type="submit" name="submit" value="newSale">New Sale</button> -->

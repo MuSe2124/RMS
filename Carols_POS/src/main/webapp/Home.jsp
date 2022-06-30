@@ -234,7 +234,7 @@
     </div>
         
         <%if(responseMessage != null){%>
-        <h1><%=responseMessage%></h1>
+        <h1><%= responseMessage %></h1>
         <%}%>
         
     <label id="copyright">Carols Boutique pty.Ltd.<br>Reg.131 482 9132</label>

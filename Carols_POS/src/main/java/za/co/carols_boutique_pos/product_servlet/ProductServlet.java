@@ -164,12 +164,12 @@ public class ProductServlet extends HttpServlet {
 				
 				System.out.println(store.getId());
 				System.out.println(employee.getId());
-				System.out.println(request.getParameter("productID"));
+				System.out.println(request.getParameter("prodID"));
 				System.out.println(Integer.parseInt(request.getParameter("amount")));
 				System.out.println(request.getParameter("size"));
 				
 				
-				Stock stock = new Stock(store.getId(),request.getParameter("productID"),employee.getId(),Integer.parseInt(request.getParameter("amount")),request.getParameter("size"));
+				Stock stock = new Stock(store.getId(),request.getParameter("prodID"),employee.getId(),Integer.parseInt(request.getParameter("amount")),request.getParameter("size"));
 				String stockAdded = pr.addProductToInventory(stock);
 				if(stockAdded != null){
 					request.setAttribute("responseMessage", stockAdded);

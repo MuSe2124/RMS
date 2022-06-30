@@ -44,9 +44,8 @@ public class RestProduct implements ProductS{
        String url = uri+"getProduct/"+productID+"/"+size;
 
         WebTarget webTarget = client.target(url);
-        Response response = null;
 
-		response = webTarget.request(MediaType.APPLICATION_JSON).get(Response.class);
+	Response response = webTarget.request(MediaType.APPLICATION_JSON).get(Response.class);
 		
         return response.readEntity(Product.class);
 	}

@@ -53,9 +53,11 @@ public class ProductServlet extends HttpServlet {
         switch (request.getParameter("submit")) {
             case "newSale":
                 Sale sale2 = new Sale();
-                request.getSession().setAttribute("sale", sale2);
+                if (sale2 != null) {
+                    request.getSession().setAttribute("sale", sale2);
+                    request.getRequestDispatcher("createSale.jsp").forward(request, response);  
+                }
                 
-                request.getRequestDispatcher("createSale.jsp").forward(request, response);
                 break;
             case "Enter":
                 Sale sale = (Sale) request.getSession().getAttribute("sale");

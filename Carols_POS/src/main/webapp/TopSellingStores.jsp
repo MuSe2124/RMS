@@ -243,22 +243,22 @@
     <div id="reportpage" class="mid">
         <h1>Top Selling Stores</h1><br>
         <label>Enter Date</label><br>
-        <input type ="month" class="bars" name ="TopSellingStoremonth"><br><br>
-        <button name="button" Svalue="TopSellingStorebutton">Get Results</button><br><br>
+        <input type ="text" class="bars" name ="TopSellingStoremonth"><br><br>
+        <button name="button" value="TopSellingStorebutton">Get Results</button><br><br>
         <%if(report!=null){%>
         <h2>Table of top selling stores</h2><br>
         <table style="width:100%">
             <tr>
                 <th>Store ID</th>
                 <th>sale Total</th>
-                <th>Target</th>
+                
             </tr>
             <%for(StoreSale ss :report.getStoreSales()){%>
             <tr><%xval.add(ss.getStoreID());yval.add(ss.getSaleTotal());%>
                 <%colors.add("rgb("+(int)Math.random()*256+","+(int)Math.random()*256+","+(int)Math.random()*256+")");%>
                 <td> <%= ss.getStoreID() %> </td>
                 <td> <%= ss.getSaleTotal() %> </td>
-                <td><%=ss.getTarget()%></td>
+                
             </tr>
             <%}%>
         </table>
@@ -267,6 +267,8 @@
         <button class="bars" onclick="displaybarchart()">Show bar graph</button><button onclick="displaypiechart()" class="bars">show pie chart</button>
         <canvas id="pieChart" style="max-height:500px;max-width:500px;"></canvas><br>
         <canvas id="barChart" style="max-height:500px;max-width:500px;"></canvas>
+        <>
+        <a onclick="this.href='data:text/html;charset=UTF-8,'+encodeURIComponent(document.documentElement.outerHTML)" href="topSellingStoresReport.pdf" download="topSellingStoresReport.pdf">Download Report</a></p>
         <%}%>
     </div>    
         </form>

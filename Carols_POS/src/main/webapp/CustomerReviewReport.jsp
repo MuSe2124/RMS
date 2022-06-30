@@ -239,7 +239,7 @@
     <div id="reportpage" class="mid">
         <h1>Product</h1><br>
         <label>Enter Date</label><br>
-        <input type ="month" class="bars" name ="CustomerReviewMonth"><br><br>
+        <input type ="text" class="bars" name ="CustomerReviewMonth"><br><br>
         <label>Enter amount reviews</label><br>
         <input type ="number" min="0" class="bars" name ="CustomerReviewAmount"><br><br>
         <button type="submit" name="button" value="CustomerReviewbutton">Get Results</button><br><br>
@@ -259,6 +259,7 @@
             </tr>
             <%}%>
         </table>
+        <a onclick="this.href='data:text/html;charset=UTF-8,'+encodeURIComponent(document.documentElement.outerHTML)" href="reportcustomerReviews.pdf" download="reportcustomerReviews.pdf">Download Report</a></p>
         <%}%>
     </div>    
         </form>

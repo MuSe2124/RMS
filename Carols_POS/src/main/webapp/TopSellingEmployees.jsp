@@ -237,7 +237,7 @@
     <div id="reportpage" class="mid">
         <h1>Top Selling Employees</h1><br>
         <label>Enter Date</label><br>
-        <input type ="month" class="bars" name ="TopSellingEmployeesmonth"><br><br>
+        <input type ="text" class="bars" name ="TopSellingEmployeesmonth"><br><br>
         <label>Store ID</label>
         <input type ="text" class="bars" name="TopSellingEmployeesStore" ><br><br>
         <button type ="submit" name="button" value="TopSellingEmployeesbutton">Get Results</button><br><br>
@@ -263,6 +263,7 @@
         <button class="bars" onclick="displaybarchart()">Show bar graph</button><button onclick="displaypiechart()" class="bars">show pie chart</button>
         <canvas id="pieChart" style="max-height:500px;max-width:500px;"></canvas><br>
         <canvas id="barChart" style="max-height:500px;max-width:500px;"></canvas>
+        <a onclick="this.href='data:text/html;charset=UTF-8,'+encodeURIComponent(document.documentElement.outerHTML)" href="topSellingEmployees.pdf" download="topSellingEmployees.pdf">Download Report</a></p>
         <%}%>
     </div>    
         </form>

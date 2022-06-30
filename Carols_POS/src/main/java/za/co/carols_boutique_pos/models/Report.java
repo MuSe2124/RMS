@@ -1,20 +1,19 @@
 package za.co.carols_boutique_pos.models;
 
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
 import za.co.carols_boutique.models.EmpSale;
 import za.co.carols_boutique.models.ProdStore;
 import za.co.carols_boutique.models.ProductReport;
 import za.co.carols_boutique.models.SaleReport;
 import za.co.carols_boutique.models.StoreSale;
-import za.co.carols_boutique_pos.rest_clients.RestReport;
-import za.co.carols_boutique_pos.service.ReportS;
-import za.co.carols_boutique_pos.models.Review;
 
 public class Report implements Serializable {
 
-	private ReportS service;
+//	private RepService service;
 	private List<StoreSale> storeSales;
 	private List<EmpSale> empSales;
 	private List<ProdStore> prodStores;
@@ -24,7 +23,7 @@ public class Report implements Serializable {
 	private List<Review> reviews;
 
 	public Report() {
-		service = new RestReport();
+//		service = new RepServiceImp();
 		reviews = new ArrayList<Review>();
 		storeSales = new ArrayList<>();
 		empSales = new ArrayList<>();
@@ -87,6 +86,14 @@ public class Report implements Serializable {
 		this.prodStores = prodStores;
 	}
 
+//	public RepService getService() {
+//		return service;
+//	}
+//
+//	public void setService(RepService service) {
+//		this.service = service;
+//	}
+
 	public List<SaleReport> getSaleReports() {
 		return saleReports;
 	}
@@ -97,13 +104,13 @@ public class Report implements Serializable {
 
 	@Override
 	public String toString() {
-		String s = "Report{" + "\nservice=" + service + "\nreviews=" + reviews.size() + "\nstoreSales=" + storeSales.size() + "\nempSales=" + empSales.size() + "\nprodStores=" + prodStores.size() + "\nsales=" + sales.size() + "\nsaleReports=" + saleReports.size() + "\n";
+		String s = "Report{" + "\nservice=" + "\nreviews=" + reviews.size() + "\nstoreSales=" + storeSales.size() + "\nempSales=" + empSales.size() + "\nprodStores=" + prodStores.size() + "\nsales=" + sales.size() + "\nsaleReports=" + saleReports.size() + "\n";
 		if (productReport != null) {
 			s += "\nproductReport= " + productReport.toString();
 		}
 		return s;
 	}
-	
-    
-    
+
 }
+
+

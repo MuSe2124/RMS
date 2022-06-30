@@ -197,9 +197,7 @@
 
     </head>
     <body style="background-image:url('https://lh3.googleusercontent.com/pw/AM-JKLXMO5yDb4rwt4sEQrgiQOMODT_pJfb1SL2dd8vpb9xK6qq-v0-sLTcA7ci2YTgbCEc9EH-VWq56ksYL1wsRQOFNAtSXfc6cmCOwCtpfS-Hbcj4rYphCA-b4AYxOAjboLEyfbJ4HxwYWuwhl5jRgETc=w1095-h657-no?authuser=0'); background-size:cover;">
-        <script type="text/javascript" src="instascan.js.min"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+
         <label id="heading">Carol's Boutique</label>
         <div id="side">
             <button class="c" id="keepaside" name="submit" onclick="openCity(event, 'Keepasidebar')">keep aside</button>
@@ -270,30 +268,32 @@
         <label id="copyright">Carols Boutique pty.Ltd.<br>Reg.131 482 9132</label>
         <div id="lineitemspage" class="mid">
             <form>
-
+                <script type="text/javascript" src="instascan.js.min"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
                 <%
-                    Sale sale = (Sale) session.getAttribute("sale");
-                    if (sale != null) {
+                                        Sale sale = (Sale) session.getAttribute("sale");
+                                        if (sale != null) {
                 %>
                 <button type="submit" name="submit" value="newSale">New Sale</button>
                 <%} else {%>
                 <script>
-                    function scanner() {
-                        let scanner = new Instascan.Scanner({video: document.getElementById('preview')});
-                        scanner.addListener('prodID', function (c) {
-                            document.getElementById('prodID').value = c;
+                function scanner() {
+                    let scanner = new Instascan.Scanner({video: document.getElementById('preview')});
+                    scanner.addListener('prodID', function (c) {
+                        document.getElementById('prodID').value = c;
 
-                        });
-                        Instascan.Camera.getCameras().then(function (cameras) {
-                            if (cameras.length > 0) {
-                                scanner.start(cameras[0]);
-                            } else {
-                                alert('no cameras found');
-                            }
-                        }).catch(function (e) {
-                            console.error(e);
-                        });
-                    }
+                    });
+                    Instascan.Camera.getCameras().then(function (cameras) {
+                        if (cameras.length > 0) {
+                            scanner.start(cameras[0]);
+                        } else {
+                            alert('no cameras found');
+                        }
+                    }).catch(function (e) {
+                        console.error(e);
+                    });
+                }
                 </script>
                 <h1>Line Items</h1>
                 <table>
@@ -309,7 +309,7 @@
                         </th>
                     </tr>
                     <%for (int i = 0; i < sale.getLineItems().size(); i++) {
-                            Product prod = sale.getLineItems().get(i).getProduct();
+                                                        Product prod = sale.getLineItems().get(i).getProduct();
                     %>
                     <tr>
                         <td><%=prod.getId()%></td>
@@ -317,7 +317,7 @@
                         <td><%=prod.getSize()%></td>
                         <td><%=sale.getLineItems().get(i).getAmount()%></td>
                         <%Float price = prod.getPrice() * sale.getLineItems().get(i).getAmount();
-                            prod.setPrice(price);
+                                                        prod.setPrice(price);
                         %>
                         <td><%=prod.getPrice()%></td>
                         <%}%>
@@ -351,8 +351,8 @@
 
 
                 <%
-                    Float change = Float.parseFloat(request.getParameter("change"));
-                    Float difference = change - Float.parseFloat(request.getParameter("Cash"));
+                                        Float change = Float.parseFloat(request.getParameter("change"));
+                                        Float difference = change - Float.parseFloat(request.getParameter("Cash"));
                 %>
                 <button style="position:absolute;left:0px;" name="submit" value="Cash" >Cash</button>
                 <%if (sale.getPayment() == null) {%>

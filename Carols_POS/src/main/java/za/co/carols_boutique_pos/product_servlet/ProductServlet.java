@@ -48,21 +48,16 @@ public class ProductServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(false);
         switch (request.getParameter("submit")) {
-//            case "newSale":
-//                
-//                
-//				List<LineItem>lis = new ArrayList<>();
-//				sale.setLineItems(lis);
-//                session.setAttribute("sale", sale);
-//				String message = "message";
-//				request.setAttribute("message", message);
-//				request.getRequestDispatcher("createSale.jsp").forward(request, response);
-//                break;
-			case "scan":
-				Sale sale = new Sale();
-				CashPayment cp = new CashPayment(Float.parseFloat(request.getParameter("Cash")));
+            case "newSale":
+                Sale sale2 = new Sale();
+                session.setAttribute("sale", sale2);
+                request.getRequestDispatcher("lineitemspage").forward(request, response);
+                break;
+            case "scan":
+		Sale sale = (Sale)session.getAttribute("sale");
+		CashPayment cp = new CashPayment(Float.parseFloat(request.getParameter("Cash")));
                 CardPayment crdP = new CardPayment(request.getParameter("cardNumber"), request.getParameter("cardType"));
                 if (cp != null) {
                     sale.setPayment(cp);

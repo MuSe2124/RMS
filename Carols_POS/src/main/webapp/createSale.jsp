@@ -310,11 +310,8 @@
             
             <form action="ProductServlet" method="get">
                 <%          
-                    Sale sale = (Sale) session.getAttribute("sale");
-                    if(sale == null){
-                    sale = new Sale();
-                    session.setAttribute("sale", sale);
-                    }
+                    
+                    Sale sale = (Sale) request.getSession(false).getAttribute("sale");
                 %>
 
                 <!--                <button type="submit" name="submit" value="newSale">New Sale</button> -->

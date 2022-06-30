@@ -246,13 +246,7 @@
             <form>
                 <h1>Exchange</h1><br>
                 <label>Receipt ID<label><br>
-                        <%
-                            Sale sale = (Sale) request.getAttribute("s");
-                            String saleResponse = (String) request.getAttribute("noSale");
-                            Product prod = (Product) request.getAttribute("product1");
-                            String prodResponse = (String) request.getAttribute("noProduct");
-                            Product prod1 = (Product) request.getAttribute("product2");
-                        %>
+                        
                         <input type="text" name="ReceiptID" class="bars"><br>
                         <button name="submit" value="receiptID">search</button><br>
                         <br><br>

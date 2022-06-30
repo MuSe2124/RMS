@@ -307,7 +307,7 @@
                 }
                 
                 </script>
-            
+                <button type="submit" name="submit" value="newSale"></button><br>
             <form action="ProductServlet" method="get">
                 <%          
                     

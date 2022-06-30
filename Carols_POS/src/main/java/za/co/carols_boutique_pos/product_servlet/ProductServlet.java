@@ -22,6 +22,7 @@ import za.co.carols_boutique_pos.models.CardPayment;
 import za.co.carols_boutique_pos.models.CashPayment;
 import za.co.carols_boutique_pos.models.Exchange;
 import za.co.carols_boutique_pos.models.LineItem;
+import za.co.carols_boutique_pos.models.Payment;
 import za.co.carols_boutique_pos.models.Product;
 import za.co.carols_boutique_pos.models.Sale;
 import za.co.carols_boutique_pos.models.Store;
@@ -53,6 +54,8 @@ public class ProductServlet extends HttpServlet {
             case "newSale":
                 Sale sale2 = new Sale();
                 session.setAttribute("sale", sale2);
+                List<LineItem> lis1 = new ArrayList<>();
+                sale2.setLineItems(lis1);
                 request.getRequestDispatcher("lineitemspage").forward(request, response);
                 break;
             case "scan":

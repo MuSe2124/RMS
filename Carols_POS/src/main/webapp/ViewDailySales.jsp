@@ -342,5 +342,5 @@
         document.getElementById("barchart").style.display = "none";
         
     </script>
-</html>
+</body>
 </html>

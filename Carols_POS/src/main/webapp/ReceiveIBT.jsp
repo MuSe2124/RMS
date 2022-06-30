@@ -275,7 +275,7 @@
         </div>
         </form>
         <label id="copyright">Carols Boutique pty.Ltd.<br>Reg.131 482 9132</label>
-    </body>
+    
     <script>
         function openCity(evt, cityName) {
             var i, tabcontent, tablinks;
@@ -290,5 +290,6 @@
             document.getElementById(cityName).style.display = "block";
             evt.currentTarget.className += " active";
         }
-    </script>    
+    </script>
+    </body>    
 </html>

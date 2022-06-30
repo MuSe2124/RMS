@@ -16,7 +16,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Least top Employees</title>
+        <title>Least Performing Stores</title>
         
         <style>
             .mid {
@@ -238,14 +238,14 @@
         <a href ="RequestIBT.jsp" id="ibtrequestb" class="b" name="button" value="IBT Requests page"
             >Request IBT</a>
     </div>
-    <%Report report = (Report)request.getAttribute("LeastTopEmployeesReport");
+    <%Report report = (Report)request.getAttribute("LeastTopStoreReport");
     List<String> x=new ArrayList<>(); List<Float> y = new ArrayList<>(); List<String> colors=new ArrayList<>();%>
         <form action="ReportServlet" method =get>
-    <div id="acheivedtargetpage" class="mid">
-        <h1>Achieved Target</h1><br>
+    <div id="reportpage" class="mid">
+        <h1>Least Performing Stores</h1><br>
         <label>Enter Date</label><br>
-        <input type ="month" class="bars" name ="LeastTopEmployeesmonth"><br><br>
-        <button name="button" value="LeastTopEmployeesbutton">Get Results</button><br><br>
+        <input type ="month" class="bars" name ="LeastTopStoresmonth"><br><br>
+        <button type="submit" name="button" value="LeastTopStorebutton">Get Results</button><br><br>
         <%if(report!=null){%>
         <h2>View top employee for ??Month??</h2><br>
         <table style="width:100%">
@@ -263,7 +263,7 @@
         </table>
         <br>
         <br>
-        <button class="bars" onclick="displaybarchart()">Show bar graph</button><button onclick="displaypiechart()" class="bars">show pie chart</button>
+        <button  onclick="displaybarchart()">Show bar graph</button><button onclick="displaypiechart()" >show pie chart</button>
         <canvas id="pieChart" style="max-height:500px;max-width:500px;"></canvas><br>
         <canvas id="barChart" style="max-height:500px;max-width:500px;"></canvas>
         <%}%>
@@ -300,7 +300,7 @@
             options: {
                 title: {
                     display: true,
-                    text: "World Wide Wine Production 2018"
+                    text: "Least Performing Stores"
                 }
             }
         });
@@ -318,7 +318,7 @@
                 legend: { display: false },
                 title: {
                     display: true,
-                    text: "LeastTopEmployees"
+                    text: "Least Performing Stores"
                 }
             }
         });
@@ -334,5 +334,5 @@
         document.getElementById("barchart").style.display = "none";
         
     </script>
-</html>
+    </body>
 </html>

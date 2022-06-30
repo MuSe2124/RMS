@@ -6,11 +6,11 @@ import java.util.List;
 import za.co.carols_boutique.models.EmpSale;
 import za.co.carols_boutique.models.ProdStore;
 import za.co.carols_boutique.models.ProductReport;
-import za.co.carols_boutique.models.Review;
 import za.co.carols_boutique.models.SaleReport;
 import za.co.carols_boutique.models.StoreSale;
 import za.co.carols_boutique_pos.rest_clients.RestReport;
 import za.co.carols_boutique_pos.service.ReportS;
+import za.co.carols_boutique_pos.models.Review;
 
 public class Report implements Serializable {
 

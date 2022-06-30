@@ -232,7 +232,7 @@
             >Request IBT</a>
     </div>
     <%Report report = (Report)request.getAttribute("ViewDailySalesReport");
-    List<String> x=new ArrayList<>(); List<Float> y = new ArrayList<>();%>
+    List<String> x=new ArrayList<>(); List<Float> y = new ArrayList<>();List<String> colors=new ArrayList<>();%>
         <form action="ReportServlet" method =get>
     <div id="acheivedtargetpage" class="mid">
         <h1>Daily Sales</h1><br>
@@ -243,16 +243,18 @@
         <h2>View Daily Sales for ??Month??</h2><br>
         <table style="width:100%">
             <tr>
-                <th>Sale ID</th>
+                <th>Date</th>
+                <th>Employee ID</th>
                 <th>Total</th>
-                <th></th>
             </tr>
-            <%for(Sale ss :report){%>
-            <tr><%x.add(ss.getId());y.add(ss);%>
+            <%for(Sale ss :report.getSales()){%>
+            <tr><%x.add(ss.getEmployee().getId());y.add(ss.calculateTotal());%>
                 <%colors.add("rgb("+(int)Math.random()*256+","+(int)Math.random()*256+","+(int)Math.random()*256+")");%>
-                <%for()%>
-                <td> <%= ss.getId() %> </td>
-                <td> <%= ; %> </td>    
+                
+                <td> <%= ss.getDate() %> </td>
+                
+                <td><%=ss.getEmployee().getId()%></td>
+                <td><%=ss.calculateTotal()%></td>
             </tr>
             <%}%>
         </table>
@@ -295,7 +297,7 @@
             options: {
                 title: {
                     display: true,
-                    text: "World Wide Wine Production 2018"
+                    text: "Sales Daily"
                 }
             }
         });
@@ -313,7 +315,7 @@
                 legend: { display: false },
                 title: {
                     display: true,
-                    text: "LeastTopEmployees"
+                    text: "Daily Sales"
                 }
             }
         });

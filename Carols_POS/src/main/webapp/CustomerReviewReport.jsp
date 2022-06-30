@@ -1,5 +1,6 @@
 
-<%@page import="za.co.carols_boutique.models.Review"%>
+<%@page import="za.co.carols_boutique_pos.models.Review"%>
+
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="za.co.carols_boutique_pos.models.StoreSales"%>
@@ -11,7 +12,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         
-        <title>Customer Reviews Report<title>
+        <title>Customer Reviews Report</title>
         <style>
             .mid {
             text-align: center;
@@ -225,7 +226,7 @@
         <a href="ProductReport.jsp" id="productsreportb" class="b" name="button" value="view product report page"
             >View product report</a><br>
         <a href="ViewDailySales.jsp" id="dailysalesb" class="b" name="button" value="view daily sales page"
-            >View daily sales page</a>
+            >View daily sales page</a> 
     </div>
     <div id="IBTbar" class="sideside">
 
@@ -235,7 +236,7 @@
     <%Report report = (Report)request.getAttribute("CustomerReviewReport");
     %>
         <form action="ReportServlet" method =get>
-    <div id="acheivedtargetpage" class="mid">
+    <div id="reportpage" class="mid">
         <h1>Product</h1><br>
         <label>Enter Date</label><br>
         <input type ="month" class="bars" name ="CustomerReviewMonth"><br><br>
@@ -279,4 +280,5 @@
             evt.currentTarget.className += " active";
         }
     </script>
+    </body>
 </html>

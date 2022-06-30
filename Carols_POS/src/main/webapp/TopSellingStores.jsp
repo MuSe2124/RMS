@@ -243,8 +243,8 @@
     <div id="reportpage" class="mid">
         <h1>Top Selling Stores</h1><br>
         <label>Enter Date</label><br>
-        <input type ="month" class="bars" name ="TopSellingStoremonth"><br><br>
-        <button name="button" Svalue="TopSellingStorebutton">Get Results</button><br><br>
+        <input type ="text" class="bars" name ="TopSellingStoremonth"><br><br>
+        <button name="button" value="TopSellingStorebutton">Get Results</button><br><br>
         <%if(report!=null){%>
         <h2>Table of top selling stores</h2><br>
         <table style="width:100%">

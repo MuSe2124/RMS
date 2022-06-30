@@ -38,8 +38,9 @@ public class RestReport implements ReportS{
     public Report viewTopAchievingStores(String month) {
 		String url = uri+"viewTopAchievingStores/"+month;
 
-        WebTarget webTarget = client.target(url);
+       WebTarget webTarget = client.target(url);
         Response response = null;
+		response = webTarget.request(MediaType.APPLICATION_JSON).get(Response.class);
 		Report report = null;
 		try {
 			report = new ObjectMapper().readValue(response.readEntity(String.class),Report.class);
@@ -54,12 +55,17 @@ public class RestReport implements ReportS{
     public Report getCustomerReviews(String month, Integer amount) {
 		String url = uri+"getCustomerReviews/"+month+"/"+amount;
 
-        WebTarget webTarget = client.target(url);
+         WebTarget webTarget = client.target(url);
         Response response = null;
-
 		response = webTarget.request(MediaType.APPLICATION_JSON).get(Response.class);
+		Report report = null;
+		try {
+			report = new ObjectMapper().readValue(response.readEntity(String.class),Report.class);
+		} catch (JsonProcessingException ex) {
+			Logger.getLogger(RestReport.class.getName()).log(Level.SEVERE, null, ex);
+		}
 		
-        return response.readEntity(Report.class);   
+        return report;  
 	}
 
     @Override
@@ -68,6 +74,7 @@ public class RestReport implements ReportS{
 
         WebTarget webTarget = client.target(url);
         Response response = null;
+		response = webTarget.request(MediaType.APPLICATION_JSON).get(Response.class);
 
 		response = webTarget.request(MediaType.APPLICATION_JSON).get(Response.class);
 		
@@ -80,6 +87,7 @@ public class RestReport implements ReportS{
 
        WebTarget webTarget = client.target(url);
         Response response = null;
+		response = webTarget.request(MediaType.APPLICATION_JSON).get(Response.class);
 		Report report = null;
 		try {
 			report = new ObjectMapper().readValue(response.readEntity(String.class),Report.class);
@@ -96,10 +104,15 @@ public class RestReport implements ReportS{
 
         WebTarget webTarget = client.target(url);
         Response response = null;
-
 		response = webTarget.request(MediaType.APPLICATION_JSON).get(Response.class);
+		Report report = null;
+		try {
+			report = new ObjectMapper().readValue(response.readEntity(String.class),Report.class);
+		} catch (JsonProcessingException ex) {
+			Logger.getLogger(RestReport.class.getName()).log(Level.SEVERE, null, ex);
+		}
 		
-        return response.readEntity(Report.class);   
+        return report;  
 	}
 
     @Override
@@ -108,22 +121,32 @@ public class RestReport implements ReportS{
 
         WebTarget webTarget = client.target(url);
         Response response = null;
-
 		response = webTarget.request(MediaType.APPLICATION_JSON).get(Response.class);
+		Report report = null;
+		try {
+			report = new ObjectMapper().readValue(response.readEntity(String.class),Report.class);
+		} catch (JsonProcessingException ex) {
+			Logger.getLogger(RestReport.class.getName()).log(Level.SEVERE, null, ex);
+		}
 		
-        return response.readEntity(Report.class); 
+        return report;  
 	}
 
     @Override
     public Report viewLeastPerformingStores(String month) {
 		String url = uri+"viewLeastPerformingStores/"+month;
 
-        WebTarget webTarget = client.target(url);
+       WebTarget webTarget = client.target(url);
         Response response = null;
-
 		response = webTarget.request(MediaType.APPLICATION_JSON).get(Response.class);
+		Report report = null;
+		try {
+			report = new ObjectMapper().readValue(response.readEntity(String.class),Report.class);
+		} catch (JsonProcessingException ex) {
+			Logger.getLogger(RestReport.class.getName()).log(Level.SEVERE, null, ex);
+		}
 		
-        return response.readEntity(Report.class); 
+        return report;  
 	}
 
     @Override
@@ -132,10 +155,15 @@ public class RestReport implements ReportS{
 
         WebTarget webTarget = client.target(url);
         Response response = null;
-
 		response = webTarget.request(MediaType.APPLICATION_JSON).get(Response.class);
+		Report report = null;
+		try {
+			report = new ObjectMapper().readValue(response.readEntity(String.class),Report.class);
+		} catch (JsonProcessingException ex) {
+			Logger.getLogger(RestReport.class.getName()).log(Level.SEVERE, null, ex);
+		}
 		
-        return response.readEntity(Report.class); 
+        return report;  
 	}
 
     @Override
@@ -144,10 +172,15 @@ public class RestReport implements ReportS{
 
         WebTarget webTarget = client.target(url);
         Response response = null;
-
 		response = webTarget.request(MediaType.APPLICATION_JSON).get(Response.class);
+		Report report = null;
+		try {
+			report = new ObjectMapper().readValue(response.readEntity(String.class),Report.class);
+		} catch (JsonProcessingException ex) {
+			Logger.getLogger(RestReport.class.getName()).log(Level.SEVERE, null, ex);
+		}
 		
-        return response.readEntity(Report.class); 
+        return report;  
 	}
 
     @Override
@@ -156,6 +189,7 @@ public class RestReport implements ReportS{
 
         WebTarget webTarget = client.target(url);
         Response response = null;
+		response = webTarget.request(MediaType.APPLICATION_JSON).get(Response.class);
 
 		try {
 			response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(Stringify(review)));
@@ -172,6 +206,7 @@ public class RestReport implements ReportS{
 
         WebTarget webTarget = client.target(url);
         Response response = null;
+		response = webTarget.request(MediaType.APPLICATION_JSON).get(Response.class);
 
 		try {
 			response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(Stringify(customer)));

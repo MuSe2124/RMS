@@ -15,6 +15,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import za.co.carols_boutique.models.Employee;
+import za.co.carols_boutique.models.Stock;
 import za.co.carols_boutique_pos.models.ProdCat;
 import za.co.carols_boutique_pos.models.CardPayment;
 import za.co.carols_boutique_pos.models.CashPayment;
@@ -22,6 +24,7 @@ import za.co.carols_boutique_pos.models.Exchange;
 import za.co.carols_boutique_pos.models.LineItem;
 import za.co.carols_boutique_pos.models.Product;
 import za.co.carols_boutique_pos.models.Sale;
+import za.co.carols_boutique_pos.models.Store;
 import za.co.carols_boutique_pos.rest_clients.RestProduct;
 import za.co.carols_boutique_pos.rest_clients.RestStore;
 import za.co.carols_boutique_pos.service.ProductS;
@@ -87,6 +90,8 @@ public class ProductServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+		                
+		HttpSession session = request.getSession();
 
         switch (request.getParameter("submit")) {
 
@@ -94,18 +99,41 @@ public class ProductServlet extends HttpServlet {
                 Product p = new Product(request.getParameter("pName"), request.getParameter("pDescription"), Float.parseFloat(request.getParameter("pPrice")));
                 ProdCat prodCat = new ProdCat(p,request.getParameter("category"));
 				String added = pr.addNewProduct(prodCat);
-				if(added != null && added.equals("New product added successfully.")){
+				if(added != null ){
 					request.setAttribute("responseMessage", added);
-                    request.getRequestDispatcher("CreateProduct.jsp").forward(request, response); 
+                    request.getRequestDispatcher("Home.jsp").forward(request, response); 
+				}else{
+					request.setAttribute("responseMessage", "could not add product");
+                    request.getRequestDispatcher("Home.jsp").forward(request, response); 
 				}
                 break;
+				
             case "Checkout":
-                HttpSession session = request.getSession();
                 Sale sale = (Sale)session.getAttribute("sale");
                 String responseMessage = ss.addSale(sale);
                 request.setAttribute(responseMessage, responseMessage);
                 request.getRequestDispatcher("create.jsp").forward(request, response);
                 break;
+				
+			case "addToStock":
+				
+				Store store = (Store)session.getAttribute("store");
+				Employee employee = (Employee)session.getAttribute("employee");
+				
+				System.out.println(store.getId());
+				System.out.println(employee.getId());
+				System.out.println(request.getParameter("productID"));
+				System.out.println(Integer.parseInt(request.getParameter("amount")));
+				System.out.println(request.getParameter("size"));
+				
+				
+				Stock stock = new Stock(store.getId(),request.getParameter("productID"),employee.getId(),Integer.parseInt(request.getParameter("amount")),request.getParameter("size"));
+				String stockAdded = pr.addProductToInventory(stock);
+				if(stockAdded != null){
+					request.setAttribute("responseMessage", stockAdded);
+                    request.getRequestDispatcher("Home.jsp").forward(request, response);
+				}
+				
         }
     }
 

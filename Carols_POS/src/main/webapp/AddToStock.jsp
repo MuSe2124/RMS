@@ -217,13 +217,18 @@
     </div>
 
     <label id="copyright">Carols Boutique pty.Ltd.<br>Reg.131 482 9132</label>
+    
     <div id="addtostockpage" class="mid">
+        <form action="ProductServlet" method="post">
         <h2>add to stock</h2><br>
         <label>enter in the id number</label><br>
-        <input type="text" name="stockid" class="bars"><br><br>
+        <input type="text" name="prodID" class="bars"><br><br>
+        <label>enter in the size</label><br>
+        <input type="text" min="0" name="size" class="bars"><br><br>
         <label>enter in the amount you want to add to stock</label><br>
         <input type="number" min="0" name="amount" class="bars"><br><br>
-        <button name="button" value="addtostock">add to stock</button>
+        <button type="submit" name="submit" value="addToStock">add to stock</button>
+        </form>
     </div>
     <script>
         function openCity(evt, cityName) {

@@ -112,6 +112,7 @@ public class ProductServlet extends HttpServlet {
                     Exchange exchange = new Exchange(sale1, preLineItem, postLineItem);
                     request.setAttribute("exchange", exchange);
                     request.getRequestDispatcher("Exchange.jsp").forward(request, response);
+
                 }
                 break;
         }

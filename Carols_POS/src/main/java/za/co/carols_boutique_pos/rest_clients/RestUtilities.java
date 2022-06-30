@@ -10,6 +10,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import za.co.carols_boutique_pos.models.IBT;
 import za.co.carols_boutique_pos.models.KeepAside;
 
 public class RestUtilities {
@@ -30,6 +31,20 @@ public class RestUtilities {
 
 		try {
 			response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(Stringify(keepAside)));
+		} catch (JsonProcessingException ex) {
+			Logger.getLogger(RestEmployee.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return response.readEntity(String.class);
+	}
+
+	public String createIBT(IBT ibt) {
+		String url = uri + "createIBT";
+
+		WebTarget webTarget = client.target(url);
+		Response response = null;
+
+		try {
+			response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(Stringify(ibt)));
 		} catch (JsonProcessingException ex) {
 			Logger.getLogger(RestEmployee.class.getName()).log(Level.SEVERE, null, ex);
 		}

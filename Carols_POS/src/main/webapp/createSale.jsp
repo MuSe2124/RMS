@@ -352,31 +352,36 @@
                     </tr>
                     </table>
 
-                    <%
-                      Float change = Float.parseFloat(request.getParameter("change"));
-                      Float difference = change - Float.parseFloat(request.getParameter("Cash"));
-                    %>
-                    <button style="position:absolute;left:0px;" name="submit" value="Cash" >Cash</button>
-
-                    <label>Cash: <input type="text" name="cash" id="cashPayment" ></label>
-                    <label>Change: <input type="text" name="change" id="change" value="change"></label>
-                    <label>Difference: <%=difference%></label>
-
-
-
-                    <button style="position:absolute;left:500px;" name="submit" value="Card">Card</button>
-
-                    <label>Card Number: <input type="text" name="cardNumber" id="cardNumber" ></label>
-                    <label>Card Type: <input type="radio" name="Debit" id="cardType" value="Debit"></label>
-                    <input type="radio" name="Credit" id="cardType" value="Credit">
-                    <input type="radio" name="Cheque" id="cardType"value="Cheque">
-
+                    
                     <%}%>
+                    
+                    <form action="ProductServlet" method="get">
+                    
+                    <br><br><br><label>Cash: <input type="text" name="cash" id="cashPayment" ></label>
+                    <br><br><br><label>Change: <input type="text" name="change" id="change" value="change"></label><br><br><br>
+                    <%
+                      //Float change = Float.parseFloat(request.getParameter("change"));
+                      //Float difference = change - Float.parseFloat(request.getParameter("Cash"));
+                    %>
+                    <br><br><label>Difference: </label>
+                    <br><br><br><button style="position:absolute;left:0px;" name="submit" value="Cash" >Cash</button>
+
+                    </form>
+
+
+                <form action="ProductServlet" method="get">
+
+                    <br><br><label style="position:absolute;left:500px;">Card Number: <input type="text" name="cardNumber" id="cardNumber" ></label><br>
+                    <br><br><label style="position:absolute;left:500px;">Card Type: <input type="radio" name="Debit" id="cardType" value="Debit">Debit</label><br>
+                    <br><br><label style="position:absolute;left:500px;"><input type="radio" name="Credit" id="cardType" value="Credit">Credit</label><br>
+                    <br><br><label style="position:absolute;left:500px;"><input type="radio" name="Cheque" id="cardType"value="Cheque">Cheque</label>  
+                    <br><br><br><br><br><button style="position:absolute;left:500px;" name="submit" value="Card">Card</button>
+
+                </form>
+                    
                     <br><br><br><br><br><br><br><button style="position:absolute;left:0px;" name="submit" value="Checkout">Proceed to
                         checkout</button><br><br><br><br>
-                        <%String responseMessage = (String) request.getAttribute("responseMessage");%>
                     <a href="../java/za/co/carols_boutique_pos/employee_servlet/EmployeeServlet.java"></a>
-                    <label><%=responseMessage%></label>
             </div>
 
         </form>

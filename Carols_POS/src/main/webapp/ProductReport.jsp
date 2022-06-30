@@ -238,7 +238,7 @@
     <div id="acheivedtargetpage" class="mid">
         <h1>Product Report</h1><br>
         <label>Enter Date</label><br>
-        <input type ="month" class="bars" name ="ProductReportMonth"><br><br>
+        <input type ="text" class="bars" name ="ProductReportMonth"><br><br>
         <label>Store ID</label>
         <input type="text" name="ProductReportStoreID" class="bars"><br><br>
         <button type="submit" name="button" value="ProductReportbutton">Get Results</button><br><br>
@@ -260,7 +260,8 @@
         <br>
         <button class="bars" onclick="displaybarchart()">Show bar graph</button><button onclick="displaypiechart()" class="bars">show pie chart</button>
         <canvas id="pieChart" style="max-height:500px;max-width:500px;"></canvas><br>
-        <canvas id="barChart" style="max-height:500px;max-width:500px;"></canvas>
+        <canvas id="barChart" style="max-height:500px;max-width:500px;"></canvas><br>
+        <a onclick="this.href='data:text/html;charset=UTF-8,'+encodeURIComponent(document.documentElement.outerHTML)" href="productReport.pdf" download="productReport.pdf">Download Report</a></p>
         <%}%>
     </div> 
         

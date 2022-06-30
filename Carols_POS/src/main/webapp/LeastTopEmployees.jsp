@@ -244,7 +244,7 @@
     <div id="reportpage" class="mid">
         <h1>Least Performing Stores</h1><br>
         <label>Enter Date</label><br>
-        <input type ="month" class="bars" name ="LeastTopStoresmonth"><br><br>
+        <input type ="text" class="bars" name ="LeastTopStoresmonth"><br><br>
         <button type="submit" name="button" value="LeastTopStorebutton">Get Results</button><br><br>
         <%if(report!=null){%>
         <h2>View top employee for ??Month??</h2><br>
@@ -266,6 +266,7 @@
         <button  onclick="displaybarchart()">Show bar graph</button><button onclick="displaypiechart()" >show pie chart</button>
         <canvas id="pieChart" style="max-height:500px;max-width:500px;"></canvas><br>
         <canvas id="barChart" style="max-height:500px;max-width:500px;"></canvas>
+        <a onclick="this.href='data:text/html;charset=UTF-8,'+encodeURIComponent(document.documentElement.outerHTML)" href="leastPerformingEmployees.pdf" download="leastPerformingEmployees.pdf">Download Report</a></p>
         <%}%>
     </div>    
     </form

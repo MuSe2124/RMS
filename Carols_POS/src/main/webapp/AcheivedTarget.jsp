@@ -242,7 +242,7 @@
     <div id="acheivedtargetpage" class="mid">
         <h1>Achieved Target</h1><br>
         <label>Enter Date</label><br>
-        <input type ="month" class="bars" name ="acheivedtargetmonth"><br><br>
+        <input type ="text" class="bars" name ="acheivedtargetmonth"><br><br>
         <button type="submit" name="button" value="acheivedtargetbutton">Get Results</button><br><br>
         
         <%if(report!=null){%>
@@ -263,6 +263,7 @@
         </table>
         <br>
         <br>
+        <a onclick="this.href='data:text/html;charset=UTF-8,'+encodeURIComponent(document.documentElement.outerHTML)" href="reportacheivedtarget.pdf" download="reportacheivedtarget.pdf">Download Report</a></p>
         <%}%>
     </div>    
     </form>

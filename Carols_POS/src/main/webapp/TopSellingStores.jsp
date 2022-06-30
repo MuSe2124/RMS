@@ -251,14 +251,14 @@
             <tr>
                 <th>Store ID</th>
                 <th>sale Total</th>
-                <th>Target</th>
+                
             </tr>
             <%for(StoreSale ss :report.getStoreSales()){%>
             <tr><%xval.add(ss.getStoreID());yval.add(ss.getSaleTotal());%>
                 <%colors.add("rgb("+(int)Math.random()*256+","+(int)Math.random()*256+","+(int)Math.random()*256+")");%>
                 <td> <%= ss.getStoreID() %> </td>
                 <td> <%= ss.getSaleTotal() %> </td>
-                <td><%=ss.getTarget()%></td>
+                
             </tr>
             <%}%>
         </table>
@@ -267,6 +267,8 @@
         <button class="bars" onclick="displaybarchart()">Show bar graph</button><button onclick="displaypiechart()" class="bars">show pie chart</button>
         <canvas id="pieChart" style="max-height:500px;max-width:500px;"></canvas><br>
         <canvas id="barChart" style="max-height:500px;max-width:500px;"></canvas>
+        <>
+        <a onclick="this.href='data:text/html;charset=UTF-8,'+encodeURIComponent(document.documentElement.outerHTML)" href="topSellingStoresReport.pdf" download="topSellingStoresReport.pdf">Download Report</a></p>
         <%}%>
     </div>    
         </form>

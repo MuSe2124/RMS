@@ -15,6 +15,7 @@ import jakarta.ws.rs.core.Response;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import za.co.carols_boutique_pos.models.Category;
 import za.co.carols_boutique_pos.models.Customer;
 import za.co.carols_boutique_pos.models.Report;
 import za.co.carols_boutique_pos.models.Review;
@@ -40,10 +41,14 @@ public class RestReport implements ReportS{
 
         WebTarget webTarget = client.target(url);
         Response response = null;
-
-		response = webTarget.request(MediaType.APPLICATION_JSON).get(Response.class);
+		Report report = null;
+		try {
+			report = new ObjectMapper().readValue(response.readEntity(String.class),Report.class);
+		} catch (JsonProcessingException ex) {
+			Logger.getLogger(RestReport.class.getName()).log(Level.SEVERE, null, ex);
+		}
 		
-        return response.readEntity(Report.class);    
+        return report;
 	}
 
     @Override

@@ -78,12 +78,16 @@ public class RestReport implements ReportS{
     public Report viewTopSellingEmployees(String storeID, String month) {
 		String url = uri+"viewTopSellingEmployees/"+storeID+"/"+month;
 
-        WebTarget webTarget = client.target(url);
+       WebTarget webTarget = client.target(url);
         Response response = null;
-
-		response = webTarget.request(MediaType.APPLICATION_JSON).get(Response.class);
+		Report report = null;
+		try {
+			report = new ObjectMapper().readValue(response.readEntity(String.class),Report.class);
+		} catch (JsonProcessingException ex) {
+			Logger.getLogger(RestReport.class.getName()).log(Level.SEVERE, null, ex);
+		}
 		
-        return response.readEntity(Report.class);   
+        return report;  
 	}
 
     @Override

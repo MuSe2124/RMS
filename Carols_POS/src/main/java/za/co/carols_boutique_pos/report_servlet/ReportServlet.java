@@ -69,8 +69,15 @@ private RestReport rr;
                 request.setAttribute("CustomerReviewReport",rep);
                 request.getRequestDispatcher("CustomerReviewReport.jsp").forward(request,response);
                 break;
-            case"":
+            case"TopSellingStorebutton":
+                System.out.println("??????????????????????"+"rrrrrrrrrrrrsdgessssss"+"?????????????");
+                rep=rr.viewTopAchievingStores(request.getParameter("TopSellingStoremonth"));
+                System.out.println("??????????????????????"+rep.getEmpSales().size()+"?????????????");
+                request.setAttribute("TopSellingStoreReport",rep);
+                
+                request.getRequestDispatcher("TopSellingStores.jsp").forward(request,response);
                 break;
+                
                 
                 
         }

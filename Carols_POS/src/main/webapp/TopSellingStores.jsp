@@ -1,15 +1,21 @@
-<%@page import="za.co.carols_boutique.models.EmpSale"%>
+<%-- 
+    Document   : TopSellingStores
+    Created on : 30 Jun 2022, 02:29:47
+    Author     : HP
+--%>
 
+<%@page import="za.co.carols_boutique.models.StoreSale"%>
+<%@page import="za.co.carols_boutique_pos.models.StoreSales"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
-<%@page import="za.co.carols_boutique_pos.models.StoreSales"%>
 <%@page import="za.co.carols_boutique_pos.models.Report"%>
+<%@page import="za.co.carols_boutique.models.EmpSale"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Top Selling Employees</title>
+        <title>Top Selling Store</title>
         
         <style>
             .mid {
@@ -231,30 +237,28 @@
         <a href ="RequestIBT.jsp" id="ibtrequestb" class="b" name="button" value="IBT Requests page"
             >Request IBT</a>
     </div>
-    <%Report report = (Report)request.getAttribute("TopSellingEmployeesReport");
+    <%Report report = (Report)request.getAttribute("TopSellingStoreReport");
     List<String> xval=new ArrayList<>(); List<Float> yval = new ArrayList<>();List<String> colors=new ArrayList<>();%>
         <form action="ReportServlet" method =get>
     <div id="reportpage" class="mid">
-        <h1>Top Selling Employees</h1><br>
+        <h1>Top Selling Stores</h1><br>
         <label>Enter Date</label><br>
-        <input type ="month" class="bars" name ="TopSellingEmployeesmonth"><br><br>
-        <label>Store ID</label>
-        <input type ="text" class="bars" name="TopSellingEmployeesStore" ><br><br>
-        <button type ="submit" name="button" value="TopSellingEmployeesbutton">Get Results</button><br><br>
-        <%if(report!=null&&(report.getEmpSales().size()==0)==true){%>
-        <h2>Table of top selling employees</h2><br>
+        <input type ="month" class="bars" name ="TopSellingStoremonth"><br><br>
+        <button name="button" Svalue="TopSellingStorebutton">Get Results</button><br><br>
+        <%if(report!=null){%>
+        <h2>Table of top selling stores</h2><br>
         <table style="width:100%">
             <tr>
-                <th>Employee ID</th>
-                <th>sale Total</th>
                 <th>Store ID</th>
+                <th>sale Total</th>
+                <th>Target</th>
             </tr>
-            <%for(EmpSale ss :report.getEmpSales()){%>
-            <tr><%xval.add(ss.getEmployee());yval.add(ss.getSaleTotal());%>
+            <%for(StoreSale ss :report.getStoreSales()){%>
+            <tr><%xval.add(ss.getStoreID());yval.add(ss.getSaleTotal());%>
                 <%colors.add("rgb("+(int)Math.random()*256+","+(int)Math.random()*256+","+(int)Math.random()*256+")");%>
                 <td> <%= ss.getStoreID() %> </td>
                 <td> <%= ss.getSaleTotal() %> </td>
-                <td><%=ss.getStoreID()%></td>
+                <td><%=ss.getTarget()%></td>
             </tr>
             <%}%>
         </table>
@@ -299,7 +303,7 @@
             options: {
                 title: {
                     display: true,
-                    text: "Top Selling Employees"
+                    text: "Top Selling Stores"
                 }
             }
         });
@@ -317,22 +321,21 @@
                 legend: { display: false },
                 title: {
                     display: true,
-                    text: "Top Selling Employees"
+                    text: "Top Selling Stores"
                 }
             }
         });
         function displaybarchart(){
-            document.getElementById("barchart").style.display = "block";
-            document.getElementById("piegraph").style.display = "none";
+            document.getElementById("barChart").style.display = "block";
+            document.getElementById("pieChart").style.display = "none";
         }
         function displaypiechart(){
-            document.getElementById("barchart").style.display = "none";
-            document.getElementById("piegraph").style.display = "block";
+            document.getElementById("barChart").style.display = "none";
+            document.getElementById("pieChart").style.display = "block";
         }
-        document.getElementById("piechart").style.display = "none";
-        document.getElementById("barchart").style.display = "none";
+        document.getElementById("pieChart").style.display = "none";
+        document.getElementById("barChart").style.display = "none";
         
     </script>
     </body>
 </html>
-

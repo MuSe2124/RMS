@@ -197,6 +197,9 @@
 
     </head>
     <body style="background-image:url('https://lh3.googleusercontent.com/pw/AM-JKLXMO5yDb4rwt4sEQrgiQOMODT_pJfb1SL2dd8vpb9xK6qq-v0-sLTcA7ci2YTgbCEc9EH-VWq56ksYL1wsRQOFNAtSXfc6cmCOwCtpfS-Hbcj4rYphCA-b4AYxOAjboLEyfbJ4HxwYWuwhl5jRgETc=w1095-h657-no?authuser=0'); background-size:cover;">
+                <script type="text/javascript" src="instascan.js.min"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
 
         <label id="heading">Carol's Boutique</label>
         <div id="side">
@@ -267,34 +270,51 @@
 
         <label id="copyright">Carols Boutique pty.Ltd.<br>Reg.131 482 9132</label>
         <div id="lineitemspage" class="mid">
-            <form>
-                <script type="text/javascript" src="instascan.js.min"></script>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-                <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
-                <%
-                                        Sale sale = (Sale) session.getAttribute("sale");
-                                        if (sale != null) {
-                %>
-                <button type="submit" name="submit" value="newSale">New Sale</button>
-                <%} else {%>
-                <script>
-                function scanner() {
-                    let scanner = new Instascan.Scanner({video: document.getElementById('preview')});
-                    scanner.addListener('prodID', function (c) {
-                        document.getElementById('prodID').value = c;
+            <button type="submit" style="position:absolute;left:500px;" name="submit" value="scan" id="prodID" onclick="scanner()">Scan</button>
 
-                    });
-                    Instascan.Camera.getCameras().then(function (cameras) {
-                        if (cameras.length > 0) {
-                            scanner.start(cameras[0]);
-                        } else {
-                            alert('no cameras found');
-                        }
-                    }).catch(function (e) {
-                        console.error(e);
-                    });
+                <script>
+                        <div class="container">
+                <div class="col-md-6">
+                <div class="row">
+                <video id="preview" width="100%" style="display:none"></video>
+                </div>
+                <div class="col-md-6">
+                <label>SCAN QR CODE</label>
+                <form>
+                <label>Product ID: <input type="text" id="prodID" name="prodID" class="bars"></label>
+                
+                </form>
+                </div>
+            </div>
+            </div>
+                <br><br><br><br>
+            function scanner() {
+                                let scanner = new Instascan.Scanner({video: document.getElementById('preview')});
+                        scanner.addListener('prodID', function (c) {
+                            document.getElementById('prodID').value = c;
+
+                        });
+                        Instascan.Camera.getCameras().then(function (cameras) {
+                            if (cameras.length > 0) {
+                                scanner.start(cameras[0]);
+                            } else {
+                                alert('no cameras found');
+                            }
+                        }).catch(function (e) {
+                            console.error(e);
+                        });
                 }
+                
                 </script>
+            
+            <form action="ProductServlet" method="get">
+                <%
+                Sale sale = (Sale) session.getAttribute("sale");
+                
+                %>
+
+                <!--                <button type="submit" name="submit" value="newSale">New Sale</button> -->
+                
                 <h1>Line Items</h1>
                 <table>
                     <tr>
@@ -309,7 +329,7 @@
                         </th>
                     </tr>
                     <%for (int i = 0; i < sale.getLineItems().size(); i++) {
-                                                        Product prod = sale.getLineItems().get(i).getProduct();
+                        Product prod = sale.getLineItems().get(i).getProduct();
                     %>
                     <tr>
                         <td><%=prod.getId()%></td>
@@ -317,7 +337,7 @@
                         <td><%=prod.getSize()%></td>
                         <td><%=sale.getLineItems().get(i).getAmount()%></td>
                         <%Float price = prod.getPrice() * sale.getLineItems().get(i).getAmount();
-                                                        prod.setPrice(price);
+                          prod.setPrice(price);
                         %>
                         <td><%=prod.getPrice()%></td>
                         <%}%>
@@ -328,55 +348,36 @@
                         <td></td>
                         <td></td>
                         <td><%=sale.calculateTotal()%></td>
-
                     </tr>
-                </table>
+                    </table>
 
-                <button type="submit" style="position:absolute;left:500px;" name="submit" value="Scan" id="prodID" onclick="scanner()">Scan</button>
-                <div class="container">
-                    <div class="col-md-6">
-                        <div class="row">
-                            <video id="preview" width="100%" style="display:none"></video>
-                        </div>
-                        <div class="col-md-6">
-                            <label>SCAN QR CODE</label>
-                            <form>
-                                <label>Product ID: <input type="text" id="prodID" name="prodID" class="bars"></label>
-
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <br><br><br><br>
+                    <%
+                      Float change = Float.parseFloat(request.getParameter("change"));
+                      Float difference = change - Float.parseFloat(request.getParameter("Cash"));
+                    %>
+                    <button style="position:absolute;left:0px;" name="submit" value="Cash" >Cash</button>
+                    <%if (sale.getPayment() == null) {%>
+                    <label>Cash: <input type="text" name="cash" id="cashPayment" ></label>
+                    <label>Change: <input type="text" name="change" id="change" value="change"></label>
+                    <label>Difference: <%=difference%></label>
+                    <%}%>
 
 
-                <%
-                                        Float change = Float.parseFloat(request.getParameter("change"));
-                                        Float difference = change - Float.parseFloat(request.getParameter("Cash"));
-                %>
-                <button style="position:absolute;left:0px;" name="submit" value="Cash" >Cash</button>
-                <%if (sale.getPayment() == null) {%>
-                <label>Cash: <input type="text" name="cash" id="cashPayment" ></label>
-                <label>Change: <input type="text" name="change" id="change" value="change"></label>
-                <label>Difference: <%=difference%></label>
-                <%}%>
+                    <button style="position:absolute;left:500px;" name="submit" value="Card">Card</button>
+                    <%if (sale.getPayment() != null) {%>
+                    <label>Card Number: <input type="text" name="cardNumber" id="cardNumber" ></label>
+                    <label>Card Type: <input type="radio" name="Debit" id="cardType" value="Debit"></label>
+                    <input type="radio" name="Credit" id="cardType" value="Credit">
+                    <input type="radio" name="Cheque" id="cardType"value="Cheque">
+                    <%}%>
+                    <button style="position:absolute;left:0px;" name="submit" value="Checkout">Proceed to
+                        checkout</button><br><br><br><br>
+                        <%String responseMessage = (String) request.getAttribute("responseMessage");%>
+                    <a href="../java/za/co/carols_boutique_pos/employee_servlet/EmployeeServlet.java"></a>
+                    <label><%=responseMessage%></label>
+            </div>
 
+        </form>
 
-                <button style="position:absolute;left:500px;" name="submit" value="Card">Card</button>
-                <%if (sale.getPayment() != null) {%>
-                <label>Card Number: <input type="text" name="cardNumber" id="cardNumber" ></label>
-                <label>Card Type: <input type="radio" name="Debit" id="cardType" value="Debit"></label>
-                <input type="radio" name="Credit" id="cardType" value="Credit">
-                <input type="radio" name="Cheque" id="cardType"value="Cheque">
-                <%}%>
-                <button style="position:absolute;left:0px;" name="submit" value="Checkout">Proceed to
-                    checkout</button><br><br><br><br>
-                    <%String responseMessage = (String) request.getAttribute("responseMessage");%>
-                <a href="../java/za/co/carols_boutique_pos/employee_servlet/EmployeeServlet.java"></a>
-                <label><%=responseMessage%></label>>
-        </div>
-        <%}%>
-    </form>
-
-</body>
+    </body>
 </html>

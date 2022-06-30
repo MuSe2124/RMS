@@ -48,40 +48,57 @@ public class ProductServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+		HttpSession session = request.getSession();
         switch (request.getParameter("submit")) {
-            case "newSale":
-                HttpSession session = request.getSession();
-                Sale sale = new Sale();
-                String productID = request.getParameter("prodID");
-                
-                String[]arr = productID.split(" ");
-                Product prod = pr.getProduct(arr[0], arr[1]);
-                if (prod != null) {
-                    
-                        Integer amount = 1;
-                        LineItem li = new LineItem(prod, amount, arr[1]);
-                        sale.getLineItems().add(li);
-                        for (int i = 0; i < sale.getLineItems().size(); i++) {
-                        if (sale.getLineItems().get(i).getProduct().getId().equals(sale.getLineItems().get(i + 1).getId())) {
-                            li.setAmount(amount++);
-                        }else{
-                            sale.getLineItems().add(new LineItem(prod, amount, arr[1]));
-                        }
-                    } 
-                }
-                Date date = new Date(System.currentTimeMillis());
-                sale.setDate(date);
-                
-                CashPayment cp = new CashPayment(Float.parseFloat(request.getParameter("Cash")));
+//            case "newSale":
+//                
+//                
+//				List<LineItem>lis = new ArrayList<>();
+//				sale.setLineItems(lis);
+//                session.setAttribute("sale", sale);
+//				String message = "message";
+//				request.setAttribute("message", message);
+//				request.getRequestDispatcher("createSale.jsp").forward(request, response);
+//                break;
+			case "scan":
+				Sale sale = new Sale();
+				CashPayment cp = new CashPayment(Float.parseFloat(request.getParameter("Cash")));
                 CardPayment crdP = new CardPayment(request.getParameter("cardNumber"), request.getParameter("cardType"));
                 if (cp != null) {
                     sale.setPayment(cp);
                 }else if(crdP != null){
                     sale.setPayment(crdP);
                 }
-                session.setAttribute("sale", sale);
-                request.getRequestDispatcher("createSale.jsp").forward(request, response);
-                break;
+				List<LineItem>lis = new ArrayList<>();
+				Date date = new Date(System.currentTimeMillis());
+                sale.setDate(date);
+				session.setAttribute("sale", sale);
+				String productID = request.getParameter("prodID");
+                String[]arr = productID.split(" ");
+                Product prod = pr.getProduct(arr[0], arr[1]);
+				
+                if (prod != null) {
+						Boolean found =	false;
+						if (found) {
+							for (int i = 0; i < sale.getLineItems().size(); i++) {
+							if(sale.getLineItems().get(i).getProduct().getId().equals(productID)){
+								LineItem lI = sale.getLineItems().get(i);
+								int currentAmount = lI.getAmount();
+								currentAmount++;
+								lI.setAmount(currentAmount);
+								found = true;
+							}
+						if(found){
+							sale.getLineItems().add(new LineItem(sale.getLineItems().get(i).getProduct(), sale.getLineItems().get(i).getAmount(), sale.getLineItems().get(i).getSize()));
+						}	
+                    }
+						}
+                }
+                
+                
+                
+                request.getRequestDispatcher("lineitemspage").forward(request, response);
+				break;
             case "receiptID":
                 Sale sale1 = ss.getSale(request.getParameter("ReceiptID"));
                 if (sale1 != null) {

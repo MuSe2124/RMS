@@ -13,106 +13,103 @@ import java.util.logging.Logger;
 import za.co.carols_boutique.models.Employee;
 import za.co.carols_boutique_pos.service.EmployeeS;
 
-
 /**
  *
  * @author Jomar
  */
-public class RestEmployee implements EmployeeS{
+public class RestEmployee implements EmployeeS {
 
 	private Client client;
 	private String uri;
 
-	public RestEmployee(){
+	public RestEmployee() {
 		client = ClientBuilder.newClient();
 		uri = "http://localhost:8080/Carols_Boutique_API/pos/employee/";
 	}
-        
-        
-        
+
 	@Override
 	public Employee login(Employee employee) {
-		String url = uri+"login";
+		String url = uri + "login";
 
-        WebTarget webTarget = client.target(url);
-        Response response = null;
-       
+		WebTarget webTarget = client.target(url);
+		Response response = null;
+
 		try {
 			response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(Stringify(employee)));
-		} catch (JsonProcessingException ex) { 
+		} catch (JsonProcessingException ex) {
 			Logger.getLogger(RestEmployee.class.getName()).log(Level.SEVERE, null, ex);
 		}
-            
-        return response.readEntity(Employee.class);
+
+		return response.readEntity(Employee.class);
 	}
 
 	@Override
 	public String register(Employee employee) {
-	
-		String url = uri+"register";
 
-        WebTarget webTarget = client.target(url);
-        Response response = null;
-       
+		String url = uri + "register";
+
+		WebTarget webTarget = client.target(url);
+		Response response = null;
+
 		try {
 			response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(Stringify(employee)));
 		} catch (JsonProcessingException ex) {
 			Logger.getLogger(RestEmployee.class.getName()).log(Level.SEVERE, null, ex);
 		}
-            
-        return response.readEntity(String.class);
+
+		return response.readEntity(String.class);
 	}
 
 	@Override
 	public String promoteToManager(String employeeID) {
-		String url = uri+"promoteToManager";
+		String url = uri + "promoteToManager";
 
-        WebTarget webTarget = client.target(url);
-        Response response = null;
-       
+		WebTarget webTarget = client.target(url);
+		Response response = null;
+
 		try {
 			response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(Stringify(employeeID)));
 		} catch (JsonProcessingException ex) {
 			Logger.getLogger(RestEmployee.class.getName()).log(Level.SEVERE, null, ex);
 		}
-            
-        return response.readEntity(String.class);
+
+		return response.readEntity(String.class);
 	}
 
 	@Override
 	public String updateEmployee(Employee employee) {
-		String url = uri+"updateEmployee";
+		String url = uri + "updateEmployee";
 
-        WebTarget webTarget = client.target(url);
-        Response response = null;
-       
+		WebTarget webTarget = client.target(url);
+		Response response = null;
+
 		try {
 			response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(Stringify(employee)));
 		} catch (JsonProcessingException ex) {
 			Logger.getLogger(RestEmployee.class.getName()).log(Level.SEVERE, null, ex);
 		}
-            
-        return response.readEntity(String.class);
+
+		return response.readEntity(String.class);
 	}
 
 	@Override
 	public String deleteEmployee(String employeeID) {
-		String url = uri+"deleteEmployee";
+		String url = uri + "deleteEmployee";
 
-        WebTarget webTarget = client.target(url);
-        Response response = null;
-       
+		WebTarget webTarget = client.target(url);
+		Response response = null;
+
 		try {
 			response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(Stringify(employeeID)));
 		} catch (JsonProcessingException ex) {
 			Logger.getLogger(RestEmployee.class.getName()).log(Level.SEVERE, null, ex);
 		}
-            
-        return response.readEntity(String.class);
+
+		return response.readEntity(String.class);
 	}
-	
-	private String Stringify(Object o) throws JsonProcessingException{   
-        return new ObjectMapper().writeValueAsString(o);
-    }
-	
+
+	private String Stringify(Object o) throws JsonProcessingException {
+		return new ObjectMapper().writeValueAsString(o);
+	}
+
 }

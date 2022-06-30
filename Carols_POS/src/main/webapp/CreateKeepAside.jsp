@@ -217,12 +217,12 @@
 			<a href ="RequestIBT.jsp" id="ibtrequestb" class="b" name="button" value="IBT Requests page"
 			   >Request IBT</a>
 		</div>
-		
-			<label id="copyright">Carols Boutique pty.Ltd.<br>Reg.131 482 9132</label>
-			<div class="mid" id="ckapage">
-				
-                         <form action="StoreServlet" method="post">
-                            <h2 style="font-size:30px;">Create keep aside</h2>
+
+		<label id="copyright">Carols Boutique pty.Ltd.<br>Reg.131 482 9132</label>
+		<div class="mid" id="ckapage">
+
+			<form action="StoreServlet" method="post">
+				<h2 style="font-size:30px;">Create keep aside</h2>
 				<label>ProductID:</label>
 				<br>
 				<br>
@@ -262,23 +262,23 @@
 				<% }%>
 
 				<button type="submit" id="createkeepaside" class="ckab" name="submit" value="keepAside">Create keep aside</button>
-                            </form>
-                        </div>
-	<script>
-		function openCity(evt, cityName) {
-			var i, tabcontent, tablinks;
-			tabcontent = document.getElementsByClassName("sideside");
-			for (i = 0; i < tabcontent.length; i++) {
-				tabcontent[i].style.display = "none";
+			</form>
+		</div>
+		<script>
+			function openCity(evt, cityName) {
+				var i, tabcontent, tablinks;
+				tabcontent = document.getElementsByClassName("sideside");
+				for (i = 0; i < tabcontent.length; i++) {
+					tabcontent[i].style.display = "none";
+				}
+				tablinks = document.getElementsByClassName("c");
+				for (i = 0; i < tablinks.length; i++) {
+					tablinks[i].className = tablinks[i].className.replace(" active", "");
+				}
+				document.getElementById(cityName).style.display = "block";
+				evt.currentTarget.className += " active";
 			}
-			tablinks = document.getElementsByClassName("c");
-			for (i = 0; i < tablinks.length; i++) {
-				tablinks[i].className = tablinks[i].className.replace(" active", "");
-			}
-			document.getElementById(cityName).style.display = "block";
-			evt.currentTarget.className += " active";
-		}
-	</script>    
-</body>
+		</script>    
+	</body>
 
 </html>

@@ -91,7 +91,7 @@ public class ProductServlet extends HttpServlet {
                     }
                     
                     LineItem preLineItem = new LineItem(returnProd, Integer.parseInt(request.getParameter("returnAmount")), arr1[1]);
-                    Exchange exchange = new Exchange(sale1, preLineItem, postLineItem);
+//                    Exchange exchange = new Exchange(sale1, preLineItem, postLineItem);
                 }
                 break;
         }

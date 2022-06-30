@@ -83,10 +83,15 @@ public class ProductServlet extends HttpServlet {
                 Sale sale1 = ss.getSale(request.getParameter("ReceiptID"));
                 if (sale1 != null) {
                     String[] arr1 = request.getParameter("returnProductID").split(" ");
+                    Product returnProd = null;
+                    for (int i = 0; i < 10; i++) {
+                        if (sale1.getLineItems().get(i).getProduct().getId().equals(arr1[1]+arr1[2])) {
+                            returnProd = sale1.getLineItems().get(i).getProduct();
+                        }
+                    }
                     
-                    Product returnProd = sale1.getLineItems().get(0);
-                    LineItem preLineItem = new LineItem(prod, Integer.SIZE, productID);
-                    Exchange exchange = new Exchange(sale, preLineItem, postLineItem);
+                    LineItem preLineItem = new LineItem(returnProd, Integer.parseInt(request.getParameter("returnAmount")), arr1[1]);
+                    Exchange exchange = new Exchange(sale1, preLineItem, postLineItem);
                 }
                 break;
         }

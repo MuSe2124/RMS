@@ -42,6 +42,15 @@ public class Store implements Serializable {
 	public Store() {
 	}
 
+	public Float getTarget() {
+		return target;
+	}
+
+	public void setTarget(Float target) {
+		this.target = target;
+	}
+
+	
 	public String getPassword() {
 		return password;
 	}

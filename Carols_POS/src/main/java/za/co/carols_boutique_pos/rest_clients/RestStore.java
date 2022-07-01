@@ -47,7 +47,7 @@ public class RestStore implements StoreS {
             Logger.getLogger(RestStore.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return store;
+        return newStore;
     }
 
     @Override

@@ -33,15 +33,14 @@ public class RestEmployee implements EmployeeS {
 
 		WebTarget webTarget = client.target(url);
 		Response response = null;
-        response = webTarget.request(MediaType.APPLICATION_JSON).get(Response.class);
-		Employee newEmployee = null;
-        try {
-            newEmployee = new ObjectMapper().readValue(response.readEntity(String.class),Employee.class);
-        } catch (JsonProcessingException ex) {
-            Logger.getLogger(RestStore.class.getName()).log(Level.SEVERE, null, ex);
-        }
 
-        return newEmployee;
+		try {
+			response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(Stringify(employee)));
+		} catch (JsonProcessingException ex) {
+			Logger.getLogger(RestEmployee.class.getName()).log(Level.SEVERE, null, ex);
+		}
+
+		return response.readEntity(Employee.class);
 	}
 
 	@Override

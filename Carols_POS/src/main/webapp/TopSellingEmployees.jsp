@@ -293,11 +293,12 @@
         
     <label id="copyright">Carols Boutique pty.Ltd.<br>Reg.131 482 9132</label>
     
-    <script>
+   <script>
         
-        var xValues =<%=xval%>;
-        var yValues = <%=yval%>;
-        var barColors = <%=colors%>;
+        var xValues =[];
+        var yValues =[];
+        var barColors =[];
+        
         function openCity(evt, cityName) {
             var i, tabcontent, tablinks;
             tabcontent = document.getElementsByClassName("sideside");
@@ -311,23 +312,21 @@
             document.getElementById(cityName).style.display = "block";
             evt.currentTarget.className += " active";
         }
-        new Chart("pieChart", {
-            type: "pie",
-            data: {
-                labels: xValues,
-                datasets: [{
-                    backgroundColor: barColors,
-                    data: yValues
-                }]
-            },
-            options: {
-                title: {
-                    display: true,
-                    text: "Top Selling Employees"
-                }
-            }
-        });
-        new Chart("barChart", {
+        
+        
+        function displaybarchart(){
+            <%for(String xrow:xval){%>
+            xValues.push(<%=xrow%>);
+            <%}%>
+            
+            <%for(Float ycol:yval){%>
+            yValues.push(<%=""+ycol%>);
+            <%}%>
+            
+            <%for(String col:colors){%>
+            barColors.push(<%=col%>);
+            <%}%>
+            new Chart("barChart", {
             type: "bar",
             data: {
 
@@ -345,16 +344,34 @@
                 }
             }
         });
-        function displaybarchart(){
-            document.getElementById("barchart").style.display = "block";
-            document.getElementById("piegraph").style.display = "none";
+            document.getElementById("barChart").style.display = "block";
+            document.getElementById("pieChart").style.display = "none";
         }
         function displaypiechart(){
-            document.getElementById("barchart").style.display = "none";
-            document.getElementById("piegraph").style.display = "block";
+            xValues =<%=xval%>;
+            yValues = <%=yval%>;
+            barColors = <%=colors%>;
+            new Chart("pieChart", {
+            type: "pie",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                    data: yValues
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: "Top Selling Employees"
+                }
+            }
+        });
+            document.getElementById("barChart").style.display = "none";
+            document.getElementById("pieChart").style.display = "block";
         }
-        document.getElementById("piechart").style.display = "none";
-        document.getElementById("barchart").style.display = "none";
+        document.getElementById("pieChart").style.display = "none";
+        document.getElementById("barChart").style.display = "none";
         
     </script>
     </body>

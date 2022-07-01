@@ -35,7 +35,7 @@
             font-style: italic;
             font-weight: bolder;
             letter-spacing: 6px;
-            text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+            text-shadow: 0 0 30px white, 0 0 30px white, 0 0 30px white, 0 0 30px white, 0 0 30px white, 0 0 30px white, 0 0 30px white, 0 0 30px white, 0 0 30px white, 0 0 30px white;
             text-align: center;
             color: #a3881d;
             padding: 20px;
@@ -171,6 +171,9 @@
         <%Employee emp=(Employee)session.getAttribute("employee");%>
     <div id="side">
         <%if(emp.getIsManager()==true){%>
+        <form action="" method=get>
+        <button class="c" id="logout" name="button">Log out</button>
+        </form>
         <button class="c" id="keepaside" name="button" onclick="openCity(event, 'Keepasidebar')">keep aside</button>
         <button class="c" id="viewreport" name="button" onclick="openCity(event, 'Reportbar')">view report </button>
         <button class="c" id="registerstore" name="button" onclick="openCity(event, 'storebar')">Store</button>
@@ -250,6 +253,10 @@
         
         <%if(responseMessage != null){%>
         <h1><%= responseMessage %></h1>
+        <%}%>
+        
+        <%if(emp!=null){%>
+        <h1>welcome <%=emp.getName()+" "+emp.getSurname()%></h1>
         <%}%>
         
     <label id="copyright">Carols Boutique pty.Ltd.<br>Reg.131 482 9132</label>

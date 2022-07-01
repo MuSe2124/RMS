@@ -280,9 +280,10 @@
         
     <label id="copyright">Carols Boutique pty.Ltd.<br>Reg.131 482 9132</label>
     <script>
-        var xValues =<%=x%>;
-        var yValues = <%=y%>;
-        var barColors = <%=colors%>;
+        
+        var xValues =[];
+        var yValues =[];
+        var barColors =[];
         function openCity(evt, cityName) {
             var i, tabcontent, tablinks;
             tabcontent = document.getElementsByClassName("sideside");
@@ -296,23 +297,21 @@
             document.getElementById(cityName).style.display = "block";
             evt.currentTarget.className += " active";
         }
-        new Chart("pieChart", {
-            type: "pie",
-            data: {
-                labels: xValues,
-                datasets: [{
-                    backgroundColor: barColors,
-                    data: yValues
-                }]
-            },
-            options: {
-                title: {
-                    display: true,
-                    text: "Sales Daily"
-                }
-            }
-        });
-        new Chart("barChart", {
+        
+        
+        function displaybarchart(){
+            <%for(String xrow:x){%>
+            xValues.push(<%=xrow%>);
+            <%}%>
+            
+            <%for(float ycol:y){%>
+            yValues.push(<%=""+ycol%>);
+            <%}%>
+            
+            <%for(String col:colors){%>
+            barColors.push(<%=col%>);
+            <%}%>
+            new Chart("barChart", {
             type: "bar",
             data: {
 
@@ -330,16 +329,42 @@
                 }
             }
         });
-        function displaybarchart(){
-            document.getElementById("barchart").style.display = "block";
-            document.getElementById("piegraph").style.display = "none";
+            document.getElementById("barChart").style.display = "block";
+            document.getElementById("pieChart").style.display = "none";
         }
         function displaypiechart(){
-            document.getElementById("barchart").style.display = "none";
-            document.getElementById("piegraph").style.display = "block";
+            <%for(String xrow:x){%>
+            xValues.push(<%=xrow%>);
+            <%}%>
+            
+            <%for(float ycol:y){%>
+            yValues.push(<%=""+ycol%>);
+            <%}%>
+            
+            <%for(String col:colors){%>
+            barColors.push(<%=col%>);
+            <%}%>
+            new Chart("pieChart", {
+            type: "pie",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                    data: yValues
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: "Daily Sales"
+                }
+            }
+        });
+            document.getElementById("barChart").style.display = "none";
+            document.getElementById("pieChart").style.display = "block";
         }
-        document.getElementById("piechart").style.display = "none";
-        document.getElementById("barchart").style.display = "none";
+        document.getElementById("pieChart").style.display = "none";
+        document.getElementById("barChart").style.display = "none";
         
     </script>
 </body>

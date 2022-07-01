@@ -320,6 +320,17 @@
         
         
         function displaybarchart(){
+            <%for(String xrow:xval){%>
+            xValues.push(<%=xrow%>);
+            <%}%>
+            
+            <%for(float ycol:yval){%>
+            yValues.push(<%=""+ycol%>);
+            <%}%>
+            
+            <%for(String col:colors){%>
+            barColors.push(<%=col%>);
+            <%}%>
             new Chart("barChart", {
             type: "bar",
             data: {
@@ -342,9 +353,17 @@
             document.getElementById("pieChart").style.display = "none";
         }
         function displaypiechart(){
-            xValues =<%=xval%>;
-            yValues = <%=yval%>;
-            barColors = <%=colors%>;
+            <%for(String xrow:xval){%>
+            xValues.push(<%=xrow%>);
+            <%}%>
+            
+            <%for(float ycol:yval){%>
+            yValues.push(<%=""+ycol%>);
+            <%}%>
+            
+            <%for(String col:colors){%>
+            barColors.push(<%=col%>);
+            <%}%>
             new Chart("pieChart", {
             type: "pie",
             data: {

@@ -29,8 +29,8 @@ private RestReport rr;
         rr = new RestReport();
         switch(request.getParameter("button")){
             case"acheivedtargetbutton":
-                rep=rr.viewStoresThatAchievedTarget(request.getParameter("acheivedtargetmonth"));
-                request.setAttribute("LeastTopStoreReport",rep);
+                rep=rr.viewStoresThatAchievedTarget(request.getParameter("AcheivedTargetMonth"));
+                request.setAttribute("acheivedtargetReport",rep);
                 request.getRequestDispatcher("AcheivedTarget.jsp").forward(request,response);
                 break;
             case"LeastTopStorebutton":

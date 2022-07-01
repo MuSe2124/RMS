@@ -29,7 +29,7 @@ public class CardPayment implements Payment, Serializable {
 	}
 
 	@Override
-	public boolean verify(Float price) {
+	public boolean verifyCash(Float price) {
 		if (price < 10000) {
 			return true;
 		} else {
@@ -40,4 +40,13 @@ public class CardPayment implements Payment, Serializable {
 		}
 		return true;
 	}
+
+    @Override
+    public boolean verifyCard(String cardNumber) {
+        if (cardNumber.length() < 12 || cardNumber.length() > 12) {
+            return false;
+        }else{
+            return true;
+        }
+    }
 }

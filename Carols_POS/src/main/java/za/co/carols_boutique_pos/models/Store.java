@@ -37,8 +37,6 @@ public class Store implements Serializable {
 		this.password = password;
 	}
 	
-	
-
 	public Store() {
 	}
 

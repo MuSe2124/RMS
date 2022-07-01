@@ -14,6 +14,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import za.co.carols_boutique_pos.models.Report;
 import za.co.carols_boutique_pos.models.Sale;
 import za.co.carols_boutique_pos.models.Store;
 import za.co.carols_boutique_pos.service.StoreS;
@@ -37,15 +38,16 @@ public class RestStore implements StoreS {
     public Store loginStore(Store store) {
 		String url = uri+"loginStore";
         WebTarget webTarget = client.target(url);
-        Response response = null;
-
+		Response response = null;
+        response = webTarget.request(MediaType.APPLICATION_JSON).get(Response.class);
+		Store newStore = null;
         try {
-            response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(Stringify(store)));
+            newStore = new ObjectMapper().readValue(response.readEntity(String.class),Store.class);
         } catch (JsonProcessingException ex) {
             Logger.getLogger(RestStore.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return response.readEntity(Store.class);
+        return store;
     }
 
     @Override

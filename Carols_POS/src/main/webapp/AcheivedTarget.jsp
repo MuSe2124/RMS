@@ -251,11 +251,25 @@
         <%Report report = (Report)request.getAttribute("acheivedtargetReport");%>    
     <div id="acheivedtargetpage" class="mid">
         <h1>Achieved Target</h1><br>
-        <label>Enter Date</label><br>
-        <input type ="text" class="bars" name ="acheivedtargetmonth"><br><br>
+        <label>Enter Date
+        <input type="text" class="bars" List="monthList" name="AcheivedTargetMonth"></label>
+        <datalist  id ="monthList"><br><br>
+            <option value="January">
+            <option value="February">
+            <option value="March">
+            <option value="April">
+            <option value="May">
+            <option value="June">
+            <option value="July">
+            <option value="August">
+            <option value="September">
+            <option value="October">    
+            <option value ="November">
+            <option value="December">
+        </datalist>
         <button type="submit" name="button" value="acheivedtargetbutton">Get Results</button><br><br>
         
-        <%if(report!=null){%>
+        <%if(report!=null&&report.getStoreSales().size()!=0){%>
         <h2>Table of achieved target <%=report.getStoreSales()%></h2><br>
         <table style="width:100%">
             <tr>

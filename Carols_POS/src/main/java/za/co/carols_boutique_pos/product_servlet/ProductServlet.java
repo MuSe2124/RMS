@@ -53,9 +53,11 @@ public class ProductServlet extends HttpServlet {
         switch (request.getParameter("submit")) {
             case "newSale":
                 Sale sale2 = new Sale();
-                request.getSession().setAttribute("sale", sale2);
+                if (sale2 != null) {
+                    request.getSession().setAttribute("sale", sale2);
+                    request.getRequestDispatcher("createSale.jsp").forward(request, response);  
+                }
                 
-                request.getRequestDispatcher("createSale.jsp").forward(request, response);
                 break;
             case "Enter":
                 Sale sale = (Sale) request.getSession().getAttribute("sale");
@@ -93,6 +95,31 @@ public class ProductServlet extends HttpServlet {
                     sale.setPayment(crdP);
                 }
                 request.getRequestDispatcher("createSale.jsp").forward(request, response);
+                break;
+            case "Cash":
+                    Payment cashPayment = new CashPayment(Float.parseFloat(request.getParameter("cashPayment")));
+                if (cashPayment != null) {
+                    request.setAttribute("cashPayment", cashPayment);
+                request.getRequestDispatcher("createSale.jsp").forward(request, response);
+                }
+                
+                break;
+            case "Card":
+                Payment cardPayment = new CardPayment(request.getParameter("cardNumber"), request.getParameter("cardType"));
+                boolean b = cardPayment.verifyCard(request.getParameter("cardNumber"));
+                String cardResponse;
+                if (b == false) {
+                    cardResponse = "Incorrect card number";
+                    request.setAttribute("cardResponse", cardResponse);
+                    request.getRequestDispatcher("createSale.jsp").forward(request, response);
+                }
+                if (cardPayment != null) {
+                    request.setAttribute("cardPayment", cardPayment);
+                    request.getRequestDispatcher("createSale.jsp").forward(request, response);
+                }
+                break;
+            case "Email":
+                String email = request.getParameter("email");
                 break;
             case "receiptID":
                 Sale sale1 = ss.getSale(request.getParameter("ReceiptID"));

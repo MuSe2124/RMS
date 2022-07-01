@@ -253,7 +253,7 @@
 
         <label id="copyright">Carols Boutique pty.Ltd.<br>Reg.131 482 9132</label>
         <div id="exchangepage" class="mid">
-            <form>
+            <form action="ProductServlet" method="get">
                 <h1>Exchange</h1><br>
                 <label>Receipt ID<label><br>
                         
@@ -317,11 +317,13 @@
                             </tr>
                         </table><br>
                         <%}%>
+                        </form>   
+                        <form action="ProductServlet" method="post">
                         <button name="submit" value="ConfirmExchange">Confirm Exchange</button>
 
-
+                        </form>
                         </div> 
-                                </form>   
+                                
                         <script>
                             function openCity(evt, cityName) {
                                 var i, tabcontent, tablinks;

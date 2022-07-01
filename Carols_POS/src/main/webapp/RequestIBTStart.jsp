@@ -4,13 +4,16 @@
     Author     : HP
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="za.co.carols_boutique_pos.models.Store_Product"%>
 <%@page import="za.co.carols_boutique.models.Employee"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Search For an item</title><style>
+        <title>Request </title><style>
 			.searchbutton {
 				width: 100px;
 				height: 40px;
@@ -231,6 +234,7 @@
 			</div>
 
 
+
 			<div id="Salebar" class="sideside">
 				<a href="Exchange.jsp" id="Exchangedb" class="b" name="button" value="Exchanged page"
 				   >Exchanged</a><br>
@@ -290,13 +294,27 @@
 			<label id="copyright">Carols Boutique pty.Ltd.<br>Reg.131 482 9132</label>
 			<div id="ibtrequestpage" class="mid">
 
+
+
 				<form action="StoreServlet" method="post">
 
-					<h1>Search For a product</h1><br>
+					<% ArrayList<Store_Product> storeProducts = (ArrayList<Store_Product>) request.getAttribute("storeProducts");  %>
+					
+					<h1>Request IBT</h1><br>
+					
+					
+					<br><br><label>Store ID</label><br>
+					<% for(Store_Product sp : storeProducts) { %>
+					<input type="radio" name="storeID" value="<%= sp.getStoreID() %>">
+					<% } %>
+					
+					<label>Amount of products</label><br>
+					<input type="text" class="bars" name="amount"><br><br>
 
-					<br><br><label>Product id</label><br>
-					<input type="text" class="bars" name="ProductID"><br><br>
-					<button type="submit" id="serachStores" class="ckab" name="submit" value="store_products">Create keep aside</button>
+					<label>Customer phone number</label><br>
+					<input type="text" class="bars" name="PhoneNumber"><br><br>
+
+					<button type="submit" id="createIBT" class="ckab" name="submit" value="ibts">Create keep aside</button>
 
 					<% String responseMessage = (String) request.getAttribute("responseMessage"); %>
 
@@ -305,6 +323,8 @@
 					<br>
 					<% }%>
 				</form>
+
+
 
 			</div>   
 			<script>

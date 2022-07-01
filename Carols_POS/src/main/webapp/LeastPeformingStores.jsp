@@ -174,9 +174,7 @@
     </head>
     <body style="background-image:url('https://lh3.googleusercontent.com/pw/AM-JKLXMO5yDb4rwt4sEQrgiQOMODT_pJfb1SL2dd8vpb9xK6qq-v0-sLTcA7ci2YTgbCEc9EH-VWq56ksYL1wsRQOFNAtSXfc6cmCOwCtpfS-Hbcj4rYphCA-b4AYxOAjboLEyfbJ4HxwYWuwhl5jRgETc=w1095-h657-no?authuser=0'); background-size:cover;">
         <label id="heading">Carol's Boutique</label>
-    <%Employee emp=(Employee)session.getAttribute("employee");%>
     <div id="side">
-        <%if(emp.getIsManager()==true){%>
         <button class="c" id="keepaside" name="button" onclick="openCity(event, 'Keepasidebar')">keep aside</button>
         <button class="c" id="viewreport" name="button" onclick="openCity(event, 'Reportbar')">view report </button>
         <button class="c" id="registerstore" name="button" onclick="openCity(event, 'storebar')">Store</button>
@@ -184,11 +182,9 @@
         <button class="c" id="ibt" name="button" onclick="openCity(event, 'IBTbar')">IBT</button>
         <button class="c" id="stock" name="button" onclick="openCity(event, 'Stockbar')">Stock</button>
         <button class="c" id="sale" name="button" onclick="openCity(event, 'Salebar')">Sale</button>
-        <%}else{%>
         <button class="c" id="keepasideemp" name="button" onclick="openCity(event, 'Keepasidebar')">keep aside</button>
         <button class="c" id="ibtemp" name="button" onclick="openCity(event, 'IBTbar')">IBT</button>
         <button class="c" id="saleemp" name="button" onclick="openCity(event, 'Salebar')">Sale</button>
-        <%}%>
     </div>
         
           

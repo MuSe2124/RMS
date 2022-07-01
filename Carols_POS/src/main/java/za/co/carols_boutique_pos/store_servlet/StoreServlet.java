@@ -18,6 +18,7 @@ import za.co.carols_boutique_pos.models.Category;
 import za.co.carols_boutique_pos.models.IBT;
 import za.co.carols_boutique_pos.models.KeepAside;
 import za.co.carols_boutique_pos.models.Store;
+import za.co.carols_boutique_pos.models.Store_Product;
 import za.co.carols_boutique_pos.rest_clients.RestProduct;
 import za.co.carols_boutique_pos.rest_clients.RestStore;
 import za.co.carols_boutique_pos.rest_clients.RestUtilities;
@@ -100,11 +101,18 @@ public class StoreServlet extends HttpServlet {
 				String res = ru.createIBT(ibt);
 				if (res == null) {
 					request.setAttribute("responseMessage", "Could not add int");
-					request.getRequestDispatcher("RequestIBT.jsp").forward(request, response);
+					request.getRequestDispatcher("RequestIBTStart.jsp").forward(request, response);
 				} else {
 					request.setAttribute("responseMessage", res);
 					request.getRequestDispatcher("Home.jsp").forward(request, response);
 				}
+				break;
+			case "store_products":
+				String productCode = request.getParameter("ProductID");
+				ArrayList<Store_Product> products = (ArrayList<Store_Product>) ru.getProdStores(productCode);
+				request.setAttribute("storeProducts", products);
+				request.getRequestDispatcher("RequestIBTStart.jsp").forward(request, response);
+				break;
 		}
 	}
 }

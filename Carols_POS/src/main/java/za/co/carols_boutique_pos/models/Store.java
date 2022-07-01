@@ -37,11 +37,18 @@ public class Store implements Serializable {
 		this.password = password;
 	}
 	
-	
-
 	public Store() {
 	}
 
+	public Float getTarget() {
+		return target;
+	}
+
+	public void setTarget(Float target) {
+		this.target = target;
+	}
+
+	
 	public String getPassword() {
 		return password;
 	}

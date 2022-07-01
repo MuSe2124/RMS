@@ -23,6 +23,7 @@ import za.co.carols_boutique_pos.models.Category;
 import za.co.carols_boutique_pos.models.ProdCat;
 import za.co.carols_boutique_pos.models.Product;
 import za.co.carols_boutique_pos.models.Refund;
+import za.co.carols_boutique_pos.models.Store;
 import za.co.carols_boutique_pos.service.ProductS;
 
 /**
@@ -44,9 +45,13 @@ public class RestProduct implements ProductS{
        String url = uri+"getProduct/"+productID+"/"+size;
 
         WebTarget webTarget = client.target(url);
-
-	Response response = webTarget.request(MediaType.APPLICATION_JSON).get(Response.class);
-		
+		Response response = webTarget.request(MediaType.APPLICATION_JSON).get(Response.class);
+		Product product = null;
+		try {
+			product = new ObjectMapper().readValue(response.readEntity(String.class),Product.class);
+		} catch (JsonProcessingException ex) {
+			Logger.getLogger(RestProduct.class.getName()).log(Level.SEVERE, null, ex);
+		}
         return response.readEntity(Product.class);
 	}
 

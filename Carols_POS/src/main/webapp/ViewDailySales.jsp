@@ -247,7 +247,7 @@
     <div id="acheivedtargetpage" class="mid">
         <h1>Daily Sales</h1><br>
         <label>Enter Store ID</label><br>
-        <input type ="text" class="bars" name ="ViewDailySalesStoreButton"><br><br>
+        <input type ="text" class="bars" name ="ViewDailySalesStoreID"><br><br>
         <button type ="submit" name="button" value="ViewDailySalesbutton">Get Results</button><br><br>
         <%if(report!=null){%>
         <h2>View Daily Sales for ??Month??</h2><br>

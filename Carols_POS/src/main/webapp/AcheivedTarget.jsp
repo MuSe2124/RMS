@@ -252,7 +252,7 @@
     <div id="acheivedtargetpage" class="mid">
         <h1>Achieved Target</h1><br>
         <label>Enter Date
-        <input type="search" class="bars" List="monthList" name="AcheivedTargetMonth"></label>
+        <input type="text" class="bars" List="monthList" name="AcheivedTargetMonth"></label>
         <datalist  id ="monthList"><br><br>
             <option value="January">
             <option value="February">

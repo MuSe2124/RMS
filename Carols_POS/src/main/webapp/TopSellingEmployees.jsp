@@ -293,11 +293,11 @@
         
     <label id="copyright">Carols Boutique pty.Ltd.<br>Reg.131 482 9132</label>
     
-    <script>
+   <script>
         
-        var xValues =<%=xval%>;
-        var yValues = <%=yval%>;
-        var barColors = <%=colors%>;
+        var xValues =[];
+        var yValues =[];
+        var barColors =[];
         function openCity(evt, cityName) {
             var i, tabcontent, tablinks;
             tabcontent = document.getElementsByClassName("sideside");
@@ -311,9 +311,13 @@
             document.getElementById(cityName).style.display = "block";
             evt.currentTarget.className += " active";
         }
-        new Chart("pieChart", {
-            type: "pie",
+        
+        
+        function displaybarchart(){
+            new Chart("barChart", {
+            type: "bar",
             data: {
+
                 labels: xValues,
                 datasets: [{
                     backgroundColor: barColors,
@@ -321,13 +325,38 @@
                 }]
             },
             options: {
+                legend: { display: false },
                 title: {
                     display: true,
-                    text: "Top Selling Employees"
+                    text: "Top Selling Stores"
                 }
             }
         });
-        new Chart("barChart", {
+            document.getElementById("barChart").style.display = "block";
+            document.getElementById("pieChart").style.display = "none";
+        }
+        <script>
+        
+        var xValues =[];
+        var yValues =[];
+        var barColors =[];
+        function openCity(evt, cityName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("sideside");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("c");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+        
+        
+        function displaybarchart(){
+            new Chart("barChart", {
             type: "bar",
             data: {
 
@@ -345,16 +374,34 @@
                 }
             }
         });
-        function displaybarchart(){
-            document.getElementById("barchart").style.display = "block";
-            document.getElementById("piegraph").style.display = "none";
+            document.getElementById("barChart").style.display = "block";
+            document.getElementById("pieChart").style.display = "none";
         }
         function displaypiechart(){
-            document.getElementById("barchart").style.display = "none";
-            document.getElementById("piegraph").style.display = "block";
+            xValues =<%=xval%>;
+            yValues = <%=yval%>;
+            barColors = <%=colors%>;
+            new Chart("pieChart", {
+            type: "pie",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                    data: yValues
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: "Top Selling Employees"
+                }
+            }
+        });
+            document.getElementById("barChart").style.display = "none";
+            document.getElementById("pieChart").style.display = "block";
         }
-        document.getElementById("piechart").style.display = "none";
-        document.getElementById("barchart").style.display = "none";
+        document.getElementById("pieChart").style.display = "none";
+        document.getElementById("barChart").style.display = "none";
         
     </script>
     </body>

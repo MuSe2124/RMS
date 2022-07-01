@@ -12,6 +12,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
+import java.time.LocalDate;
+import static java.time.LocalDate.now;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -54,18 +58,22 @@ public class ProductServlet extends HttpServlet {
             case "newSale":
                 Sale sale2 = new Sale();
                 if (sale2 != null) {
-                    request.getSession().setAttribute("sale", sale2);
+                    session.setAttribute("sale", sale2);
                     request.getRequestDispatcher("createSale.jsp").forward(request, response);  
                 }
                 
                 break;
             case "Enter":
-                Sale sale = (Sale) request.getSession().getAttribute("sale");
+                Sale sale = (Sale) session.getAttribute("sale");
                 
                 List<LineItem> lis = new ArrayList<>();
-                Date date = new Date(System.currentTimeMillis());
+				DateTimeFormatter ds = DateTimeFormatter.ISO_LOCAL_DATE;
+				
+                LocalDate date =LocalDate.parse(ds.format(now()));
+				
+				System.out.println("\n\n\n\n\n\n\n\n"+date+"\n\n\n\n\n\n\n\n\n");
                 sale.setDate(date);
-                request.getSession().setAttribute("sale", sale);
+                session.setAttribute("sale", sale);
                 String productID = request.getParameter("prodID");
                 String[] arr = productID.split(" ");
                 Product prod = pr.getProduct(arr[0], arr[1]);

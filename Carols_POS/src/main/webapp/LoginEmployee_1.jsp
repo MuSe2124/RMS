@@ -94,7 +94,7 @@ top:10px;
             <label>Employee ID number:</label><br>
             <input type="text" class="bars" id="empID" name="empID" placeholder ="253"><br><br>
             <label>Password:</label><br>
-            <input type="text" class ="bars" id="empPass" name="empPass" placeholder ="password"><br><br>
+            <input type="password" class ="bars" id="empPass" name="empPass" placeholder ="password"><br><br>
             <br>
             <input type= "submit" class="button"  id ="login" name = "submit" value ="login"><br>
             <br>

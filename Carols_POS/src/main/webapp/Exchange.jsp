@@ -262,12 +262,13 @@
                         <br><br>
                         <label></label><br><br>
                         
-                        <label style>Return ProductID</label><br>
-                        <input type="text" name="returnProductID" class="bars"><br>
-                        <input type="text" name="returnAmount" class="bars"><br>
-                        <label>Exchange ProductID</label><br>
-                        <input type="text" name="exchangeProductID" class="bars">
-                        <input type="text" name="exchangeAmount" class="bars">
+                        <br><br><label style>Return ProductID</label><br>
+                        <br><br><input type="text" name="returnProductID" id="returnProductID" class="bars"><br>
+                        <br><br><input type="text" name="returnAmount" id="returnAmount" class="bars"><br>
+                        <br><br><label>Exchange ProductID</label><br>
+                        <br><br><input type="text" name="exchangeProductID" id="exchangeProductID" class="bars">
+                        <br><br><input type="text" name="exchangeAmount" id="exchangeAmount" class="bars">
+                        <br><br><button name="submit" value="productID">Submit</button><br>
                         <br><br>
                         <%
                         Exchange exchange = (Exchange)request.getAttribute("exchange");
@@ -281,6 +282,7 @@
                                 <th>Price</th>
                                 
                             </tr>
+                            <form action="ProductServlet" method="get">
                             <%if(exchange != null){%>
                             <tr style="background-color:red">
 

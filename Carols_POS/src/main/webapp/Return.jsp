@@ -4,6 +4,7 @@
     Author     : HP
 --%>
 
+<%@page import="za.co.carols_boutique_pos.models.Product"%>
 <%@page import="za.co.carols_boutique.models.Employee"%>
 <%@page import="za.co.carols_boutique_pos.models.Sale"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -245,11 +246,21 @@
     <div id="returnpage" class="mid">
         <h1>Return</h1><br>
         <label>Receipt ID<label><br>
-                <input type="text" name="ReceiptID" class="bars"><br>
-                <button name="submit" value="searchSale">search</button><br>
+                <form action="ProductServlet" method="get">
+               <br> <input type="text" name="returnReceiptID" class="bars"><br><br>
+                <br><button name="submit" value="searchSale">search</button><br><br>
                 <%
-                Sale sale = (Sale) request.getAttribute("sale1");
+                Sale sale = (Sale) request.getAttribute("sale");
                 String saleResponse = (String) request.getAttribute("noSale");
+                
+                %>
+               <br> <input type="text" name="returnProductID" class="bars"><br><br>
+               <br> <button name="submit" value="searchProduct">search</button><br><br>
+                <%
+                Product prod = (Product)request.getAttribute("prod");
+                if (prod != null) {
+                        
+                    
                 %>
                 <br><br>
                 <label><%=saleResponse%></label><br><br>
@@ -272,13 +283,18 @@
                         <td>??item??
                         </td>
                     </tr>
+                    <%}else{
+                        String errorRep = "OOPS! Something went wrong, please try again..";
+                        %>
+                        <h1><%=errorRep%></h1>
                 </table>
                 <br><br>
-                <label>Customer's Email Adress</label><br>
+                <form action="ProductServlet" method="post">
+                <label>Customer's Email Address</label><br>
                 <input type="text" name="Email" class="bars"><br><br>
-                <button name="submit" value="removeitem">remove item</button><br>
                 <button name="submit" value="ConfirmReturn">Confirm</button>
-
+                </form>
+                </form>
     </div>   
     <script>
         function openCity(evt, cityName) {

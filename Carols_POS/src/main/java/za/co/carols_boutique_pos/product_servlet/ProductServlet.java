@@ -87,13 +87,15 @@ public class ProductServlet extends HttpServlet {
                         }
                     }
                 }
-                CashPayment cp = new CashPayment(Float.parseFloat(request.getParameter("Cash")));
-                CardPayment crdP = new CardPayment(request.getParameter("cardNumber"), request.getParameter("cardType"));
+                Payment cp = new CashPayment(Float.parseFloat(request.getParameter("Cash")));
+                Payment crdP = new CardPayment(request.getParameter("cardNumber"), request.getParameter("cardType"));
                 if (cp != null) {
                     sale.setPayment(cp);
                 } else if (crdP != null) {
                     sale.setPayment(crdP);
                 }
+                request.setAttribute("cp", cp);
+                request.setAttribute("crdP", crdP);
                 request.getRequestDispatcher("createSale.jsp").forward(request, response);
                 break;
             case "Cash":
@@ -122,7 +124,16 @@ public class ProductServlet extends HttpServlet {
                 String email = request.getParameter("email");
                 break;
             case "receiptID":
-                Sale sale1 = ss.getSale(request.getParameter("ReceiptID"));
+                Sale sale1 = new Sale();
+                if (sale1 != null) {
+                    sale1 = ss.getSale(request.getParameter("ReceiptID"));
+                    request.setAttribute("sale", sale1);
+                    request.getRequestDispatcher("Exchange.jsp").forward(request, response);
+                }
+                
+                break;
+            case "productID":
+                sale1 =(Sale) request.getAttribute("sale");
                 if (sale1 != null) {
                     String[] arr1 = request.getParameter("returnProductID").split(" ");
                     Product returnProd = null;
@@ -139,10 +150,23 @@ public class ProductServlet extends HttpServlet {
                     Exchange exchange = new Exchange(sale1, preLineItem, postLineItem);
                     request.setAttribute("exchange", exchange);
                     request.getRequestDispatcher("Exchange.jsp").forward(request, response);
-
                 }
                 break;
+            case "searchSale":
+                
+                Sale sale3 = new Sale();
+                sale3 = ss.getSale(request.getParameter("returnReceiptID"));
+                request.setAttribute("sale", sale3);
+                request.getRequestDispatcher("Return.jsp").forward(request, response);
+                break;
+            case "searchProduct":
+                String[] arr4 = request.getParameter("returnProductID").split(" ");
+                Product prod5 = pr.getProduct(arr4[0], arr4[1]);
+                request.setAttribute("prod", prod5);
+                request.getRequestDispatcher("Return.jsp").forward(request, response);
+                break;
         }
+        
     }
 
     @Override
@@ -197,6 +221,11 @@ public class ProductServlet extends HttpServlet {
                     request.setAttribute("responseMessage", stockAdded);
                     request.getRequestDispatcher("Home.jsp").forward(request, response);
                 }
+                break;
+            case "ConfirmReturn":
+                //Email
+                request.getRequestDispatcher("Home.jsp").forward(request, response);
+                break;
 
         }
     }

@@ -337,8 +337,9 @@
                         <td><%=prod.getName()%></td>
                         <td><%=prod.getSize()%></td>
                         <td><%=sale.getLineItems().get(i).getAmount()%></td>
-                        <%Float price = prod.getPrice() * sale.getLineItems().get(i).getAmount();
-                          prod.setPrice(price);
+                        <%
+                            Float price = prod.getPrice() * sale.getLineItems().get(i).getAmount();
+                            prod.setPrice(price);
                         %>
                         <td><%=prod.getPrice()%></td>
                         <%}%>
@@ -364,28 +365,28 @@
                     <form action="ProductServlet" method="get">
                     
                     <br><br><br><label>Cash: <input type="text" name="cashPayment" id="cashPayment" ></label>
-                    <%
-                        Float cash = 0.0f;
-                        Float change = 0.0f;
-                        if (cash != 0.0f) {
-                                  cash = (Float)request.getAttribute("cashPayment");
-                                  change = cash - sale.calculateTotal();
-                            }
-                            Float total = sale.calculateTotal();
-                            if (total == null) {
-                                    total = 0.0f;
-                                }
-                       String calc = cash + " " + "-" + " " + total;
-                    %>
-                    <label><%=calc%></label>
-                    <br><br><br><label>Change: <input type="text" name="change" id="change" value="<%=change%>"></label><br><br><br>
+                    
                     <%
                       //Float change = Float.parseFloat(request.getParameter("change"));
                       //Float difference = change - Float.parseFloat(request.getParameter("Cash"));
                     %>
                     <br><br><label></label>
                     <br><br><br><button style="position:absolute;left:0px;" name="submit" value="Cash" >Cash</button>
-
+<%
+                        Float cash = 0.0f;
+                        Float change = 0.0f;
+                        if (cash != 0.0f) {
+                                 // cash = (Float)request.getAttribute("cashPayment");
+                                 // change = cash - sale.calculateTotal();
+                            }
+                            //Float total = sale.calculateTotal();
+                          //  if (total == null) {
+                          //          total = 0.0f;
+                          //      }
+                      String calc = cash + " " + "-" + " " + 0;
+                    %>
+                    <label><%=calc%></label>
+                    <br><br><br><label>Change: <input type="text" name="change" id="change" value="<%=change%>"></label><br><br><br>
                     </form>
 
 
@@ -404,8 +405,10 @@
                         <br><br><br><br><label>Customer Email: <input type="text" name="email" id="email"></label><br><br>
                         <br><br><button name="submit" value="Email">Email</button><br><br>
                     </form>
+                    <form action="ProductServlet" method="post">
                     <br><br><br><br><br><br><br><button style="position:absolute;left:0px;" name="submit" value="Checkout">Proceed to
                         checkout</button><br><br><br><br>
+                        </form>
                     <a href="../java/za/co/carols_boutique_pos/employee_servlet/EmployeeServlet.java"></a>
             </div>
 

@@ -1,178 +1,175 @@
 <%-- 
-    Document   : AcheivedTarget
-    Created on : 27 Jun 2022, 09:20:50
+    Document   : ViewKeepAsides
+    Created on : 30 Jun 2022, 20:16:22
     Author     : HP
 --%>
 
-
+<%@page import="za.co.carols_boutique.models.Employee"%>
 <%@page import="za.co.carols_boutique.models.Employee"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="za.co.carols_boutique_pos.models.KeepAside"%>
 <%@page import="java.util.List"%>
-<%@page import="za.co.carols_boutique.models.StoreSale"%>
-
-<%@page import="za.co.carols_boutique_pos.models.Report"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Achieved Target</title>
-        <style>
-            .mid {
-            text-align: center;
-            background-color: white;
-            width: 950px;
-            height: 500px;
-            position: absolute;
-            top: 80px;
-            left: 305px;
-            border-style: solid;
-            border-width: 1px;
-            border-color: grey;
-            overflow: auto;
-        }
-        #heading {
-            position: absolute;
+        <title>View Keep Asides</title><style>
+            
+            #ViewKeepAsidePage button {
+				background-color: rgb(0, 128, 117);
 
-            top: 0;
-            left: 550px;
-            font-family: Papyrus;
-            font-size: 40px;
-            font-style: italic;
-            font-weight: bolder;
-            letter-spacing: 6px;
-            text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-            text-align: center;
-            color: #a3881d;
-            padding: 20px;
-        }    
-            h1,
-        h2 {
-            font-size: 35px;
-        }
-         #acheivedtargetpage table {
+				color: white;
+
+
+				text-align: center;
+				text-decoration: none;
+				font-size: 18px;
+				height: 80px;
+				width: 250px;
+				transition-duration: all 0.1s;
+				cursor: pointer;
+
+				border-style: solid;
+				border-color: white;
+				border-width: 3px;
+				border-radius: 8px;
+			}
+
+			#ViewKeepAsidePage label {
+				font-size: 30px;
+			}
+                        #ViewKeepAsidePage table {
             font-family: arial, sans-serif;
             border-collapse: collapse;
             width: 100%;
         }
 
-        #acheivedtargetpage td,
+        #ViewKeepAsidePage td,
         th {
             border: 1px solid #dddddd;
             text-align: left;
             padding: 8px;
         }
 
-        #acheivedtargetpage tr:nth-child(even) {
+        #ViewKeepAsidePage tr:nth-child(even) {
             background-color: #dddddd;
         }
-        #acheivedtargetpage button{
-            
-            background-color: rgb(0, 128, 117);
-            color: white;
-            text-align: center;
-            text-decoration: none;
-            transition-duration: all 0.1s;
-            cursor: pointer;
-            font-size: 20px;
-            width: 300px;
-            height: 60px;
-            border-style: solid;
-            border-color: white;
-            border-width: 3px;
-            border-radius: 8px;
-        }
-        #acheivedtargetpage .bars{
-            font-size:25px;
-            width:400px;
-        }
-        #acheivedtargetpage label{
-            font-size:30px;
-        }
-        .b:hover {
-            background-color: rgb(0, 0, 80);
-        }
+			.mid {
+				text-align: center;
+				background-color: white;
+				width: 950px;
+				height: 500px;
+				position: absolute;
+				top: 80px;
+				left: 305px;
+				border-style: solid;
+				border-width: 1px;
+				border-color: grey;
+				overflow: auto;
+			}
+			#heading {
+				position: absolute;
 
-        .b.active {
-            background-color: rgb(0, 0, 128);
-        }
+				top: 0;
+				left: 550px;
+				font-family: Papyrus;
+				font-size: 40px;
+				font-style: italic;
+				font-weight: bolder;
+				letter-spacing: 6px;
+				text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+				text-align: center;
+				color: #a3881d;
+				padding: 20px;
+			}
+            h1,
+			h2 {
+				font-size: 35px;
+			}
+			.b:hover {
+				background-color: rgb(0, 0, 80);
+			}
 
-        .c:hover {
-            background-color: rgb(0, 0, 80);
-        }
+			.b.active {
+				background-color: rgb(0, 0, 128);
+			}
 
-        .c.active {
-            background-color: rgb(0, 0, 50);
-        }
+			.c:hover {
+				background-color: rgb(0, 0, 80);
+			}
 
-        .mid button:hover {
-            box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24);
-        }
-        .sideside {
-            background-color: rgb(0, 0, 50);
-            width: 100px;
-            height: 100%;
-            position: fixed;
-            top: 0px;
-            left: 120px;
-            text-align: left;
-        }
+			.c.active {
+				background-color: rgb(0, 0, 50);
+			}
 
-        .b {
-            border: none;
-            background-color: rgb(0, 0, 50);
-            color: white;
-            transition-duration: all 0.1s;
-            font-size:14px;
-            padding: 20px 10px;
-            width:80px;
-            height:40px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            cursor: pointer;
-            text-decoration: none;
-        }
+			.mid button:hover {
+				box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24);
+			}
+			.sideside {
+				background-color: rgb(0, 0, 50);
+				width: 100px;
+				height: 100%;
+				position: fixed;
+				top: 0px;
+				left: 120px;
+				text-align: left;
+			}
 
-        #copyright {
-            Position: absolute;
-            top: 600px;
-            left: 680px;
-        }
+			.b {
+				border: none;
+				background-color: rgb(0, 0, 50);
+				color: white;
+				transition-duration: all 0.1s;
+				font-size:14px;
+				padding: 20px 10px;
+				width:80px;
+				height:40px;
+				text-align: center;
+				text-decoration: none;
+				display: inline-block;
+				cursor: pointer;
+				text-decoration: none;
+			}
 
-        .c {
-            background-color: rgb(0, 0, 128);
-            border: none;
-            color: white;
+			#copyright {
+				Position: absolute;
+				top: 600px;
+				left: 680px;
+			}
 
-            text-align: left;
-            text-decoration: none;
-            font-size: 18px;
-            height: 70px;
-            width: 120px;
-            transition-duration: all 0.1s;
-            cursor: pointer;
-        }
+			.c {
+				background-color: rgb(0, 0, 128);
+				border: none;
+				color: white;
 
-        #side {
-            align: right;
+				text-align: left;
+				text-decoration: none;
+				font-size: 18px;
+				height: 70px;
+				width: 120px;
+				transition-duration: all 0.1s;
+				cursor: pointer;
+			}
 
-            height: 100%;
-            width: 120px;
-            position: fixed;
-            z-index: 1;
-            top: 0;
-            left: 0;
-            background-color: rgb(0, 0, 128);
-            overflow-x: hidden;
-            padding-top: 10px;
-        }
-        </style>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+			#side {
+				align: right;
+
+				height: 100%;
+				width: 120px;
+				position: fixed;
+				z-index: 1;
+				top: 0;
+				left: 0;
+				background-color: rgb(0, 0, 128);
+				overflow-x: hidden;
+				padding-top: 10px;
+			}
+        </style> 
     </head>
     <body style="background-image:url('https://lh3.googleusercontent.com/pw/AM-JKLXMO5yDb4rwt4sEQrgiQOMODT_pJfb1SL2dd8vpb9xK6qq-v0-sLTcA7ci2YTgbCEc9EH-VWq56ksYL1wsRQOFNAtSXfc6cmCOwCtpfS-Hbcj4rYphCA-b4AYxOAjboLEyfbJ4HxwYWuwhl5jRgETc=w1095-h657-no?authuser=0'); background-size:cover;">
         <label id="heading">Carol's Boutique</label>
-        <%Employee emp=(Employee)session.getAttribute("employee");%>
+    <%Employee emp=(Employee)session.getAttribute("employee");%>
     <div id="side">
         <%if(emp.getIsManager()==true){%>
         <button class="c" id="keepaside" name="button" onclick="openCity(event, 'Keepasidebar')">keep aside</button>
@@ -245,53 +242,38 @@
 
         <a href ="RequestIBT.jsp" id="ibtrequestb" class="b" name="button" value="IBT Requests page"
             >Request IBT</a>
-    </div>
-    
-        <form action="ReportServlet" method =get>
-        <%Report report = (Report)request.getAttribute("acheivedtargetReport");%>    
-    <div id="acheivedtargetpage" class="mid">
-        <h1>Achieved Target</h1><br>
-        <label>Enter Date
-        <input type="text" class="bars" List="monthList" name="AcheivedTargetMonth"></label>
-        <datalist  id ="monthList"><br><br>
-            <option value="January">
-            <option value="February">
-            <option value="March">
-            <option value="April">
-            <option value="May">
-            <option value="June">
-            <option value="July">
-            <option value="August">
-            <option value="September">
-            <option value="October">    
-            <option value ="November">
-            <option value="December">
-        </datalist>
-        <button type="submit" name="button" value="acheivedtargetbutton">Get Results</button><br><br>
         
-        <%if(report!=null&&report.getStoreSales().size()!=0){%>
-        <h2>Table of achieved target <%=report.getStoreSales()%></h2><br>
-        <table style="width:100%">
+    </div>
+        <form>
+        <div class ="mid" id="ViewKeepAsidePage">
+        <%List<KeepAside>keepasides=new ArrayList<>();%>
+        <h1>View Keep Aside</h1><br><br>
+        <%if(keepasides==null&&keepasides.size()==0){%>
+        <button>get table of Keep Asides</button>
+        <%}else{%>
+        <Label>Keep Aside Table</label>
+        <table>
             <tr>
-                <th>Store ID</th>
-                <th>Sale Total</th>
-                <th>Target</th>
+                <th>Keep Aside ID</th>
+                <th>Product ID</th>
+                <th>QTY</th>
+                <th>Customer Email</th>
+                
             </tr>
-            <%for(StoreSale ss:report.getStoreSales()){%>
+            <%for(KeepAside ka:keepasides){%>
             <tr>
-                <td><%=ss.getStoreID()%></td>
-                <td><%=ss.getSaleTotal()%></td>
-                <td><%=ss.getTarget()%></td>
+                <td><%=ka.getId()%></td>
+                <td><%=ka.getProductID()%></td>
+                <td><%=ka.getAmount()%></td>
+                <td><%=ka.getCustomerEmail()%></td>
             </tr>
             <%}%>
         </table>
-        <br>
-        <br>
-        <a onclick="this.href='data:text/html;charset=UTF-8,'+encodeURIComponent(document.documentElement.outerHTML)" href="reportacheivedtarget.pdf" download="reportacheivedtarget.pdf">Download Report</a></p>
         <%}%>
-    </div>    
-    </form>
-    <label id="copyright">Carols Boutique pty.Ltd.<br>Reg.131 482 9132</label>
+        </div>
+        </form>
+        <label id="copyright">Carols Boutique pty.Ltd.<br>Reg.131 482 9132</label>
+    
     <script>
         function openCity(evt, cityName) {
             var i, tabcontent, tablinks;
@@ -307,5 +289,5 @@
             evt.currentTarget.className += " active";
         }
     </script>
-    </body>
+    </body>    
 </html>

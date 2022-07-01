@@ -253,7 +253,21 @@
     <div id="reportpage" class="mid">
         <h1>Top Selling Stores</h1><br>
         <label>Enter Date</label><br>
-        <input type ="text" class="bars" name ="TopSellingStoremonth"><br><br>
+        <input type ="text" class="bars" list="monthList" name ="TopSellingStoremonth">
+        <datalist  id ="monthList">
+            <option value="January">
+            <option value="February">
+            <option value="March">
+            <option value="April">
+            <option value="May">
+            <option value="June">
+            <option value="July">
+            <option value="August">
+            <option value="September">
+            <option value="October">    
+            <option value ="November">
+            <option value="December">
+        </datalist><br><br>
         <button name="button" value="TopSellingStorebutton">Get Results</button><br><br>
         <%if(report!=null){%>
         <h2>Table of top selling stores</h2><br>
@@ -287,9 +301,9 @@
     
     <script>
         
-        var xValues =<%=xval%>;
-        var yValues = <%=yval%>;
-        var barColors = <%=colors%>;
+        var xValues =[];
+        var yValues =[];
+        var barColors =[];
         function openCity(evt, cityName) {
             var i, tabcontent, tablinks;
             tabcontent = document.getElementsByClassName("sideside");
@@ -303,23 +317,10 @@
             document.getElementById(cityName).style.display = "block";
             evt.currentTarget.className += " active";
         }
-        new Chart("pieChart", {
-            type: "pie",
-            data: {
-                labels: xValues,
-                datasets: [{
-                    backgroundColor: barColors,
-                    data: yValues
-                }]
-            },
-            options: {
-                title: {
-                    display: true,
-                    text: "Top Selling Stores"
-                }
-            }
-        });
-        new Chart("barChart", {
+        
+        
+        function displaybarchart(){
+            new Chart("barChart", {
             type: "bar",
             data: {
 
@@ -337,11 +338,29 @@
                 }
             }
         });
-        function displaybarchart(){
             document.getElementById("barChart").style.display = "block";
             document.getElementById("pieChart").style.display = "none";
         }
         function displaypiechart(){
+            xValues =<%=xval%>;
+            yValues = <%=yval%>;
+            barColors = <%=colors%>;
+            new Chart("pieChart", {
+            type: "pie",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                    data: yValues
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: "Top Selling Stores"
+                }
+            }
+        });
             document.getElementById("barChart").style.display = "none";
             document.getElementById("pieChart").style.display = "block";
         }

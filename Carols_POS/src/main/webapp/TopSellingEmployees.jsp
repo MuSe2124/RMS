@@ -247,7 +247,20 @@
     <div id="reportpage" class="mid">
         <h1>Top Selling Employees</h1><br>
         <label>Enter Date</label><br>
-        <input type ="text" class="bars" name ="TopSellingEmployeesmonth"><br><br>
+        <input type ="text" class="bars" list="monthList" name ="TopSellingEmployeesmonth"><datalist  id ="monthList">
+            <option value="January">
+            <option value="February">
+            <option value="March">
+            <option value="April">
+            <option value="May">
+            <option value="June">
+            <option value="July">
+            <option value="August">
+            <option value="September">
+            <option value="October">    
+            <option value ="November">
+            <option value="December">
+        </datalist><br><br>
         <label>Store ID</label>
         <input type ="text" class="bars" name="TopSellingEmployeesStore" ><br><br>
         <button type ="submit" name="button" value="TopSellingEmployeesbutton">Get Results</button><br><br>

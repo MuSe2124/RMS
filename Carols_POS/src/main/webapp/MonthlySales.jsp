@@ -254,7 +254,21 @@
     <div id="reportpage" class="mid">
         <h1>Monthly Sales</h1><br>
         <label>Enter Date</label><br>
-        <input type ="text" class="bars" name ="MonthlySalesMonth"><br><br>
+        <input type ="text" class="bars" list="monthList" name ="MonthlySalesMonth"><br><br>
+        <datalist  id ="monthList">
+            <option value="January">
+            <option value="February">
+            <option value="March">
+            <option value="April">
+            <option value="May">
+            <option value="June">
+            <option value="July">
+            <option value="August">
+            <option value="September">
+            <option value="October">    
+            <option value ="November">
+            <option value="December">
+        </datalist><br><br>
         <label>Enter Store</label><br>
         <input type ="text" class="bars" name ="MonthlySalesStoreID"><br><br>
         <button type="submit" name="button" value="MonthlySalesbutton">Get Results</button><br><br>

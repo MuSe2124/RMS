@@ -250,7 +250,6 @@
                 <%
                 Sale sale = (Sale) request.getAttribute("sale1");
                 String saleResponse = (String) request.getAttribute("noSale");
-                
                 %>
                 <br><br>
                 <label><%=saleResponse%></label><br><br>

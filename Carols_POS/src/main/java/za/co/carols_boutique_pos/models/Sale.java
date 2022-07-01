@@ -52,8 +52,8 @@ public class Sale implements Serializable {
 
 	}
         {
-        store = new Store();
-        employee = new Employee();
+        store = new Store("str2", "pass");
+        employee = new Employee("J", "P", "pass", "s", true);
         lineItems = new ArrayList<>();
         customerEmail = "muaadhseedat3@gmail.com";
         date = new Date(System.currentTimeMillis());

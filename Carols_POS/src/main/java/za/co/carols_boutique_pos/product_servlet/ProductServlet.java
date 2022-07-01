@@ -96,6 +96,31 @@ public class ProductServlet extends HttpServlet {
                 }
                 request.getRequestDispatcher("createSale.jsp").forward(request, response);
                 break;
+            case "Cash":
+                    Payment cashPayment = new CashPayment(Float.parseFloat(request.getParameter("cashPayment")));
+                if (cashPayment != null) {
+                    request.setAttribute("cashPayment", cashPayment);
+                request.getRequestDispatcher("createSale.jsp").forward(request, response);
+                }
+                
+                break;
+            case "Card":
+                Payment cardPayment = new CardPayment(request.getParameter("cardNumber"), request.getParameter("cardType"));
+                boolean b = cardPayment.verifyCard(request.getParameter("cardNumber"));
+                String cardResponse;
+                if (b == false) {
+                    cardResponse = "Incorrect card number";
+                    request.setAttribute("cardResponse", cardResponse);
+                    request.getRequestDispatcher("createSale.jsp").forward(request, response);
+                }
+                if (cardPayment != null) {
+                    request.setAttribute("cardPayment", cardPayment);
+                    request.getRequestDispatcher("createSale.jsp").forward(request, response);
+                }
+                break;
+            case "Email":
+                String email = request.getParameter("email");
+                break;
             case "receiptID":
                 Sale sale1 = ss.getSale(request.getParameter("ReceiptID"));
                 if (sale1 != null) {

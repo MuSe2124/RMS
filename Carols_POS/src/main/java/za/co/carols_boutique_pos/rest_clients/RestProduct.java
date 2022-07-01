@@ -52,7 +52,7 @@ public class RestProduct implements ProductS{
 		} catch (JsonProcessingException ex) {
 			Logger.getLogger(RestProduct.class.getName()).log(Level.SEVERE, null, ex);
 		}
-        return response.readEntity(Product.class);
+        return product;
 	}
 
     @Override
@@ -138,7 +138,7 @@ public class RestProduct implements ProductS{
         WebTarget webTarget = client.target(url);
         Response response = null;
 		response = webTarget.request(MediaType.APPLICATION_JSON).get(Response.class);
-		List<Category> cats = new ArrayList<Category>();
+		List<Category> cats = new ArrayList<>();
 		try {
 			cats = Arrays.asList(new ObjectMapper().readValue(response.readEntity(String.class) , Category[].class));
 		} catch (JsonProcessingException ex) {

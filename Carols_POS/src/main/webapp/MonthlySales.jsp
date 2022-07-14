@@ -306,9 +306,10 @@
         
     <label id="copyright">Carols Boutique pty.Ltd.<br>Reg.131 482 9132</label>
     <script>
-        var xValues =<%=x%>;
-        var yValues = <%=y%>;
-        var barColors = <%=colors%>;
+        
+        var xValues =[];
+        var yValues =[];
+        var barColors =[];
         function openCity(evt, cityName) {
             var i, tabcontent, tablinks;
             tabcontent = document.getElementsByClassName("sideside");
@@ -322,23 +323,10 @@
             document.getElementById(cityName).style.display = "block";
             evt.currentTarget.className += " active";
         }
-        new Chart("pieChart", {
-            type: "pie",
-            data: {
-                labels: xValues,
-                datasets: [{
-                    backgroundColor: barColors,
-                    data: yValues
-                }]
-            },
-            options: {
-                title: {
-                    display: true,
-                    text: "Monthly Sales"
-                }
-            }
-        });
-        new Chart("barChart", {
+        
+        
+        function displaybarchart(){
+            new Chart("barChart", {
             type: "bar",
             data: {
 
@@ -356,11 +344,29 @@
                 }
             }
         });
-        function displaybarchart(){
             document.getElementById("barChart").style.display = "block";
             document.getElementById("pieChart").style.display = "none";
         }
         function displaypiechart(){
+            xValues =<%=x%>;
+            yValues = <%=y%>;
+            barColors = <%=colors%>;
+            new Chart("pieChart", {
+            type: "pie",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                    data: yValues
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: "Monthly Sales"
+                }
+            }
+        });
             document.getElementById("barChart").style.display = "none";
             document.getElementById("pieChart").style.display = "block";
         }

@@ -35,7 +35,7 @@
             font-style: italic;
             font-weight: bolder;
             letter-spacing: 6px;
-            text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+            text-shadow: 0 0 30px white, 0 0 30px white, 0 0 30px white, 0 0 30px white, 0 0 30px white, 0 0 30px white, 0 0 30px white, 0 0 30px white, 0 0 30px white, 0 0 30px white;
             text-align: center;
             color: #a3881d;
             padding: 20px;
@@ -168,6 +168,12 @@
         style="background-image:url('https://lh3.googleusercontent.com/pw/AM-JKLXMO5yDb4rwt4sEQrgiQOMODT_pJfb1SL2dd8vpb9xK6qq-v0-sLTcA7ci2YTgbCEc9EH-VWq56ksYL1wsRQOFNAtSXfc6cmCOwCtpfS-Hbcj4rYphCA-b4AYxOAjboLEyfbJ4HxwYWuwhl5jRgETc=w1095-h657-no?authuser=0'); background-size:cover;">
         <label id="heading">Carol's Boutique</label>
     <div id="side">
+
+        <%if(emp.getIsManager()==true){%>
+        <form action="" method=get>
+        <button class="c" id="logout" name="button">Log out</button>
+        </form>
+
         <button class="c" id="keepaside" name="button" onclick="openCity(event, 'Keepasidebar')">keep aside</button>
         <button class="c" id="viewreport" name="button" onclick="openCity(event, 'Reportbar')">view report </button>
         <button class="c" id="registerstore" name="button" onclick="openCity(event, 'storebar')">Store</button>
@@ -244,6 +250,10 @@
     </div>
         
         
+        
+        <%if(emp!=null){%>
+        <h1>welcome <%=emp.getName()+" "+emp.getSurname()%></h1>
+        <%}%>
         
     <label id="copyright">Carols Boutique pty.Ltd.<br>Reg.131 482 9132</label>
 

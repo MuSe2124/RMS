@@ -294,52 +294,11 @@
     <label id="copyright">Carols Boutique pty.Ltd.<br>Reg.131 482 9132</label>
     
    <script>
-        
-        var xValues =[];
-        var yValues =[];
-        var barColors =[];
-        function openCity(evt, cityName) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("sideside");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
-            tablinks = document.getElementsByClassName("c");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-            document.getElementById(cityName).style.display = "block";
-            evt.currentTarget.className += " active";
-        }
-        
-        
-        function displaybarchart(){
-            new Chart("barChart", {
-            type: "bar",
-            data: {
 
-                labels: xValues,
-                datasets: [{
-                    backgroundColor: barColors,
-                    data: yValues
-                }]
-            },
-            options: {
-                legend: { display: false },
-                title: {
-                    display: true,
-                    text: "Top Selling Stores"
-                }
-            }
-        });
-            document.getElementById("barChart").style.display = "block";
-            document.getElementById("pieChart").style.display = "none";
-        }
-        <script>
-        
         var xValues =[];
         var yValues =[];
         var barColors =[];
+        
         function openCity(evt, cityName) {
             var i, tabcontent, tablinks;
             tabcontent = document.getElementsByClassName("sideside");
@@ -354,8 +313,20 @@
             evt.currentTarget.className += " active";
         }
         
-        
         function displaybarchart(){
+
+            <%for(String xrow:xval){%>
+            xValues.push(<%=xrow%>);
+            <%}%>
+            
+            <%for(Float ycol:yval){%>
+            yValues.push(<%=""+ycol%>);
+            <%}%>
+            
+            <%for(String col:colors){%>
+            barColors.push(<%=col%>);
+            <%}%>
+
             new Chart("barChart", {
             type: "bar",
             data: {

@@ -4,13 +4,16 @@
     Author     : HP
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="za.co.carols_boutique_pos.models.Store_Product"%>
 <%@page import="za.co.carols_boutique.models.Employee"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Search For an item</title><style>
+        <title>Request </title><style>
 			.searchbutton {
 				width: 100px;
 				height: 40px;
@@ -26,6 +29,19 @@
 			}
 
 			#ibtrequestpage button {
+				background-color: rgb(0, 128, 117);
+				color: white;
+				text-align: center;
+				text-decoration: none;
+				transition-duration: all 0.1s;
+				cursor: pointer;
+
+				border-style: solid;
+				border-color: white;
+				border-width: 3px;
+				border-radius: 8px;
+			}
+			#home {
 				background-color: rgb(0, 128, 117);
 				color: white;
 				text-align: center;
@@ -213,9 +229,6 @@
 			   >View daily sales page</a>
 		</div>
 		<div id="IBTbar" class="sideside">
-
-			<%Employee emp = (Employee) session.getAttribute("employee");%>
-
 			<div id="side">
 				<%if (emp.getIsManager() == true) {%>
 				<button class="c" id="keepaside" name="button" onclick="openCity(event, 'Keepasidebar')">keep aside</button>
@@ -231,6 +244,7 @@
 				<button class="c" id="saleemp" name="button" onclick="openCity(event, 'Salebar')">Sale</button>
 				<%}%>
 			</div>
+
 
 
 			<div id="Salebar" class="sideside">
@@ -292,13 +306,33 @@
 			<label id="copyright">Carols Boutique pty.Ltd.<br>Reg.131 482 9132</label>
 			<div id="ibtrequestpage" class="mid">
 
+
+
 				<form action="StoreServlet" method="post">
 
-					<h1>Search For a product</h1><br>
+					<% ArrayList<Store_Product> storeProducts = (ArrayList<Store_Product>) request.getAttribute("storeProducts");  %>
 
-					<br><br><label>Product id</label><br>
-					<input type="text" class="bars" name="ProductID"><br><br>
-					<button type="submit" id="serachStores" class="ckab" name="submit" value="store_products">Create keep aside</button>
+					<h1>Request IBT</h1><br>
+
+
+					<% if (storeProducts.size() > 0) { %>
+					<br><br><label>Store ID</label><br>
+					<% for (Store_Product sp : storeProducts) {%>
+					<input type="radio" id="storeID" name="storeID" value="<%= sp.getStoreID()%>">
+					<% } %>
+
+					<br><br>
+
+					<label>Amount of products</label><br>
+					<input type="text" class="bars" name="amount"><br><br>
+
+					<label>Customer phone number</label><br>
+					<input type="text" class="bars" name="PhoneNumber"><br><br>
+					<button type="submit" id="createIBT" class="ckab" name="submit" value="ibts">Create keep aside</button>
+					<% } else { %>
+					<h2>There are no stores with the requested product in stock.</h2>
+					<a href ="CreateProduct.jsp" id="home" class="ckab" name="button" value="Home"> Home </a><br>
+					<% } %>
 
 					<% String responseMessage = (String) request.getAttribute("responseMessage"); %>
 
@@ -307,6 +341,8 @@
 					<br>
 					<% }%>
 				</form>
+
+
 
 			</div>   
 			<script>

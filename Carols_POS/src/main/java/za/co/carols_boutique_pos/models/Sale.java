@@ -95,9 +95,9 @@ public class Sale implements Serializable {
 	}
 
 	public Float calculateTotal() {
-		Float flo = null;
+		Float flo = 0F;
 		for (LineItem lineItem : lineItems) {
-			flo += lineItem.getProduct().getPrice() * lineItem.getAmount();
+			flo += (lineItem.getProduct().getPrice() * lineItem.getAmount());
 		}
 		return flo;
 	}

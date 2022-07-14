@@ -156,6 +156,9 @@
 		<%Employee emp=(Employee)session.getAttribute("employee");%>
     <div id="side">
         <%if(emp.getIsManager()==true){%>
+        <form action="" method=get>
+        <button class="c" id="logout" name="button">Log out</button>
+        </form>
         <button class="c" id="keepaside" name="button" onclick="openCity(event, 'Keepasidebar')">keep aside</button>
         <button class="c" id="viewreport" name="button" onclick="openCity(event, 'Reportbar')">view report </button>
         <button class="c" id="registerstore" name="button" onclick="openCity(event, 'storebar')">Store</button>
@@ -191,7 +194,9 @@
     </div>
     <div id="Keepasidebar" class="sideside">
         <a href="CreateKeepAside.jsp" id="createkeepasideb" class="b" name="button" value="createkeepasidepage"
-            >create keep aside</a>
+            >create keep aside</a><br>
+            <a href="ViewKeepAsides.jsp" id="createkeepasideb" class="b"
+            >View keep asides</a><br>
     </div>
     <div id="Stockbar" class="sideside">
         <a href ="CreateProduct.jsp" id="createproductb" class="b" name="button" value="createproduct page"
@@ -208,7 +213,7 @@
         <a href="MonthlySales.jsp" id="monthlysalesb" class="b" name="button" value="view monthly sales page"
             >view monthly sales</a><br>
         <a href ="CustomerReviewReport.jsp" id="topreviewsb" class="b" name="button" value="view top selling employees page"
-            >view top selling employees</a><br>
+            >view Customer Review</a><br>
         <a href ="AcheivedTarget.jsp"id="achievedtargetb" class="b" name="button" value="view stores that achieved target page"
             >View stores that achieved target page</a><br>
         <a href ="TopSellingEmployees.jsp" id="topsellingproductsb" class="b" name="button" value="view top selling products page"
@@ -218,73 +223,18 @@
         <a href="ProductReport.jsp" id="productsreportb" class="b" name="button" value="view product report page"
             >View product report</a><br>
         <a href="ViewDailySales.jsp" id="dailysalesb" class="b" name="button" value="view daily sales page"
-            >View daily sales page</a>
+            >View daily sales page</a><br>
         <a href="TopSellingProducts.jsp" id="topsellingproductsb" class="b" 
-            >Top Selling Products</a>    
+            >Top Selling Products</a><br>    
     </div>
     <div id="IBTbar" class="sideside">
 
-			<button class="c" id="registerstore" name="button" onclick="openCity(event, 'storebar')">Store</button>
-			<button class="c" id="updateemploye" name="button" onclick="openCity(event, 'employeebar')">Employee</button>
-			<button class="c" id="ibt" name="button" onclick="openCity(event, 'IBTbar')">IBT</button>
-			<button class="c" id="stock" name="button" onclick="openCity(event, 'Stockbar')">Stock</button>
-			<button class="c" id="sale" name="button" onclick="openCity(event, 'Salebar')">Sale</button>
-		</div>
-		<div id="Salebar" class="sideside">
-			<a href="Exchange.jsp" id="Exchangedb" class="b" name="button" value="Exchanged page"
-			   >Exchanged</a><br>
-			<a href="Return.jsp" id="Returnb" class="b" name="button" value="Return page"
-			   >Return</a><br>
-			<a href="createSale.jsp"id="LineItemsb" class="b" name="button" value="LineItems page"
-			   >Create Sale</a>
-		</div>
-		<div id="storebar" class="sideside">
-			<a href="RegisterStore.jsp" id="registerstoreb" class="b" name="button" value="registerstorepage"
-			   >register store</a>
-		</div>
-		<div id="employeebar" class="sideside">
-			<a href="RegisterEmployee.jsp" id="registeremployeeb" class="b" name="button" value="registerstorepage"
-			   >Register Employee</a><br>
-			<a href="UpdateEmployee.jsp" id="registeremployeeb" class="b" name="button" value="registerstorepage"
-			   >Update Employee</a>
-		</div>
-		<div id="Keepasidebar" class="sideside">
-			<a href="CreateKeepAside.jsp" id="createkeepasideb" class="b" name="button" value="createkeepasidepage"
-			   >create keep aside</a>
-		</div>
-		<div id="Stockbar" class="sideside">
-			<a href ="CreateProduct.jsp" id="createproductb" class="b" name="button" value="createproduct page"
-			   >create product</a><br>
-			<a href="DeleteProduct.jsp" id="deleteproductb" class="b" name="button" value="delete product page"
-			   >delete product</a><br>
-			<a href="AddToStock.jsp" id="addtostockb" class="b" name="button" value="add to stock page"
-			   >add to stock</a><br>
-			<a href ="RemoveFromStock.jsp" id="removefromstockb" class="b" name="button" value="remove from stock page"
-			   >remove from stock</a>
-		</div>
-		<div id="Reportbar" class="sideside">
-			<a href="ViewTopEmployee.jsp" id="viewtopempb" class="b" name="button" value="view top employees page"
-			   >view top employees page</a><br>
-			<a href="MonthlySales.jsp" id="monthlysalesb" class="b" name="button" value="view monthly sales page"
-			   >view monthly sales</a><br>
-			<a href ="ViewTopSellingEmployees.jsp" id="topsellingempsb" class="b" name="button" value="view top selling employees page"
-			   >view top selling employees</a><br>
-			<a href ="AcheivedTarget.jsp"id="achievedtargetb" class="b" name="button" value="view stores that achieved target page"
-			   >View stores that achieved target page</a><br>
-			<a href ="ViewTopSellingEmployees.jsp" id="topsellingproductsb" class="b" name="button" value="view top selling products page"
-			   >View top selling products</a><br>
-			<a href="LeastTopEmployees.jsp" id="leastperformingstoresb" class="b" name="button" value="view least performing stores page"
-			   >View least performing stores</a><br>
-			<a href="ProductReport.jsp" id="productsreportb" class="b" name="button" value="view product report page"
-			   >View product report</a><br>
-			<a href="ViewDailySales.jsp" id="dailysalesb" class="b" name="button" value="view daily sales page"
-			   >View daily sales page</a>
-		</div>
-		<div id="IBTbar" class="sideside">
-
-			<a href ="RequestIBT.jsp" id="ibtrequestb" class="b" name="button" value="IBT Requests page"
-			   >Request IBT</a>
-		</div>
+        <a href ="RequestIBT.jsp" id="ibtrequestb" class="b" name="button" value="IBTRequestspage"
+            >Request IBT</a><br>
+        
+        <a href ="ReceiveIBT.jsp" id="ibtReceiveb" class="b" name="button" value="IBTReceivedpage"
+            >Received IBT's</a>
+    </div>
 
 		<label id="copyright">Carols Boutique pty.Ltd.<br>Reg.131 482 9132</label>
 		<div class="mid" id="ckapage">

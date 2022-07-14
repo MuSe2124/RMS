@@ -21,7 +21,7 @@ import za.co.carols_boutique_pos.models.Store;
 import za.co.carols_boutique_pos.models.Store_Product;
 import za.co.carols_boutique_pos.rest_clients.RestProduct;
 import za.co.carols_boutique_pos.rest_clients.RestStore;
-import za.co.carols_boutique_pos.rest_clients.RestUtilities;
+import za.co.carols_boutique_pos.rest_clients.UtilitiesRest;
 
 /**
  *
@@ -32,12 +32,12 @@ public class StoreServlet extends HttpServlet {
 
 	private RestStore rs;
 	private RestProduct product;
-	private RestUtilities ru;
+	private UtilitiesRest ru;
 
 	public StoreServlet() {
 		rs = new RestStore();
 		product = new RestProduct();
-		ru = new RestUtilities();
+		ru = new UtilitiesRest();
 
 	}
 
@@ -49,7 +49,7 @@ public class StoreServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		ru = new RestUtilities();
+		ru = new UtilitiesRest();
 		switch (request.getParameter("submit")) {
 			case "login":
 				Store store = new Store(request.getParameter("Id"), request.getParameter("fname"));

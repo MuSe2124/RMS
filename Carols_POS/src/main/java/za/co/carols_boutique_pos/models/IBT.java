@@ -30,6 +30,10 @@ public class IBT implements Serializable {
 
 	public IBT() {
 	}
+
+	public void setCustomerPhone(String customerPhone) {
+		this.customerPhone = customerPhone;
+	}
 	
 	
 

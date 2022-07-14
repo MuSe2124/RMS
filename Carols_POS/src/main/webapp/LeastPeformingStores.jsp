@@ -175,6 +175,12 @@
     <body style="background-image:url('https://lh3.googleusercontent.com/pw/AM-JKLXMO5yDb4rwt4sEQrgiQOMODT_pJfb1SL2dd8vpb9xK6qq-v0-sLTcA7ci2YTgbCEc9EH-VWq56ksYL1wsRQOFNAtSXfc6cmCOwCtpfS-Hbcj4rYphCA-b4AYxOAjboLEyfbJ4HxwYWuwhl5jRgETc=w1095-h657-no?authuser=0'); background-size:cover;">
         <label id="heading">Carol's Boutique</label>
     <div id="side">
+
+        <%if(emp.getIsManager()==true){%>
+        <form action="" method=get>
+        <button class="c" id="logout" name="button">Log out</button>
+        </form>
+
         <button class="c" id="keepaside" name="button" onclick="openCity(event, 'Keepasidebar')">keep aside</button>
         <button class="c" id="viewreport" name="button" onclick="openCity(event, 'Reportbar')">view report </button>
         <button class="c" id="registerstore" name="button" onclick="openCity(event, 'storebar')">Store</button>
@@ -208,7 +214,9 @@
     </div>
     <div id="Keepasidebar" class="sideside">
         <a href="CreateKeepAside.jsp" id="createkeepasideb" class="b" name="button" value="createkeepasidepage"
-            >create keep aside</a>
+            >create keep aside</a><br>
+            <a href="ViewKeepAsides.jsp" id="createkeepasideb" class="b"
+            >View keep asides</a><br>
     </div>
     <div id="Stockbar" class="sideside">
         <a href ="CreateProduct.jsp" id="createproductb" class="b" name="button" value="createproduct page"
@@ -225,7 +233,7 @@
         <a href="MonthlySales.jsp" id="monthlysalesb" class="b" name="button" value="view monthly sales page"
             >view monthly sales</a><br>
         <a href ="CustomerReviewReport.jsp" id="topreviewsb" class="b" name="button" value="view top selling employees page"
-            >view top selling employees</a><br>
+            >view Customer Review</a><br>
         <a href ="AcheivedTarget.jsp"id="achievedtargetb" class="b" name="button" value="view stores that achieved target page"
             >View stores that achieved target page</a><br>
         <a href ="TopSellingEmployees.jsp" id="topsellingproductsb" class="b" name="button" value="view top selling products page"
@@ -235,14 +243,17 @@
         <a href="ProductReport.jsp" id="productsreportb" class="b" name="button" value="view product report page"
             >View product report</a><br>
         <a href="ViewDailySales.jsp" id="dailysalesb" class="b" name="button" value="view daily sales page"
-            >View daily sales page</a>
+            >View daily sales page</a><br>
         <a href="TopSellingProducts.jsp" id="topsellingproductsb" class="b" 
-            >Top Selling Products</a>    
+            >Top Selling Products</a><br>    
     </div>
     <div id="IBTbar" class="sideside">
 
-        <a href ="RequestIBT.jsp" id="ibtrequestb" class="b" name="button" value="IBT Requests page"
-            >Request IBT</a>
+        <a href ="RequestIBT.jsp" id="ibtrequestb" class="b" name="button" value="IBTRequestspage"
+            >Request IBT</a><br>
+        
+        <a href ="ReceiveIBT.jsp" id="ibtReceiveb" class="b" name="button" value="IBTReceivedpage"
+            >Received IBT's</a>
     </div>
     <%Report report = (Report)request.getAttribute("LeastTopStoreReport");
     List<String> x=new ArrayList<>(); List<Float> y = new ArrayList<>(); List<String> colors=new ArrayList<>();%>
@@ -289,7 +300,7 @@
         <a onclick="this.href='data:text/html;charset=UTF-8,'+encodeURIComponent(document.documentElement.outerHTML)" href="leastPerformingEmployees.pdf" download="leastPerformingEmployees.pdf">Download Report</a></p>
         <%}%>
     </div>    
-    </form
+        </form>
         
     <label id="copyright">Carols Boutique pty.Ltd.<br>Reg.131 482 9132</label>
     <script>
@@ -313,6 +324,19 @@
         
         
         function displaybarchart(){
+
+            <%for(String xrow:x){%>
+            xValues.push(<%=xrow%>);
+            <%}%>
+            
+            <%for(Float ycol:y){%>
+            yValues.push(<%=""+ycol%>);
+            <%}%>
+            
+            <%for(String col:colors){%>
+            barColors.push(<%=col%>);
+            <%}%>
+
             new Chart("barChart", {
             type: "bar",
             data: {
@@ -335,9 +359,23 @@
             document.getElementById("pieChart").style.display = "none";
         }
         function displaypiechart(){
+
             xValues =<%=x%>;
             yValues = <%=y%>;
             barColors = <%=colors%>;
+
+            <%for(String xrow:x){%>
+            xValues.push(<%=xrow%>);
+            <%}%>
+            
+            <%for(Float ycol:y){%>
+            yValues.push(<%=""+ycol%>);
+            <%}%>
+            
+            <%for(String col:colors){%>
+            barColors.push(<%=col%>);
+            <%}%>
+
             new Chart("pieChart", {
             type: "pie",
             data: {

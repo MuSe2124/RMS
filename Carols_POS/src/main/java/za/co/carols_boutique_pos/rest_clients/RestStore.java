@@ -72,17 +72,18 @@ public class RestStore implements StoreS {
 
 		String url = uri+"register";
 
-        WebTarget webTarget = client.target(url);
+		WebTarget webTarget = client.target(url);
         Response response = null;
-
-        try {
-            response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(Stringify(sale)));
-        } catch (JsonProcessingException ex) {
-            Logger.getLogger(RestEmployee.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        return response.readEntity(String.class);
-    }
+		response = webTarget.request(MediaType.APPLICATION_JSON).get(Response.class);
+		String s = null;
+		try {
+			s = new ObjectMapper().readValue(response.readEntity(String.class),String.class);
+		} catch (JsonProcessingException ex) {
+			Logger.getLogger(RestReport.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		
+        return s;
+	}
 
     @Override
     public String deleteStore(String storeID) {

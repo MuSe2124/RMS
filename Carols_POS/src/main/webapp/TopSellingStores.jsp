@@ -249,8 +249,9 @@
     </div>
     <%Report report = (Report)request.getAttribute("TopSellingStoreReport");
     List<String> xval=new ArrayList<>(); List<Float> yval = new ArrayList<>();List<String> colors=new ArrayList<>();%>
-        <form action="ReportServlet" method =get>
+        
     <div id="reportpage" class="mid">
+        <form action="ReportServlet" method =get>
         <h1>Top Selling Stores</h1><br>
         <label>Enter Date</label><br>
         <input type ="text" class="bars" list="monthList" name ="TopSellingStoremonth">
@@ -269,6 +270,7 @@
             <option value="December">
         </datalist><br><br>
         <button name="button" value="TopSellingStorebutton">Get Results</button><br><br>
+        </form>
         <%if(report!=null){%>
         <h2>Table of top selling stores</h2><br>
         <table style="width:100%">
@@ -288,14 +290,15 @@
         </table>
         <br>
         <br>
-        <button class="bars" onclick="displaybarchart()">Show bar graph</button><button onclick="displaypiechart()" class="bars">show pie chart</button>
+        <button class="bars" onclick="displaybarchart()">Show bar graph</button>
+        <button onclick="displaypiechart()" class="bars">show pie chart</button>
         <canvas id="pieChart" style="max-height:500px;max-width:500px;"></canvas><br>
         <canvas id="barChart" style="max-height:500px;max-width:500px;"></canvas>
-        <>
+        
         <a onclick="this.href='data:text/html;charset=UTF-8,'+encodeURIComponent(document.documentElement.outerHTML)" href="topSellingStoresReport.pdf" download="topSellingStoresReport.pdf">Download Report</a></p>
         <%}%>
     </div>    
-        </form>
+        
         
     <label id="copyright">Carols Boutique pty.Ltd.<br>Reg.131 482 9132</label>
     

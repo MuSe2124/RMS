@@ -213,7 +213,6 @@
 			   >View daily sales page</a>
 		</div>
 		<div id="IBTbar" class="sideside">
-			<%Employee emp = (Employee) session.getAttribute("employee");%>
 			<div id="side">
 				<%if (emp.getIsManager() == true) {%>
 				<button class="c" id="keepaside" name="button" onclick="openCity(event, 'Keepasidebar')">keep aside</button>

@@ -110,6 +110,9 @@ public class StoreServlet extends HttpServlet {
 			case "store_products":
 				String productCode = request.getParameter("ProductID");
 				ArrayList<Store_Product> products = (ArrayList<Store_Product>) ru.getProdStores(productCode);
+				System.out.println("The size of the stores arryay list is ");
+				System.out.println(products.size());
+				System.out.println("The size of the stores arryay list is ");
 				request.setAttribute("storeProducts", products);
 				request.getRequestDispatcher("RequestIBTStart.jsp").forward(request, response);
 				break;

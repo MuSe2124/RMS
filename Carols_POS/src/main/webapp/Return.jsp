@@ -249,11 +249,6 @@
                 <form action="ProductServlet" method="get">
                <br> <input type="text" name="returnReceiptID" class="bars"><br><br>
                 <br><button name="submit" value="searchSale">search</button><br><br>
-                <%
-                Sale sale = (Sale) request.getAttribute("sale");
-                String saleResponse = (String) request.getAttribute("noSale");
-                
-                %>
                <br> <input type="text" name="returnProductID" class="bars"><br><br>
                <br> <button name="submit" value="searchProduct">search</button><br><br>
                 <%
@@ -263,7 +258,7 @@
                     
                 %>
                 <br><br>
-                <label><%=saleResponse%></label><br><br>
+                <label></label><br><br>
                 <table>
                     <tr>
                         <th>ProductID</th>
@@ -273,14 +268,14 @@
                         <th>Price</th>
                     </tr>
                     <tr>
-                        <td>?ProductID?
+                        <td><%=prod.getId()%>
                         </td>
-                        <td>??item??
+                        <td><%=prod.getName()%>
                         </td>
-                        <td>??item??
+                        <td><%=prod.getSize()%>
                         </td>
-                        <td>Qty</td>
-                        <td>??item??
+                        <td></td>
+                        <td><%=prod.getPrice()%>
                         </td>
                     </tr>
                     <%}else{

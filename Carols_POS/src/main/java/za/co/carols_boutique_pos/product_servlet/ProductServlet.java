@@ -129,11 +129,7 @@ public class ProductServlet extends HttpServlet {
 			case "Card":
 				Sale sale5 = (Sale) session.getAttribute("sale");
 				Payment cardPayment = new CardPayment(request.getParameter("cardNumber"), request.getParameter("cardType"));
-				if (cardPayment != null) {
-					sale5.setPayment(cardPayment);
-				}
-				request.setAttribute("crdP", cardPayment);
-				request.getRequestDispatcher("createSale.jsp").forward(request, response);
+                                sale5.setPayment(cardPayment);
 				boolean b = cardPayment.verifyCard(request.getParameter("cardNumber"));
 				String cardResponse;
 				if (b == false) {
@@ -142,7 +138,13 @@ public class ProductServlet extends HttpServlet {
 					System.out.println("\n\n\n\n\n\n\n\nSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS\n\n\n\n\n\n\n\n\n");
 
 					request.getRequestDispatcher("createSale.jsp").forward(request, response);
-				}
+				}else{
+                                    cardResponse = "Card number accepted";
+					request.setAttribute("cardResponse", cardResponse);
+					System.out.println("\n\n\n\n\n\n\n\nSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS\n\n\n\n\n\n\n\n\n");
+
+					request.getRequestDispatcher("createSale.jsp").forward(request, response);
+                                }
 				if (cardPayment != null) {
 					request.setAttribute("cardPayment", cardPayment);
 					System.out.println("\n\n\n\n\n\n\n\nSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS\n\n\n\n\n\n\n\n\n");
@@ -155,23 +157,20 @@ public class ProductServlet extends HttpServlet {
 				break;
 			case "receiptID":
 				Sale sale1 = new Sale();
-				if (sale1 != null) {
 					sale1 = ss.getSale(request.getParameter("ReceiptID"));
-					request.setAttribute("sale", sale1);
+					session.setAttribute("sale", sale1);
 					System.out.println("\n\n\n\n\n\n\n\nSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS\n\n\n\n\n\n\n\n\n");
 
 					request.getRequestDispatcher("Exchange.jsp").forward(request, response);
-				}
-
 				break;
 			case "productID":
-				sale1 = (Sale) request.getAttribute("sale");
+				sale1 = (Sale)session.getAttribute("sale");
 				if (sale1 != null) {
 					String[] arr1 = request.getParameter("returnProductID").split(" ");
-					Product returnProd = null;
-					for (int i = 0; i < sale1.getLineItems().size(); i++) {
-						if (sale1.getLineItems().get(i).getProduct().getId().equals(arr1[1] + arr1[2])) {
-							returnProd = sale1.getLineItems().get(i).getProduct();
+					Product returnProd = new Product();
+					for(LineItem item : sale1.getLineItems()){
+						if (item.getProduct().getId().equals(arr1[0])) {
+							returnProd = item.getProduct();
 						}
 					}
 					String[] arr2 = request.getParameter("exchangeProductID").split(" ");
@@ -179,7 +178,10 @@ public class ProductServlet extends HttpServlet {
 
 					LineItem preLineItem = new LineItem(returnProd, Integer.parseInt(request.getParameter("returnAmount")), arr1[1]);
 					LineItem postLineItem = new LineItem(exchangeProd, Integer.parseInt(request.getParameter("exchangeAmount")), arr2[1]);
-					Exchange exchange = new Exchange(sale1, preLineItem, postLineItem);
+					Exchange exchange = new Exchange();
+                                        exchange.setPostLineItem(postLineItem);
+                                        exchange.setPreLineItem(preLineItem);
+                                        exchange.setSale(sale1);
 					request.setAttribute("exchange", exchange);
 					request.getRequestDispatcher("Exchange.jsp").forward(request, response);
 				}
@@ -188,7 +190,8 @@ public class ProductServlet extends HttpServlet {
 
 				Sale sale3 = new Sale();
 				sale3 = ss.getSale(request.getParameter("returnReceiptID"));
-				request.setAttribute("sale", sale3);
+                                
+				session.setAttribute("sale", sale3);
 				request.getRequestDispatcher("Return.jsp").forward(request, response);
 				break;
 			case "searchProduct":
@@ -233,6 +236,7 @@ public class ProductServlet extends HttpServlet {
 				String[] arr = request.getParameter("exchangeProductID").split(" ");
 				Product product = pr.getProduct(arr[0], arr[1]);
 				pr.removeProductFromInventory(new Stock(product.getId(), product.getName(), Integer.parseInt(request.getParameter("exchangeAmount"))));
+                                request.getRequestDispatcher("Home.jsp").forward(request, response);
 				break;
 
 			case "addToStock":

@@ -393,10 +393,13 @@
                 <form action="ProductServlet" method="get">
 
                     <br><br><label style="position:absolute;left:500px;">Card Number: <input type="text" name="cardNumber" id="cardNumber" ></label><br>
+                    <%if (request.getAttribute("cardResponse") != null){%>
                     <br><br><label style="position:absolute;left:500px;" type="color:red"><%=request.getAttribute("cardResponse")%></label><br><br>
-                    <br><br><label style="position:absolute;left:500px;">Card Type: <input type="radio" name="Debit" id="cardType" value="Debit">Debit</label><br>
-                    <br><br><label style="position:absolute;left:500px;"><input type="radio" name="Credit" id="cardType" value="Credit">Credit</label><br>
-                    <br><br><label style="position:absolute;left:500px;"><input type="radio" name="Cheque" id="cardType"value="Cheque">Cheque</label>  
+                    <%}%>
+                    <br><br><label style="position:absolute;left:500px;">Card Type:</label>
+                    <br><br><label style="position:absolute;left:500px;"><input type="radio" name="cardType" id="cardType" value="Debit">Debit</label><br>
+                    <br><br><label style="position:absolute;left:500px;"><input type="radio" name="cardType" id="cardType" value="Credit">Credit</label><br>
+                    <br><br><label style="position:absolute;left:500px;"><input type="radio" name="cardType" id="cardType"value="Cheque">Cheque</label>  
                     <br><br><br><br><br><button style="position:absolute;left:500px;" name="submit" value="Card">Card</button>
 
                 </form>

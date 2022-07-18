@@ -108,10 +108,10 @@ public class StoreServlet extends HttpServlet {
 				}
 				break;
 			case "store_products":
-				String productCode = request.getParameter("ProductID");
-				ArrayList<Store_Product> products = (ArrayList<Store_Product>) ru.getProdStores(productCode);
-				request.setAttribute("storeProducts", products);
-				request.getRequestDispatcher("RequestIBTStart.jsp").forward(request, response);
+//				String productCode = request.getParameter("ProductID");
+//				ArrayList<Store_Product> products = (ArrayList<Store_Product>) ru.getProdStores(productCode);
+//				request.setAttribute("storeProducts", products);
+//				request.getRequestDispatcher("RequestIBTStart.jsp").forward(request, response);
 				break;
 		}
 	}

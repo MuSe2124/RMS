@@ -264,12 +264,12 @@
             <form action="ProductServlet" method="get">
                 <h1>Exchange</h1><br>
                 <label>Receipt ID<label><br>
-                        
+                        <form action="ProductServlet" method="get">
                         <input type="text" name="ReceiptID" class="bars"><br>
                         <button name="submit" value="receiptID">search</button><br>
                         <br><br>
                         <label></label><br><br>
-                        
+                        </form>
                         <br><br><label style>Return ProductID</label><br>
                         <br><br><input type="text" name="returnProductID" id="returnProductID" class="bars"><br>
                         <br><br><input type="text" name="returnAmount" id="returnAmount" class="bars"><br>
@@ -281,6 +281,7 @@
                         <%
                         Exchange exchange = (Exchange)request.getAttribute("exchange");
                         %>
+                        
                         <table>
                             <tr>
                                 <th>ProductID</th>

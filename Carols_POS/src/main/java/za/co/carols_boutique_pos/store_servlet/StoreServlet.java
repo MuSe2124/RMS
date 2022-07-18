@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import za.co.carols_boutique.models.Store_Product;
 import za.co.carols_boutique_pos.models.Category;
 import za.co.carols_boutique_pos.models.IBT;
 import za.co.carols_boutique_pos.models.KeepAside;
@@ -44,19 +45,22 @@ public class StoreServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		switch (request.getParameter("submit")) {
+
+		}
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		ru = new UtilitiesRest();
+		HttpSession session = request.getSession(false);
+
 		switch (request.getParameter("submit")) {
 			case "login":
 				Store store = new Store(request.getParameter("Id"), request.getParameter("fname"));
 				Store loggedInStore = rs.loginStore(store);
 				if (loggedInStore != null) {
 					List<Category> categories = product.getCategories();
-					HttpSession session = request.getSession();
 					session.setAttribute("store", loggedInStore);
 					session.setAttribute("categories", categories);
 					request.getRequestDispatcher("LoginEmployee_1.jsp").forward(request, response);
@@ -99,6 +103,7 @@ public class StoreServlet extends HttpServlet {
 
 				IBT ibt = new IBT(request.getParameter("ProductID"), quantity, request.getParameter("PhoneNumber"), request.getParameter("size"), request.getParameter("storeID"));
 				String res = ru.createIBT(ibt);
+				System.out.println(res);
 				if (res == null) {
 					request.setAttribute("responseMessage", "Could not add int");
 					request.getRequestDispatcher("RequestIBTStart.jsp").forward(request, response);
@@ -107,21 +112,53 @@ public class StoreServlet extends HttpServlet {
 					request.getRequestDispatcher("Home.jsp").forward(request, response);
 				}
 				break;
-			case "store_products":
+//			case "store_products":
 
 //				String productCode = request.getParameter("ProductID");
 //				ArrayList<Store_Product> products = (ArrayList<Store_Product>) ru.getProdStores(productCode);
 //				request.setAttribute("storeProducts", products);
 //				request.getRequestDispatcher("RequestIBTStart.jsp").forward(request, response);
 
+//				String productCode = request.getParameter("ProductID");
+//				ArrayList<Store_Product> products = (ArrayList<Store_Product>) ru.getProdStores(productCode);
+//				System.out.println("The size of the stores arryay list is ");
+//				System.out.println(products.size());
+//				System.out.println("The size of the stores arryay list is ");
+//				request.setAttribute("storeProducts", products);
+//				request.getRequestDispatcher("RequestIBTStart.jsp").forward(request, response);
+//				break;
+
+
+//				break;
+			case "store_products":
 				String productCode = request.getParameter("ProductID");
-				ArrayList<Store_Product> products = (ArrayList<Store_Product>) ru.getProdStores(productCode);
-				System.out.println("The size of the stores arryay list is ");
-				System.out.println(products.size());
-				System.out.println("The size of the stores arryay list is ");
+				List<Store_Product> products = ru.getProdStores(productCode);
 				request.setAttribute("storeProducts", products);
 				request.getRequestDispatcher("RequestIBTStart.jsp").forward(request, response);
 				break;
+
+			case "receivedIBT":
+				Store store1 = (Store) session.getAttribute("store");
+				List<IBT> received = ru.getIBTs(store1.getId());
+				request.setAttribute("received", received);
+				request.getRequestDispatcher("ReceiveIBT.jsp").forward(request, response);
+				break;
+
+			case "ReceiveIBT":
+				System.out.println("\n\n\n\n\nssssssssssssssssssssssss\n\n\n");
+				String[] ibtIDS = request.getParameterValues("ibtcheckbox");
+				System.out.println(ibtIDS.length);
+
+				for (String g : ibtIDS) {
+					ru.acceptIBT(g);
+				}
+				request.setAttribute("responseMessage", "IBT approved");
+
+				request.getRequestDispatcher("Home.jsp").forward(request, response);
+
+				break;
+
+
 		}
 	}
 }

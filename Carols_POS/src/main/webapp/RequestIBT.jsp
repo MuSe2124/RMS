@@ -298,7 +298,7 @@
 
 					<br><br><label>Product id</label><br>
 					<input type="text" class="bars" name="ProductID"><br><br>
-					<button type="submit" id="serachStores" class="ckab" name="submit" value="store_products">Create keep aside</button>
+					<button type="submit" id="serachStores" class="ckab" name="submit" value="store_products">Create IBT</button>
 
 					<% String responseMessage = (String) request.getAttribute("responseMessage"); %>
 

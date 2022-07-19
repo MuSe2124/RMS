@@ -55,7 +55,8 @@ public class StoreServlet extends HttpServlet {
 		switch (request.getParameter("submit")) {
 			case "login":
 				Store store = new Store(request.getParameter("Id"), request.getParameter("fname"));
-				Store loggedInStore = rs.loginStore(store);
+				//Store loggedInStore = rs.loginStore(store);
+				Store loggedInStore = new Store("str2","Not Sandton", "Not Sandton", "pass", 1000f);
 				System.out.println("\n\n\n\n\n\n\n\n\nloggedInStore\n\n\n\n\n\n");
 				if (loggedInStore != null) {
 					List<Category> categories = product.getCategories();

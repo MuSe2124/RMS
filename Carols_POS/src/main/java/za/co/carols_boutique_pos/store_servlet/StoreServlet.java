@@ -57,7 +57,6 @@ public class StoreServlet extends HttpServlet {
 				Store store = new Store(request.getParameter("Id"), request.getParameter("fname"));
 				//Store loggedInStore = rs.loginStore(store);
 				Store loggedInStore = new Store("str2","Not Sandton", "Not Sandton", "pass", 1000f);
-				System.out.println("\n\n\n\n\n\n\n\n\nloggedInStore\n\n\n\n\n\n");
 				if (loggedInStore != null) {
 					List<Category> categories = product.getCategories();
 					session.setAttribute("store", loggedInStore);
@@ -68,8 +67,8 @@ public class StoreServlet extends HttpServlet {
 					request.getRequestDispatcher("LoginStore_1.jsp").forward(request, response);
 				}
 				break;
+				
 			case "register":
-
 				Store s = new Store("id", request.getParameter("name"), request.getParameter("location"), request.getParameter("password"), Float.parseFloat(request.getParameter("ftarget")));
 				String registerResponseMessage = rs.registerStore(s);
 				if (registerResponseMessage != null) {
@@ -86,7 +85,6 @@ public class StoreServlet extends HttpServlet {
 				String storeID = request.getParameter("StoreID");
 				Integer amount = Integer.parseInt(request.getParameter("amount"));
 				String customerEmail = request.getParameter("CustomerEmail");
-
 				KeepAside keepAside = new KeepAside(storeID, customerEmail, productID, amount);
 				String message = ru.createKeepAside(keepAside);
 				if (message == null) {
@@ -97,16 +95,15 @@ public class StoreServlet extends HttpServlet {
 					request.getRequestDispatcher("Home.jsp").forward(request, response);
 				}
 				break;
+				
 			case "ibts":
 				Integer quantity = Integer.parseInt(request.getParameter("amount"));
-
 				IBT ibt = new IBT();
 				ibt.setProductID((String) request.getSession(false).getAttribute("productID"));
 				ibt.setAmount(quantity);
 				ibt.setCustomerPhone(request.getParameter("PhoneNumber"));
 				ibt.setSize(request.getParameter("size"));
-				ibt.setStoreID(request.getParameter("storeID"));
-								
+				ibt.setStoreID(request.getParameter("storeID"));				
 				String res = ru.createIBT(ibt);
 				request.getSession(false).setAttribute("productID", null);
 				if (res == null) {
@@ -134,14 +131,11 @@ public class StoreServlet extends HttpServlet {
 
 			case "ReceiveIBT":
 				String[] ibtIDS = request.getParameterValues("ibtcheckbox");
-
 				for (String g : ibtIDS) {
 					ru.acceptIBT(g);
 				}
 				request.setAttribute("responseMessage", "IBT approved");
-
 				request.getRequestDispatcher("Home.jsp").forward(request, response);
-
 				break;
 
 		}

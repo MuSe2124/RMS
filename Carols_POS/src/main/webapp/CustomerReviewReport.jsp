@@ -279,15 +279,15 @@
         <h2>Table of customer reviews</h2><br>
         <table style="width:100%">
             <tr>
-                <th>Product ID</th>
-                <th>Store ID</th>
-                <th>Amount</th>
+                <th>Review ID</th>
+                <th>Comment</th>
+                <th>Rating</th>
             </tr>
             <%for(Review ss:report.getReviews()){%>
             <tr>
                 <td> <%= ss.getId() %> </td>
                 <td> <%= ss.getComment() %> </td>
-                <td><%=ss.getDate()%></td>
+                <td><%=ss.getRating()%></td>
             </tr>
             <%}%>
         </table>

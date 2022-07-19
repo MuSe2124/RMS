@@ -53,9 +53,9 @@ public class RestReport implements ReportS{
 
     @Override
     public Report getCustomerReviews(String month, Integer amount) {
-		String url = uri+"getCustomerReviews/"+month+"/"+amount;
+		String url = uri+"getCustomerReviews/"+month+"/"+amount.toString();
 
-         WebTarget webTarget = client.target(url);
+        WebTarget webTarget = client.target(url);
         Response response = null;
 		response = webTarget.request(MediaType.APPLICATION_JSON).get(Response.class);
 		Report report = null;

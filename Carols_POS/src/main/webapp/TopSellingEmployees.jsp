@@ -242,8 +242,8 @@
             >Request IBT</a>
     </div>
     <%Report report = (Report)request.getAttribute("TopSellingEmployeesReport");
-    List<String> xval=new ArrayList<>(); List<Float> yval = new ArrayList<>();List<String> colors=new ArrayList<>();%>
-        <form action="ReportServlet" method =get>
+    List<String> xval = new ArrayList<>(); List<Float> yval = new ArrayList<>(); List<String> colors = new ArrayList<>();%>
+        <form action="ReportServlet" method = get>
     <div id="reportpage" class="mid">
         <h1>Top Selling Employees</h1><br>
         <label>Enter Date</label><br>
@@ -264,7 +264,7 @@
         <label>Store ID</label>
         <input type ="text" class="bars" name="TopSellingEmployeesStore" ><br><br>
         <button type ="submit" name="button" value="TopSellingEmployeesbutton">Get Results</button><br><br>
-        <%if(report!=null&&(report.getEmpSales().size()==0)==true){%>
+        <%if(report!=null && (report.getEmpSales().size()>0)){%>
         <h2>Table of top selling employees</h2><br>
         <table style="width:100%">
             <tr>

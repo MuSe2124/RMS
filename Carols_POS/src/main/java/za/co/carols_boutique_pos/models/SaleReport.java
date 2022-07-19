@@ -13,6 +13,11 @@ public class SaleReport implements Serializable {
 		this.saleTotal = saleTotal;
 	}
 
+	public SaleReport() {
+	}
+
+	
+	
 	public String getSaleID() {
 		return saleID;
 	}

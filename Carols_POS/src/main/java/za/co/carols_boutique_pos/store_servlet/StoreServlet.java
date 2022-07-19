@@ -45,20 +45,20 @@ public class StoreServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		switch (request.getParameter("submit")) {
-
-		}
+		
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
+		HttpSession session = request.getSession();
 
 		switch (request.getParameter("submit")) {
 			case "login":
 				Store store = new Store(request.getParameter("Id"), request.getParameter("fname"));
-				Store loggedInStore = rs.loginStore(store);
+				//Store loggedInStore = rs.loginStore(store);
+				Store loggedInStore = new Store("str2","Not Sandton", "Not Sandton", "pass", 1000f);
+				System.out.println("\n\n\n\n\n\n\n\n\nloggedInStore\n\n\n\n\n\n");
 				if (loggedInStore != null) {
 					List<Category> categories = product.getCategories();
 					session.setAttribute("store", loggedInStore);
@@ -101,9 +101,15 @@ public class StoreServlet extends HttpServlet {
 			case "ibts":
 				Integer quantity = Integer.parseInt(request.getParameter("amount"));
 
-				IBT ibt = new IBT(request.getParameter("ProductID"), quantity, request.getParameter("PhoneNumber"), request.getParameter("size"), request.getParameter("storeID"));
+				IBT ibt = new IBT();
+				ibt.setProductID((String) request.getSession(false).getAttribute("productID"));
+				ibt.setAmount(quantity);
+				ibt.setCustomerPhone(request.getParameter("PhoneNumber"));
+				ibt.setSize(request.getParameter("size"));
+				ibt.setStoreID(request.getParameter("storeID"));
+								
 				String res = ru.createIBT(ibt);
-				System.out.println(res);
+				request.getSession(false).setAttribute("productID", null);
 				if (res == null) {
 					request.setAttribute("responseMessage", "Could not add int");
 					request.getRequestDispatcher("RequestIBTStart.jsp").forward(request, response);
@@ -132,6 +138,7 @@ public class StoreServlet extends HttpServlet {
 //				break;
 			case "store_products":
 				String productCode = request.getParameter("ProductID");
+				request.getSession(false).setAttribute("productID", productCode);
 				List<Store_Product> products = ru.getProdStores(productCode);
 				request.setAttribute("storeProducts", products);
 				request.getRequestDispatcher("RequestIBTStart.jsp").forward(request, response);
@@ -145,9 +152,7 @@ public class StoreServlet extends HttpServlet {
 				break;
 
 			case "ReceiveIBT":
-				System.out.println("\n\n\n\n\nssssssssssssssssssssssss\n\n\n");
 				String[] ibtIDS = request.getParameterValues("ibtcheckbox");
-				System.out.println(ibtIDS.length);
 
 				for (String g : ibtIDS) {
 					ru.acceptIBT(g);

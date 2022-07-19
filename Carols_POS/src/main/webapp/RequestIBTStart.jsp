@@ -4,6 +4,9 @@
     Author     : HP
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="za.co.carols_boutique.models.Store_Product"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="za.co.carols_boutique_pos.models.Store_Product"%>
 <%@page import="za.co.carols_boutique.models.Employee"%>
@@ -312,7 +315,7 @@
 
                 <form action="StoreServlet" method="post">
 
-                    <% ArrayList<Store_Product> storeProducts = (ArrayList<Store_Product>) request.getAttribute("storeProducts");  %>
+                    <% List<Store_Product> storeProducts = (List<Store_Product>) request.getAttribute("storeProducts");  %>
 
                     <h1>Request IBT</h1><br>
 
@@ -320,7 +323,7 @@
                     <% if (storeProducts.size() > 0) { %>
                     <br><br><label>Store ID</label><br>
                     <% for (Store_Product sp : storeProducts) {%>
-                    <input type="radio" id="storeID" name="storeID" value="<%= sp.getStoreID()%>">
+                    <input type="radio" id="storeID" name="storeID" value="<%= sp.getStoreID()%>"><%= sp.getStoreID()%></input>
                     <% } %>
 
                     <br><br>

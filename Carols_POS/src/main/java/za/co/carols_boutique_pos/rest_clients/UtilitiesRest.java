@@ -56,7 +56,7 @@ public class UtilitiesRest {
 		} catch (JsonProcessingException ex) {
 			Logger.getLogger(UtilitiesRest.class.getName()).log(Level.SEVERE, null, ex);
 		}
-		return response.readEntity(ArrayList.class);
+		return prodStores;
 	}
 
 	public String acceptIBT(String ibtID) {
@@ -83,16 +83,12 @@ public class UtilitiesRest {
 	}
 
 	public String createIBT(IBT ibt) {
-		String url = uri + "createIBT";
+		String url = uri + "createIBT/" + ibt.getProductID() + "/" + ibt.getStoreID() + "/"+ ibt.getAmount() + "/"+ ibt.getCustomerPhone() + "/" + ibt.getSize();
 
 		WebTarget webTarget = client.target(url);
 		Response response = null;
 
-		try {
-			response = webTarget.request(MediaType.APPLICATION_JSON).post(Entity.json(Stringify(ibt)));
-		} catch (JsonProcessingException ex) {
-			Logger.getLogger(RestEmployee.class.getName()).log(Level.SEVERE, null, ex);
-		}
+		response = webTarget.request(MediaType.APPLICATION_JSON).get(Response.class);
 		return response.readEntity(String.class);
 	}
 

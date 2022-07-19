@@ -4,6 +4,7 @@
     Author     : HP
 --%>
 
+<%@page import="za.co.carols_boutique_pos.models.piechart"%>
 <%@page import="za.co.carols_boutique.models.Employee"%>
 <%@page import="za.co.carols_boutique.models.StoreSale"%>
 <%@page import="za.co.carols_boutique_pos.models.StoreSales"%>
@@ -168,6 +169,123 @@
             overflow-x: hidden;
             padding-top: 10px;
         }
+        
+        
+        
+        
+        
+        
+        
+        
+        .graph {
+	       margin-bottom:1em;
+               font:normal 100%/150% arial,helvetica,sans-serif;
+            }
+
+            .graph caption {
+	        font:bold 150%/120% arial,helvetica,sans-serif;
+	        padding-bottom:0.33em;
+            }
+
+            .graph tbody th {
+	       text-align:right;
+            }
+
+
+
+		.graph {
+		    display:block;
+                    width:600px;
+                    height:300px;
+		}
+
+		.graph caption {
+			display:block;
+		}
+
+		.graph thead {
+			display:none;
+		}
+
+		.graph tbody {
+			position:relative;
+			display:grid;
+			grid-template-columns:repeat(auto-fit, minmax(2em, 1fr));
+			column-gap:2.5%;
+			align-items:end;
+			height:100%;
+			margin:3em 0 1em 2.8em;
+			padding:0 1em;
+			border-bottom:2px solid rgba(0,0,0,0.5);
+			background:repeating-linear-gradient(
+				180deg,
+				rgba(170,170,170,0.7) 0,
+				rgba(170,170,170,0.7) 1px,
+				transparent 1px,
+				transparent 20%
+			);
+		}
+
+		.graph tbody:before,
+		.graph tbody:after {
+			position:absolute;
+			left:-3.2em;
+			width:2.8em;
+			text-align:right;
+			font:bold 80%/120% arial,helvetica,sans-serif;
+		}
+
+		.graph tbody:before {
+			
+			top:-0.6em;
+		}
+
+		.graph tbody:after {
+			content:"0";
+			bottom:-0.6em;
+		}
+
+		.graph tr {
+			position:relative;
+			display:block;
+		}
+
+		
+
+		.graph th,
+		.graph td {
+			display:block;
+			text-align:center;
+		}
+
+		.graph tbody th {
+			position:absolute;
+			top:-3em;
+			left:0;
+			width:100%;
+			font-weight:normal;
+			text-align:center;
+                        white-space:nowrap;
+			text-indent:0;
+			transform:rotate(-45deg);
+		}
+
+		
+
+		.graph td {
+			width:100%;
+			height:100%;
+			background:#F63;
+			border-radius:0.5em 0.5em 0 0;
+			transition:background 0.5s;
+		}
+            #my-pie-chart {
+             border-radius: 50%;
+            }
+            #my-pie-chart {
+            height: 500px;
+            width: 500px;
+            }
         </style>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     </head>
@@ -272,7 +390,7 @@
         <button name="button" value="TopSellingStorebutton">Get Results</button><br><br>
         </form>
         <%if(report!=null){%>
-        <h2>Table of top selling stores</h2><br>
+        <h2 >table of top selling stores</h2><br>
         <table style="width:100%">
             <tr>
                 <th>Store ID</th>
@@ -290,11 +408,54 @@
         </table>
         <br>
         <br>
-        <button class="bars" onclick="displaybarchart()">Show bar graph</button>
-        <button onclick="displaypiechart()" class="bars">show pie chart</button>
-        <canvas id="pieChart" style="max-height:500px;max-width:500px;"></canvas><br>
-        <canvas id="barChart" style="max-height:500px;max-width:500px;"></canvas>
+        <button class="bars" onclick="showbar()">Show bar graph</button>
+        <button onclick="showpie()" class="bars">show pie chart</button><br>
+        <br>
+        <br>
+        <%piechart pie = new piechart(xval,yval);%>
+        <%float start =0f;%>
+        <h1 id="piechartheading">Pie Chart of top selling stores</h1>
+        <div id="my-pie-chart" style="background: conic-gradient(black 0.00%,<%for(int i =0; i<pie.getName().size();i++){%>
+             <%=pie.getColours().get(i)%>  
+             <%=start%>%  
+             <%=pie.getPercentagePosition().get(i)%>%  
+             <%start=pie.getPercentagePosition().get(i);%> 
+            <%if(i!=pie.getName().size()-1){%>
+            ,
+            <%}%>
+        <%}%>);"></div>
+        <br>
         
+        <table style="width:100px" id="tablecolors">
+            <tr style="background-color:black; color:white;border: 1px solid black">
+                <td>Names</td>
+            </tr>
+            <%for(int i =0; i<pie.getName().size();i++){%>
+            <tr style="background-color:<%=pie.getColours().get(i)%>;">
+                <td><%=pie.getName().get(i)%></td>
+            </tr>
+            <%}%>
+        </table>
+        <br>
+        
+        <table class="graph" id ="barchartgraph">
+	<caption>Bar Chart HTML From HTML Table</caption>
+	<thead>
+		<tr>
+			<th scope="col">Item</th>
+			<th scope="col">Percent</th>
+		</tr>
+	</thead><tbody >
+                <%for(int i =0; i<pie.getName().size();i++){%>
+                <tr style ="height:<%=pie.getTablePercentage().get(i)%>%">
+                <th scope="row"><%=pie.getName().get(i)%></th>
+                <td><span><%=pie.getFvalues().get(i)%></span></td>
+                </tr>
+                <%}%>
+	</tbody>
+        </table>
+        
+        <br><br><br><br><br><br><br><br><br><br><br>
         <a onclick="this.href='data:text/html;charset=UTF-8,'+encodeURIComponent(document.documentElement.outerHTML)" href="topSellingStoresReport.pdf" download="topSellingStoresReport.pdf">Download Report</a></p>
         <%}%>
     </div>    
@@ -304,9 +465,7 @@
     
     <script>
         
-        var xValues =[];
-        var yValues =[];
-        var barColors =[];
+        
         function openCity(evt, cityName) {
             var i, tabcontent, tablinks;
             tabcontent = document.getElementsByClassName("sideside");
@@ -322,72 +481,22 @@
         }
         
         
-        function displaybarchart(){
-            <%for(String xrow:xval){%>
-            xValues.push(<%=xrow%>);
-            <%}%>
-            
-            <%for(float ycol:yval){%>
-            yValues.push(<%=""+ycol%>);
-            <%}%>
-            
-            <%for(String col:colors){%>
-            barColors.push(<%=col%>);
-            <%}%>
-            new Chart("barChart", {
-            type: "bar",
-            data: {
-
-                labels: xValues,
-                datasets: [{
-                    backgroundColor: barColors,
-                    data: yValues
-                }]
-            },
-            options: {
-                legend: { display: false },
-                title: {
-                    display: true,
-                    text: "Top Selling Stores"
-                }
+        function showbar(){
+                document.getElementById("piechartheading").style.display = "none";
+                document.getElementById("tablecolors").style.display = "none";
+                document.getElementById("my-pie-chart").style.display = "none";
+                document.getElementById("barchartgraph").style.display = "";
             }
-        });
-            document.getElementById("barChart").style.display = "block";
-            document.getElementById("pieChart").style.display = "none";
-        }
-        function displaypiechart(){
-            <%for(String xrow:xval){%>
-            xValues.push(<%=xrow%>);
-            <%}%>
-            
-            <%for(float ycol:yval){%>
-            yValues.push(<%=""+ycol%>);
-            <%}%>
-            
-            <%for(String col:colors){%>
-            barColors.push(<%=col%>);
-            <%}%>
-            new Chart("pieChart", {
-            type: "pie",
-            data: {
-                labels: xValues,
-                datasets: [{
-                    backgroundColor: barColors,
-                    data: yValues
-                }]
-            },
-            options: {
-                title: {
-                    display: true,
-                    text: "Top Selling Stores"
-                }
+            function showpie(){
+                document.getElementById("piechartheading").style.display = "";
+                document.getElementById("tablecolors").style.display = "";
+                document.getElementById("my-pie-chart").style.display = "";
+                document.getElementById("barchartgraph").style.display = "none";
             }
-        });
-            document.getElementById("barChart").style.display = "none";
-            document.getElementById("pieChart").style.display = "block";
-        }
-        document.getElementById("pieChart").style.display = "none";
-        document.getElementById("barChart").style.display = "none";
+            document.getElementById("piechartheading").style.display = "none";
+            document.getElementById("tablecolors").style.display = "none";
+            document.getElementById("my-pie-chart").style.display = "none";
+            document.getElementById("barchartgraph").style.display = "none";
         
     </script>
     </body>

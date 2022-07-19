@@ -9,12 +9,20 @@ public class Review implements Serializable {
 	private String comment;
 	private Integer rating;
 	private Date date;
+	private String stringDate;
 
 	public Review(String id, String comment, Integer rating, Date date) {
 		this.id = id;
 		this.comment = comment;
 		this.rating = rating;
 		this.date = date;
+	}
+	
+	public Review(String id, String comment, Integer rating, String date) {
+		this.id = id;
+		this.comment = comment;
+		this.rating = rating;
+		this.stringDate = date;
 	}
 
 	public Review(String comment, Integer rating) {
@@ -25,6 +33,15 @@ public class Review implements Serializable {
 	public Review() {
 	}
 
+	public String getStringDate() {
+		return stringDate;
+	}
+
+	public void setStringDate(String stringDate) {
+		this.stringDate = stringDate;
+	}
+
+	
 	public String getId() {
 		return id;
 	}

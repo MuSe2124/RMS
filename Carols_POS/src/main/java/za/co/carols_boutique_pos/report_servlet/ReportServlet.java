@@ -33,48 +33,52 @@ private RestReport rr;
                 request.setAttribute("acheivedtargetReport",rep);
                 request.getRequestDispatcher("AcheivedTarget.jsp").forward(request,response);
                 break;
+				
             case"LeastTopStorebutton":
                 rep=rr.viewLeastPerformingStores(request.getParameter("LeastTopStoresmonth"));
                 request.setAttribute("LeastTopStoreReport",rep);
                 request.getRequestDispatcher("LeastTopStores.jsp").forward(request,response);
                 break;
+				
             case"MonthlySalesbutton":
                 rep=rr.viewMonthlySales(request.getParameter("MonthlySalesStoreID"), request.getParameter("MonthlySalesMonth"));
                 request.setAttribute("MonthlySalesReport",rep);
                 request.getRequestDispatcher("MonthlySales.jsp").forward(request,response);
                 break;
+				
             case"TopSellingEmployeesbutton":
                 rep=rr.viewTopSellingEmployees(request.getParameter("TopSellingEmployeesStore"), request.getParameter("TopSellingEmployeesmonth"));
                 request.setAttribute("TopSellingEmployeesReport",rep);
                 request.getRequestDispatcher("TopSellingEmployees.jsp").forward(request,response);
                 break;
+				
             case"ViewDailySalesbutton":
                 rep=rr.viewDailySalesReport(request.getParameter("ViewDailySalesStoreButton"));
                 request.setAttribute("ViewDailySalesReport",rep);
                 request.getRequestDispatcher("ViewDailySales.jsp").forward(request,response);
-                break;    
+                break;   
+				
             case"ProductReportbutton":
                 rep=rr.viewProductReport(request.getParameter("ProductReportStoreID"), request.getParameter("ProductReportMonth"));
                 request.setAttribute("ProductReportReport",rep);
                 request.getRequestDispatcher("ProductReport.jsp").forward(request,response);
-                break;    
+                break;   
+				
             case"TopSellingProductsbutton":
                 rep=rr.viewTopSellingProducts(request.getParameter("TopSellingProductsMonth"));
                 request.setAttribute("TopSellingProductsReport",rep);
                 request.getRequestDispatcher("TopSellingProducts.jsp").forward(request,response);
                 break;
+				
             case"CustomerReviewbutton":
-                rep=rr.getCustomerReviews(request.getParameter("CustomerReviewMonth"),Integer.valueOf(request.getParameter("CustomerReviewAmount")));
-                System.out.println("?????????????????????"+rep.getReviews().size()+"?????????????????????????????????");
-                request.setAttribute("CustomerReviewReport",rep);
+				rep=rr.getCustomerReviews(request.getParameter("CustomerReviewMonth"),Integer.parseInt(request.getParameter("CustomerReviewAmount")));
+				request.setAttribute("CustomerReviewReport",rep );
                 request.getRequestDispatcher("CustomerReviewReport.jsp").forward(request,response);
                 break;
+				
             case"TopSellingStorebutton":
-                System.out.println("??????????????????????"+"rrrrrrrrrrrrsdgessssss"+"?????????????");
                 rep=rr.viewTopAchievingStores(request.getParameter("TopSellingStoremonth"));
-                System.out.println("??????????????????????"+rep.getEmpSales().size()+"?????????????");
                 request.setAttribute("TopSellingStoreReport",rep);
-                
                 request.getRequestDispatcher("TopSellingStores.jsp").forward(request,response);
                 break;
                 

@@ -35,9 +35,9 @@ private RestReport rr;
                 break;
 				
             case"LeastTopStorebutton":
-                rep=rr.viewLeastPerformingStores(request.getParameter("LeastTopStoresmonth"));
-                request.setAttribute("LeastTopStoreReport",rep);
-                request.getRequestDispatcher("LeastTopStores.jsp").forward(request,response);
+                rep= rr.viewLeastPerformingStores(request.getParameter("LeastTopStoresmonth"));
+				request.setAttribute("LeastSellingStoreReport",rep);
+                request.getRequestDispatcher("TopSellingStores.jsp").forward(request,response);
                 break;
 				
             case"MonthlySalesbutton":

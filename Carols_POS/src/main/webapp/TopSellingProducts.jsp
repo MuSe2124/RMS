@@ -5,6 +5,8 @@
     Author     : HP
 --%>
 
+
+<%@page import="za.co.carols_boutique_pos.models.piechart"%>
 <%@page import="za.co.carols_boutique.models.Employee"%>
 <%@page import="za.co.carols_boutique.models.ProdStore"%>
 <%@page import="java.util.ArrayList"%>
@@ -168,6 +170,115 @@
             overflow-x: hidden;
             padding-top: 10px;
         }
+        .graph {
+	       margin-bottom:1em;
+               font:normal 100%/150% arial,helvetica,sans-serif;
+            }
+
+            .graph caption {
+	        font:bold 150%/120% arial,helvetica,sans-serif;
+	        padding-bottom:0.33em;
+            }
+
+            .graph tbody th {
+	       text-align:right;
+            }
+
+
+
+		.graph {
+		    display:block;
+                    width:600px;
+                    height:300px;
+		}
+
+		.graph caption {
+			display:block;
+		}
+
+		.graph thead {
+			display:none;
+		}
+
+		.graph tbody {
+			position:relative;
+			display:grid;
+			grid-template-columns:repeat(auto-fit, minmax(2em, 1fr));
+			column-gap:2.5%;
+			align-items:end;
+			height:100%;
+			margin:3em 0 1em 2.8em;
+			padding:0 1em;
+			border-bottom:2px solid rgba(0,0,0,0.5);
+			background:repeating-linear-gradient(
+				180deg,
+				rgba(170,170,170,0.7) 0,
+				rgba(170,170,170,0.7) 1px,
+				transparent 1px,
+				transparent 20%
+			);
+		}
+
+		.graph tbody:before,
+		.graph tbody:after {
+			position:absolute;
+			left:-3.2em;
+			width:2.8em;
+			text-align:right;
+			font:bold 80%/120% arial,helvetica,sans-serif;
+		}
+
+		.graph tbody:before {
+			
+			top:-0.6em;
+		}
+
+		.graph tbody:after {
+			content:"0";
+			bottom:-0.6em;
+		}
+
+		.graph tr {
+			position:relative;
+			display:block;
+		}
+
+		
+
+		.graph th,
+		.graph td {
+			display:block;
+			text-align:center;
+		}
+
+		.graph tbody th {
+			position:absolute;
+			top:-3em;
+			left:0;
+			width:100%;
+			font-weight:normal;
+			text-align:center;
+                        white-space:nowrap;
+			text-indent:0;
+			transform:rotate(-45deg);
+		}
+
+		
+
+		.graph td {
+			width:100%;
+			height:100%;
+			background:#F63;
+			border-radius:0.5em 0.5em 0 0;
+			transition:background 0.5s;
+		}
+            #my-pie-chart {
+             border-radius: 50%;
+            }
+            #my-pie-chart {
+            height: 500px;
+            width: 500px;
+            }
         </style>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     </head>
@@ -176,6 +287,9 @@
     <%Employee emp=(Employee)session.getAttribute("employee");%>
     <div id="side">
         <%if(emp.getIsManager()==true){%>
+        <form action="" method=get>
+        <button class="c" id="logout" name="button">Log out</button>
+        </form>
         <button class="c" id="keepaside" name="button" onclick="openCity(event, 'Keepasidebar')">keep aside</button>
         <button class="c" id="viewreport" name="button" onclick="openCity(event, 'Reportbar')">view report </button>
         <button class="c" id="registerstore" name="button" onclick="openCity(event, 'storebar')">Store</button>
@@ -211,7 +325,9 @@
     </div>
     <div id="Keepasidebar" class="sideside">
         <a href="CreateKeepAside.jsp" id="createkeepasideb" class="b" name="button" value="createkeepasidepage"
-            >create keep aside</a>
+            >create keep aside</a><br>
+            <a href="ViewKeepAsides.jsp" id="createkeepasideb" class="b"
+            >View keep asides</a><br>
     </div>
     <div id="Stockbar" class="sideside">
         <a href ="CreateProduct.jsp" id="createproductb" class="b" name="button" value="createproduct page"
@@ -225,10 +341,9 @@
     <div id="Reportbar" class="sideside">
         <a href="TopSellingStores.jsp" id="viewtopstoreb" class="b" name="button" value="view top employees page"
             >view top Achieving Stores page</a><br>
-        <a href="MonthlySales.jsp" id="monthlysalesb" class="b" name="button" value="view monthly sales page"
-            >view monthly sales</a><br>
+        
         <a href ="CustomerReviewReport.jsp" id="topreviewsb" class="b" name="button" value="view top selling employees page"
-            >view top selling employees</a><br>
+            >view Customer Review</a><br>
         <a href ="AcheivedTarget.jsp"id="achievedtargetb" class="b" name="button" value="view stores that achieved target page"
             >View stores that achieved target page</a><br>
         <a href ="TopSellingEmployees.jsp" id="topsellingproductsb" class="b" name="button" value="view top selling products page"
@@ -238,20 +353,24 @@
         <a href="ProductReport.jsp" id="productsreportb" class="b" name="button" value="view product report page"
             >View product report</a><br>
         <a href="ViewDailySales.jsp" id="dailysalesb" class="b" name="button" value="view daily sales page"
-            >View daily sales page</a>
+            >View daily sales page</a><br>
         <a href="TopSellingProducts.jsp" id="topsellingproductsb" class="b" 
-            >Top Selling Products</a>    
+            >Top Selling Products</a><br>    
     </div>
     <div id="IBTbar" class="sideside">
 
-        <a href ="RequestIBT.jsp" id="ibtrequestb" class="b" name="button" value="IBT Requests page"
-            >Request IBT</a>
+        <a href ="RequestIBT.jsp" id="ibtrequestb" class="b" name="button" value="IBTRequestspage"
+            >Request IBT</a><br>
+        
+        <a href ="ReceiveIBT.jsp" id="ibtReceiveb" class="b" name="button" value="IBTReceivedpage"
+            >Received IBT's</a>
     </div>
     <%Report report = (Report)request.getAttribute("TopSellingProductsReport");
     List<String> x=new ArrayList<>(); List<Integer> y = new ArrayList<>();List<String> colors=new ArrayList<>();%>
-        <form action="ReportServlet" method =get>
+        
     <div id="acheivedtargetpage" class="mid">
-        <h1>Product Report</h1><br>
+        <form action="ReportServlet" method =get>
+        <h1>Top selling product Report</h1><br>
         <label>Enter Date</label><br>
         <input type ="text" class="bars" name ="TopSellingProductsMonth" list="monthList"><datalist  id ="monthList">
             <option value="January">
@@ -268,6 +387,7 @@
             <option value="December">
         </datalist><br><br>
         <button type="submit" name="button" value="TopSellingProductsbutton">Get Results</button><br><br>
+        </form>
         <%if(report!=null){%>
         <h2>Table of Top Selling Products</h2><br>
         <table style="width:100%">
@@ -286,20 +406,66 @@
         </table>
         <br>
         <br>
-        <button class="bars" onclick="displaybarchart()">Show bar graph</button><button onclick="displaypiechart()" class="bars">show pie chart</button>
-        <canvas id="pieChart" style="max-height:500px;max-width:500px;"></canvas><br>
-        <canvas id="barChart" style="max-height:500px;max-width:500px;"></canvas>
+        <button class="bars" onclick="showbar()">Show bar graph</button>
+        <button onclick="showpie()" class="bars">show pie chart</button><br><br><br>
+        <%List<Float> fy= new ArrayList<>();%>
+        <%for(Integer iy:y){
+        fy.add(iy.floatValue());
+        }%>
+        <%piechart pie = new piechart(x,fy);%>
+        <%float start =0f;%>
+        <h1 id="piechartheading">Pie Chart of top selling products</h1>
+        <div id="my-pie-chart" style="background: conic-gradient(black 0.00%,<%for(int i =0; i<pie.getName().size();i++){%>
+             <%=pie.getColours().get(i)%>  
+             <%=start%>%  
+             <%=pie.getPercentagePosition().get(i)%>%  
+             <%start=pie.getPercentagePosition().get(i);%> 
+            <%if(i!=pie.getName().size()-1){%>
+            ,
+            <%}%>
+        <%}%>);"></div>
+        <br>
+        
+        <table style="width:100px" id="tablecolors">
+            <tr style="background-color:black; color:white;border: 1px solid black">
+                <td>Names</td>
+            </tr>
+            <%for(int i =0; i<pie.getName().size();i++){%>
+            <tr style="background-color:<%=pie.getColours().get(i)%>;">
+                <td><%=pie.getName().get(i)%></td>
+            </tr>
+            <%}%>
+        </table>
+        <br>
+        
+        <table class="graph" id ="barchartgraph">
+	<caption>Bar Chart of top selling products</caption>
+	<thead>
+		<tr>
+			<th scope="col">Item</th>
+			<th scope="col">Percent</th>
+		</tr>
+	</thead><tbody >
+                <%for(int i =0; i<pie.getName().size();i++){%>
+                <tr style ="height:<%=pie.getTablePercentage().get(i)%>%">
+                <th scope="row"><%=pie.getName().get(i)%></th>
+                <td><span><%=pie.getFvalues().get(i)%></span></td>
+                </tr>
+                <%}%>
+	</tbody>
+        </table>
+        
+        <br><br><br><br><br><br><br><br><br><br><br>
+        
         <a onclick="this.href='data:text/html;charset=UTF-8,'+encodeURIComponent(document.documentElement.outerHTML)" href="topSellingProducts.pdf" download="topSellingProducts.pdf">Download Report</a></p>
         <%}%>
     </div>    
-    </form
+    
         
     <label id="copyright">Carols Boutique pty.Ltd.<br>Reg.131 482 9132</label>
     <script>
         
-        var xValues =[];
-        var yValues =[];
-        var barColors =[];
+        
         function openCity(evt, cityName) {
             var i, tabcontent, tablinks;
             tabcontent = document.getElementsByClassName("sideside");
@@ -382,13 +548,22 @@
                     display: true,
                     text: "Top Selling Products"
                 }
+        function showbar(){
+                document.getElementById("piechartheading").style.display = "none";
+                document.getElementById("tablecolors").style.display = "none";
+                document.getElementById("my-pie-chart").style.display = "none";
+                document.getElementById("barchartgraph").style.display = "";
             }
-        });
-            document.getElementById("barChart").style.display = "none";
-            document.getElementById("pieChart").style.display = "block";
-        }
-        document.getElementById("pieChart").style.display = "none";
-        document.getElementById("barChart").style.display = "none";
+            function showpie(){
+                document.getElementById("piechartheading").style.display = "";
+                document.getElementById("tablecolors").style.display = "";
+                document.getElementById("my-pie-chart").style.display = "";
+                document.getElementById("barchartgraph").style.display = "none";
+            }
+            document.getElementById("piechartheading").style.display = "none";
+            document.getElementById("tablecolors").style.display = "none";
+            document.getElementById("my-pie-chart").style.display = "none";
+            document.getElementById("barchartgraph").style.display = "none";
         
     </script>
     </body>

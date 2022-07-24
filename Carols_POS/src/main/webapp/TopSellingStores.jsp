@@ -343,8 +343,7 @@
     <div id="Reportbar" class="sideside">
         <a href="TopSellingStores.jsp" id="viewtopstoreb" class="b" name="button" value="view top employees page"
             >view top Achieving Stores page</a><br>
-        <a href="MonthlySales.jsp" id="monthlysalesb" class="b" name="button" value="view monthly sales page"
-            >view monthly sales</a><br>
+        
         <a href ="CustomerReviewReport.jsp" id="topreviewsb" class="b" name="button" value="view top selling employees page"
             >view top selling employees</a><br>
         <a href ="AcheivedTarget.jsp"id="achievedtargetb" class="b" name="button" value="view stores that achieved target page"
@@ -365,12 +364,24 @@
         <a href ="RequestIBT.jsp" id="ibtrequestb" class="b" name="button" value="IBT Requests page"
             >Request IBT</a>
     </div>
-    <%Report report = (Report)request.getAttribute("TopSellingStoreReport");
+    <%Report report1 = (Report)request.getAttribute("TopSellingStoreReport");
+    Report report2 = (Report)request.getAttribute("LeastSellingStoreReport");
+    Report report = null;
+    if(report1 != null){
+    report = report1;
+    }
+    if(report2 != null){
+    report = report2;
+    }
     List<String> xval=new ArrayList<>(); List<Float> yval = new ArrayList<>();List<String> colors=new ArrayList<>();%>
         
     <div id="reportpage" class="mid">
         <form action="ReportServlet" method =get>
+            <%if(report1 !=null){%>
         <h1>Top Selling Stores</h1><br>
+        <%}else{%>
+         <h1>least performing Stores</h1>
+         <%}%>
         <label>Enter Date</label><br>
         <input type ="text" class="bars" list="monthList" name ="TopSellingStoremonth">
         <datalist  id ="monthList">
@@ -390,7 +401,11 @@
         <button name="button" value="TopSellingStorebutton">Get Results</button><br><br>
         </form>
         <%if(report!=null){%>
+        <%if(report1 !=null){%>
         <h2 >table of top selling stores</h2><br>
+        <%}else{%>
+        <h2 >table of least performing stores</h2><br>
+        <%}%>
         <table style="width:100%">
             <tr>
                 <th>Store ID</th>
@@ -414,7 +429,12 @@
         <br>
         <%piechart pie = new piechart(xval,yval);%>
         <%float start =0f;%>
+        
+        <%if(report1 !=null){%>
         <h1 id="piechartheading">Pie Chart of top selling stores</h1>
+        <%}else{%>
+        <h1 id="piechartheading">Pie Chart of least performing stores</h1>
+        <%}%>
         <div id="my-pie-chart" style="background: conic-gradient(black 0.00%,<%for(int i =0; i<pie.getName().size();i++){%>
              <%=pie.getColours().get(i)%>  
              <%=start%>%  
@@ -439,7 +459,12 @@
         <br>
         
         <table class="graph" id ="barchartgraph">
-	<caption>Bar Chart HTML From HTML Table</caption>
+	
+        <%if(report1 !=null){%>
+        <caption>Bar Chart of top selling stores</caption>
+        <%}else{%>
+        <caption>Bar Chart of least performing stores</caption>
+        <%}%>
 	<thead>
 		<tr>
 			<th scope="col">Item</th>

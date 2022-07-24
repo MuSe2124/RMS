@@ -225,8 +225,7 @@
     <div id="Reportbar" class="sideside">
         <a href="TopSellingStores.jsp" id="viewtopstoreb" class="b" name="button" value="view top employees page"
             >view top Achieving Stores page</a><br>
-        <a href="MonthlySales.jsp" id="monthlysalesb" class="b" name="button" value="view monthly sales page"
-            >view monthly sales</a><br>
+        
         <a href ="CustomerReviewReport.jsp" id="topreviewsb" class="b" name="button" value="view top selling employees page"
             >view Customer Review</a><br>
         <a href ="AcheivedTarget.jsp"id="achievedtargetb" class="b" name="button" value="view stores that achieved target page"
@@ -251,7 +250,7 @@
             >Received IBT's</a>
     </div>
     <%Report report = (Report)request.getAttribute("ProductReportReport");
-    List<String> x=new ArrayList<>(); List<Integer> y = new ArrayList<>(); List<String> colors=new ArrayList<>();%>
+    %>
         <form action="ReportServlet" method =get>
     <div id="acheivedtargetpage" class="mid">
         <h1>Product Report</h1><br>
@@ -271,30 +270,27 @@
             <option value ="November">
             <option value="December">
         </datalist><br><br>
-        <label>Store ID</label>
+        <label>Product Id</label>
         <input type="text" name="ProductReportStoreID" class="bars"><br><br>
         <button type="submit" name="button" value="ProductReportbutton">Get Results</button><br><br>
         <%if(report!=null){%>
-        <h2>Table of product report</h2><br>
+        <h2>product report</h2><br>
         <table style="width:100%">
             <tr>
                 <th>Product ID</th>
                 <th>Amount Sold</th>
-                
+                <th>employee id</th>
             </tr>
             <tr>
                 <td> <%= report.getProductReport().getProductID() %> </td>
-                <td> <%= report.getProductReport().getAmountsSold() %> </td>    
+                <td> <%= report.getProductReport().getAmountsSold() %> </td>  
+                <td><%=report.getProductReport().getEmployeeID()%></td>
             </tr>
             <%}%>
         </table>
-        <br>
-        <br>
-        <button class="bars" onclick="displaybarchart()">Show bar graph</button><button onclick="displaypiechart()" class="bars">show pie chart</button>
-        <canvas id="pieChart" style="max-height:500px;max-width:500px;"></canvas><br>
-        <canvas id="barChart" style="max-height:500px;max-width:500px;"></canvas><br>
+        
         <a onclick="this.href='data:text/html;charset=UTF-8,'+encodeURIComponent(document.documentElement.outerHTML)" href="productReport.pdf" download="productReport.pdf">Download Report</a></p>
-        <%}%>
+        
     </div> 
         
         </form>

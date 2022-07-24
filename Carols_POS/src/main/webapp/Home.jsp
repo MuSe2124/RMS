@@ -223,8 +223,7 @@
     <div id="Reportbar" class="sideside">
         <a href="TopSellingStores.jsp" id="viewtopstoreb" class="b" name="button" value="view top employees page"
             >view top Achieving Stores page</a><br>
-        <a href="MonthlySales.jsp" id="monthlysalesb" class="b" name="button" value="view monthly sales page"
-            >view monthly sales</a><br>
+        
         <a href ="CustomerReviewReport.jsp" id="topreviewsb" class="b" name="button" value="view top selling employees page"
             >view Customer Review</a><br>
         <a href ="AcheivedTarget.jsp"id="achievedtargetb" class="b" name="button" value="view stores that achieved target page"
